@@ -21,8 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-// is this an activity?? i changed the name from Login to LoginActivity but i don't see it
-// implemented in main at all
+
 public class LoginActivity extends AppCompatActivity
 {
     private static final String TAG = "Login";
@@ -62,7 +61,6 @@ public class LoginActivity extends AppCompatActivity
                 // ...
             }
         };
-
 
         ps = getPreferences(0);
         pe = ps.edit();
