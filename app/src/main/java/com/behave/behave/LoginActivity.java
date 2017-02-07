@@ -12,15 +12,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import static java.sql.DriverManager.println;
 
 public class LoginActivity extends AppCompatActivity
 {
@@ -106,7 +113,7 @@ public class LoginActivity extends AppCompatActivity
             etUsername.setText(spUsername);
             etPassword.setText(spPassword);
             //create an intent to store Username information for UserActivity
-            Intent userIntent = new Intent(LoginActivity.this, UserActivity.class);
+            Intent userIntent = new Intent(LoginActivity.this, HomeParentActivity.class);
             userIntent.putExtra("Username", spUsername);
             Username = spUsername;
             userIntent.putExtra("password", spPassword);
@@ -124,41 +131,43 @@ public class LoginActivity extends AppCompatActivity
                 @Override
                 public void onClick(View v)
                 {
-                    final String Username = etUsername.getText().toString();
+                    final String username = etUsername.getText().toString(); // should be email
                     final String password = etPassword.getText().toString();
-                    Response.Listener<String> responseListener = new Response.Listener<String>() {
-                        @Override
+
+                    signIn(username, password);
+//                    Response.Listener<String> responseListener = new Response.Listener<String>() {
+//                        @Override
                         //Validate Username + Password with database
-                        public void onResponse(String response) {
-                            try {
-                                JSONObject jsonResponse = new JSONObject(response);
-                                boolean success = jsonResponse.getBoolean("success");
-                                if (success) {
-                                    String username = jsonResponse.getString("Username");
-                                    String password = jsonResponse.getString("password");
-                                    pe.putString("Username", username);
-                                    pe.putString("password", password);
-                                    pe.commit();
-
-                                    //create an intent to store Username information for UserActivity
-                                    Intent userIntent = new Intent(LoginActivity.this, UserActivity.class);
-                                    userIntent.putExtra("Username", username);
-                                    userIntent.putExtra("password", password);
-
-                                    //start activity to UserActivity.class
-                                    LoginActivity.this.startActivity(userIntent);
-                                } else {
-                                    AlertDialog.Builder Alert = new AlertDialog.Builder(LoginActivity.this);
-                                    Alert.setMessage("Invalid Username or Password");
-                                    Alert.setPositiveButton("OK", null);
-                                    etPassword.setText("");
-                                    Alert.create().show();
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    };
+//                        public void onResponse(String response) {
+//                            try {
+//                                JSONObject jsonResponse = new JSONObject(response);
+//                                boolean success = jsonResponse.getBoolean("success");
+//                                if (success) {
+//                                    String username = jsonResponse.getString("Username");
+//                                    String password = jsonResponse.getString("password");
+//                                    pe.putString("Username", username);
+//                                    pe.putString("password", password);
+//                                    pe.commit();
+//
+//                                    //create an intent to store Username information for UserActivity
+//                                    Intent userIntent = new Intent(LoginActivity.this, HomeParentActivity.class);
+//                                    userIntent.putExtra("Username", username);
+//                                    userIntent.putExtra("password", password);
+//
+//                                    //start activity to UserActivity.class
+//                                    LoginActivity.this.startActivity(userIntent);
+//                                } else {
+//                                    AlertDialog.Builder Alert = new AlertDialog.Builder(LoginActivity.this);
+//                                    Alert.setMessage("Invalid Username or Password");
+//                                    Alert.setPositiveButton("OK", null);
+//                                    etPassword.setText("");
+//                                    Alert.create().show();
+//                                }
+//                            } catch (JSONException e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                    };
 
                     //HUYANH call LoginRequest
 //                    LoginRequest loginRequest = new LoginRequest(Username, password, responseListener);
@@ -168,6 +177,33 @@ public class LoginActivity extends AppCompatActivity
             });
         }
 
+    }
+
+    private void signIn(String email, String password) {
+        Log.d(TAG, "signIn:" + email);
+
+        // [START sign_in_with_email]
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
+
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "signInWithEmail:failed", task.getException());
+                            Toast.makeText(LoginActivity.this, "couldn't sign in whoops lol",
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+//                            create an intent to store Username information for UserActivity
+                            Intent userIntent = new Intent(LoginActivity.this, HomeParentActivity.class);
+                            LoginActivity.this.startActivity(userIntent);
+                        }
+                    }
+                });
+        // [END sign_in_with_email]
     }
 
     // [START on_start_add_listener]
