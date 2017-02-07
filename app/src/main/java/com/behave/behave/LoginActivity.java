@@ -25,7 +25,7 @@ import org.json.JSONObject;
 // implemented in main at all
 public class LoginActivity extends AppCompatActivity
 {
-    private static final String TAG = "LoginActivity";
+    private static final String TAG = "Login";
     private static SharedPreferences ps;
     private static SharedPreferences.Editor pe;
     private static String Username;
