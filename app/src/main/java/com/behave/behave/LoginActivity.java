@@ -3,9 +3,11 @@ package com.behave.behave;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,21 +16,53 @@ import android.widget.TextView;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
+// is this an activity?? i changed the name from Login to LoginActivity but i don't see it
+// implemented in main at all
 public class LoginActivity extends AppCompatActivity
 {
+    private static final String TAG = "LoginActivity";
     private static SharedPreferences ps;
     private static SharedPreferences.Editor pe;
     private static String Username;
     private static String Password;
 
+    // [START declare_auth]
+    private FirebaseAuth mAuth;
+    // [END declare_auth]
+
+    // [START declare_auth_listener]
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    // [END declare_auth_listener]
+
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // [START initialize_auth]
+        mAuth = FirebaseAuth.getInstance();
+        // [END initialize_auth]
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                } else {
+                    // User is signed out
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                }
+                // ...
+            }
+        };
+
 
         ps = getPreferences(0);
         pe = ps.edit();
@@ -137,6 +171,24 @@ public class LoginActivity extends AppCompatActivity
         }
 
     }
+
+    // [START on_start_add_listener]
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+    // [END on_start_add_listener]
+
+    // [START on_stop_remove_listener]
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
+    // [END on_stop_remove_listener]
 
     public static void clearUsername()
     {

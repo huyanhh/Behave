@@ -20,7 +20,8 @@
             android:label="@string/title_activity_register"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LoginRequest" />
-        <activity android:name=".ForgotPassword"></activity>
+        <activity android:name=".ForgotPassword" />
+        <activity android:name=".ChildRedeemPage"></activity>
     </application>
 
 </manifest>

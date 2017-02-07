@@ -10,7 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 public class HomeParentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_adult_page);
+        setContentView(R.layout.activity_home_parent_page);
 
     }
 }

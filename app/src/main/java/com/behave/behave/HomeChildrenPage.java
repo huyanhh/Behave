@@ -18,7 +18,7 @@ public class HomeChildrenPage extends AppCompatActivity {
         //tv.setText(stringFromJNI());
     }
     public void redeemPrize(View view){
-        Intent startNewActivity = new Intent (this,childRedeemPage.class);
+        Intent startNewActivity = new Intent (this,ChildRedeemPage.class);
         startActivity(startNewActivity);
     }
     /**
