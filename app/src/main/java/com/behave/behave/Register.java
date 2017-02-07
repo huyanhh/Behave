@@ -91,7 +91,7 @@ public class Register extends AppCompatActivity
                     valid = false;
                     etEmail.requestFocus();
                 }
-                if (!notEmpty(firstName) || !notEmpty(lastName)) {
+                if (!notEmpty(firstName)) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
                     builder.setMessage("Name cannot be blank").setNegativeButton("Retry", null).create().show();
                     valid = false;
@@ -159,6 +159,24 @@ public class Register extends AppCompatActivity
 
     }
 
+    // [START on_start_add_listener]
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+    // [END on_start_add_listener]
+
+    // [START on_stop_remove_listener]
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
+    // [END on_stop_remove_listener]
+
     private void createAccount(String email, String password) {
         Log.d(TAG, "createAccount:" + email);
 
@@ -173,7 +191,10 @@ public class Register extends AppCompatActivity
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Toast.makeText(Register.this, "Authentication failed",
+                            Toast.makeText(Register.this, "firebase auth failed",
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(Register.this, "success",
                                     Toast.LENGTH_SHORT).show();
                         }
 
