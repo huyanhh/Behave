@@ -3,6 +3,7 @@ package com.behave.behave;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.renderscript.ScriptGroup;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -73,5 +74,15 @@ public class SetUpReward extends AppCompatActivity {
                 alert.show();
             }
         });
+
+        bOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SetUpReward.this, MainActivity.class);
+                SetUpReward.this.startActivity(intent);
+            }
+        });
     }
+
+
 }
