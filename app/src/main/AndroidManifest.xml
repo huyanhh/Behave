@@ -27,7 +27,8 @@
         <activity android:name=".HomeParentActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".AddChild" />
-        <activity android:name=".ChildTokenSchedule"></activity>
+        <activity android:name=".ChildTokenSchedule" />
+        <activity android:name=".SetUpReward"></activity>
     </application>
 
 </manifest>
