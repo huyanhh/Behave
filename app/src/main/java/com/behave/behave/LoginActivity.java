@@ -135,44 +135,6 @@ public class LoginActivity extends AppCompatActivity
                     final String password = etPassword.getText().toString();
 
                     signIn(username, password);
-//                    Response.Listener<String> responseListener = new Response.Listener<String>() {
-//                        @Override
-                        //Validate Username + Password with database
-//                        public void onResponse(String response) {
-//                            try {
-//                                JSONObject jsonResponse = new JSONObject(response);
-//                                boolean success = jsonResponse.getBoolean("success");
-//                                if (success) {
-//                                    String username = jsonResponse.getString("Username");
-//                                    String password = jsonResponse.getString("password");
-//                                    pe.putString("Username", username);
-//                                    pe.putString("password", password);
-//                                    pe.commit();
-//
-//                                    //create an intent to store Username information for UserActivity
-//                                    Intent userIntent = new Intent(LoginActivity.this, HomeParentActivity.class);
-//                                    userIntent.putExtra("Username", username);
-//                                    userIntent.putExtra("password", password);
-//
-//                                    //start activity to UserActivity.class
-//                                    LoginActivity.this.startActivity(userIntent);
-//                                } else {
-//                                    AlertDialog.Builder Alert = new AlertDialog.Builder(LoginActivity.this);
-//                                    Alert.setMessage("Invalid Username or Password");
-//                                    Alert.setPositiveButton("OK", null);
-//                                    etPassword.setText("");
-//                                    Alert.create().show();
-//                                }
-//                            } catch (JSONException e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
-//                    };
-
-                    //HUYANH call LoginRequest
-//                    LoginRequest loginRequest = new LoginRequest(Username, password, responseListener);
-//                    RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
-//                    queue.add(loginRequest);
                 }
             });
         }

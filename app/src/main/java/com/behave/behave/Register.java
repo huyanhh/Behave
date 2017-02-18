@@ -48,8 +48,6 @@ public class Register extends AppCompatActivity
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_register);
 
-        mAuth = FirebaseAuth.getInstance();
-
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -85,57 +83,34 @@ public class Register extends AppCompatActivity
                 final String verifyPassword = etVerifyPassword.getText().toString();
                 valid = true;
 
-                if (!isValidEmail(email)) {
+                if (!isValidEmail(email) || email == null) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
                     builder.setMessage("Not a valid Email address").setNegativeButton("Retry", null).create().show();
                     valid = false;
                     etEmail.requestFocus();
                 }
-                if (!notEmpty(firstName)) {
+                if (!notEmpty(firstName)|| firstName == null) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
                     builder.setMessage("Name cannot be blank").setNegativeButton("Retry", null).create().show();
                     valid = false;
                     etFirstName.requestFocus();
                 }
-                if (!notEmpty(Username)) {
+
+                if (!notEmpty(Username) || Username == null) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
                     builder.setMessage("Not a valid Username").setNegativeButton("Retry", null).create().show();
                     valid = false;
                     etUsername.requestFocus();
                 }
-                if (!notEmpty(password)) {
+                if (!notEmpty(password) && password.length() >= 8) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
-                    builder.setMessage("Not a valid password").setNegativeButton("Retry", null).create().show();
+                    builder.setMessage("Password has to be at least 8 characters long").setNegativeButton("Retry", null).create().show();
                     valid = false;
                     etPassword.requestFocus();
                 }
+                mAuth = FirebaseAuth.getInstance();
 
-                Response.Listener<String> responseListener = new Response.Listener<String>()
-                {
-
-                    @Override
-                    public void onResponse(String response) {
-                        if (valid == true) {
-                            try {
-                                JSONObject jsonResponse = new JSONObject(response);
-                                boolean success = jsonResponse.getBoolean("success");
-
-                                if (success) {
-                                    Intent intent = new Intent(Register.this, LoginActivity.class);
-                                    Register.this.startActivity(intent);
-                                } else {
-                                    AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
-                                    builder.setMessage("Username taken").setNegativeButton("Retry", null).create().show();
-                                    etUsername.requestFocus();
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                };
-
-                if(password.equals(verifyPassword))
+                if(password.equals(verifyPassword) && password != null)
                 {
                     //HUYANH REGISTER TO DATA BASE
 //                    RegisterRequest registerRequest = new RegisterRequest(firstName,lastName,email,dateOfBirth,Username,password, responseListener );
@@ -196,6 +171,8 @@ public class Register extends AppCompatActivity
                         } else {
                             Toast.makeText(Register.this, "success",
                                     Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(Register.this, LoginActivity.class);
+                            Register.this.startActivity(intent);
                         }
 
                     }
