@@ -133,8 +133,18 @@ public class LoginActivity extends AppCompatActivity
                 {
                     final String username = etUsername.getText().toString(); // should be email
                     final String password = etPassword.getText().toString();
+                    if(!username.isEmpty() || !password.isEmpty())
+                        signIn(username, password);
 
-                    signIn(username, password);
+                    //if username||password is empty display this
+                    else
+                    {
+                        AlertDialog.Builder Alert = new AlertDialog.Builder(LoginActivity.this);
+                        Alert.setMessage("Username or Password cannot be blank");
+                        Alert.setPositiveButton("OK", null);
+                        Alert.create().show();
+                    }
+
                 }
             });
         }

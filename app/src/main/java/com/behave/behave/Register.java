@@ -1,5 +1,6 @@
 package com.behave.behave;
 
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,6 +49,8 @@ public class Register extends AppCompatActivity
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_register);
 
+        mAuth = FirebaseAuth.getInstance();
+
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -83,7 +86,7 @@ public class Register extends AppCompatActivity
                 final String verifyPassword = etVerifyPassword.getText().toString();
                 valid = true;
 
-                if (!isValidEmail(email) || email == null) {
+                if (!isValidEmail(email) || email.isEmpty()) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
                     builder.setMessage("Not a valid Email address").setNegativeButton("Retry", null).create().show();
                     valid = false;
@@ -102,23 +105,14 @@ public class Register extends AppCompatActivity
                     valid = false;
                     etUsername.requestFocus();
                 }
-                if (!notEmpty(password) && password.length() >= 8) {
+                if (!notEmpty(password) || password.length() < 8) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
                     builder.setMessage("Password has to be at least 8 characters long").setNegativeButton("Retry", null).create().show();
                     valid = false;
                     etPassword.requestFocus();
                 }
-                mAuth = FirebaseAuth.getInstance();
 
-                if(password.equals(verifyPassword) && password != null)
-                {
-                    //HUYANH REGISTER TO DATA BASE
-//                    RegisterRequest registerRequest = new RegisterRequest(firstName,lastName,email,dateOfBirth,Username,password, responseListener );
-//                    RequestQueue queue = Volley.newRequestQueue(Register.this);
-//                    queue.add(registerRequest);
-                    createAccount(email, password);
-                }
-                else
+                if(!password.equals(verifyPassword))
                 {
                     AlertDialog.Builder Alert = new AlertDialog.Builder(Register.this);
                     Alert.setMessage("Password does not match");
@@ -129,28 +123,33 @@ public class Register extends AppCompatActivity
                     etPassword.requestFocus();
                     valid = false;
                 }
+
+
+                if(valid) {
+                    createAccount(email, password);
+
+                    AlertDialog.Builder Alert = new AlertDialog.Builder(Register.this);
+                    Alert.setMessage("Do you want to add child now?");
+                    Alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent addChildNow = new Intent(Register.this, AddChild.class);
+                            Register.this.startActivity(addChildNow);
+                        }
+                    });
+                    Alert.setNeutralButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent addChildLater = new Intent(Register.this, LoginActivity.class);
+                            Register.this.startActivity(addChildLater);
+                        }
+                    });
+                    Alert.create().show();
+                }
             }
         });
 
     }
-
-    // [START on_start_add_listener]
-    @Override
-    public void onStart() {
-        super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
-    }
-    // [END on_start_add_listener]
-
-    // [START on_stop_remove_listener]
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
-    }
-    // [END on_stop_remove_listener]
 
     private void createAccount(String email, String password) {
         Log.d(TAG, "createAccount:" + email);
@@ -171,14 +170,31 @@ public class Register extends AppCompatActivity
                         } else {
                             Toast.makeText(Register.this, "success",
                                     Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(Register.this, LoginActivity.class);
-                            Register.this.startActivity(intent);
                         }
 
                     }
                 });
         // [END create_user_with_email]
     }
+
+    // [START on_start_add_listener]sdaf
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+    // [END on_start_add_listener]
+
+    // [START on_stop_remove_listener]
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
+    // [END on_stop_remove_listener]
+
 
     public final static boolean isValidEmail(CharSequence target)
     {
