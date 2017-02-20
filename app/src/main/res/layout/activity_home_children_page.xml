@@ -60,6 +60,14 @@
         android:layout_marginStart="22dp"
         android:layout_alignTop="@+id/textView" />
 
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:srcCompat="@drawable/ww"
+        android:id="@+id/imageView2"
+        android:layout_below="@+id/textView4"
+        android:layout_centerHorizontal="true" />
+
     <TextView
         android:text="X more token to get PRIZE"
         android:layout_width="wrap_content"
@@ -67,14 +75,6 @@
         android:textSize="28dp"
         android:id="@+id/textView2"
         android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true" />
-
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        app:srcCompat="@drawable/ww"
-        android:id="@+id/imageView2"
-        android:layout_below="@+id/textView4"
         android:layout_centerHorizontal="true" />
 
 

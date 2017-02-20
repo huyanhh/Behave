@@ -5,11 +5,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class ChildTokenSchedule extends AppCompatActivity {
 
@@ -51,10 +53,6 @@ public class ChildTokenSchedule extends AppCompatActivity {
         sTokenEnter.setAdapter(tokenAdapter);
         sTime.setAdapter(timeAdapter);
         sTimeUnits.setAdapter(timeUnitAdapter);
-
-//    public void addListenerOnSpinnerItemSelection() {
-//        sTokenEnter.setOnItemSelectedListener(new CustomOnItemSelectedListener());
-//    }
 
         sTokenEnter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -102,19 +100,12 @@ public class ChildTokenSchedule extends AppCompatActivity {
 //
                 //do something
                 AlertDialog.Builder Alert = new AlertDialog.Builder(ChildTokenSchedule.this);
-                Alert.setMessage("Do you want to add child now?");
-                Alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                Alert.setMessage("Auto-Token set for " + "Child");
+                Alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent addChildNow = new Intent(ChildTokenSchedule.this, AddChild.class);
-                        ChildTokenSchedule.this.startActivity(addChildNow);
-                    }
-                });
-                Alert.setNeutralButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent addChildLater = new Intent(ChildTokenSchedule.this, MainActivity.class);
-                        ChildTokenSchedule.this.startActivity(addChildLater);
+                        Intent setUpReward = new Intent(ChildTokenSchedule.this, SetUpReward.class);
+                        ChildTokenSchedule.this.startActivity(setUpReward);
                     }
                 });
                 Alert.create().show();
