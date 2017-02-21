@@ -21,18 +21,19 @@
             android:text="Child 1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button4" />
+            android:id="@+id/button1" />
 
         <Button
-            android:text="Child 2"
+            android:text="change name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button2" />
+
+        <Button
+            android:text="change name back"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/button3" />
 
-        <Button
-            android:text="Child 3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/button2" />
     </LinearLayout>
 </LinearLayout>
