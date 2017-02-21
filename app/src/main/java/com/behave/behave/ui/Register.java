@@ -208,10 +208,10 @@ public class Register extends AppCompatActivity
     {
         return firstName;
     }
-    public static String getLastName()
-    {
-        return lastName;
-    }
+//    public static String getLastName()
+//    {
+//        return lastName;
+//    }
     public static String getEmail()
     {
         return email;
