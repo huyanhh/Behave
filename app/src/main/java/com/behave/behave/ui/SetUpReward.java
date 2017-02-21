@@ -1,10 +1,9 @@
-package com.behave.behave;
+package com.behave.behave.ui;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.renderscript.ScriptGroup;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -14,23 +13,32 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import com.behave.behave.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Calvin on 2/17/2017.
- */
-
 public class SetUpReward extends AppCompatActivity {
+
+
 
     private ListView rewards;
     private ArrayAdapter<String> adapter;
     private String newPrize;
     private int tokenAmount;
+    final Map<String, Integer> reward = new HashMap<String, Integer>();
+    final List<String> rewardsList = new ArrayList<String>();
+
+    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference mPrizesRef = mRootRef.child("parents").child("parentid1").child("prizes");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +47,8 @@ public class SetUpReward extends AppCompatActivity {
 
         final Button bAddReward = (Button) findViewById(R.id.bSetUpAdd);
         final Button bOk = (Button) findViewById(R.id.bSetUpRewards);
+
         rewards = (ListView) findViewById(R.id.lRewardList);
-        final List<String> rewardsList = new ArrayList<String>();
-        final Map<String, Integer> reward = new HashMap<String, Integer>();
 
         adapter = new ArrayAdapter<String>(SetUpReward.this, android.R.layout.simple_list_item_1, rewardsList);
         rewards.setAdapter(adapter);      // arrayadapter filled with friends' name
@@ -108,6 +115,7 @@ public class SetUpReward extends AppCompatActivity {
                                 alert1.setPositiveButton("OK", null);
                                 alert1.create().show();
 
+                                writePrize(newPrize, tokenAmount);
                                 adapter.notifyDataSetChanged();
                             } else {
 
@@ -142,13 +150,43 @@ public class SetUpReward extends AppCompatActivity {
                 Alert.setNeutralButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent addChildLater = new Intent(SetUpReward.this, MainActivity.class);
+                        Intent addChildLater = new Intent(SetUpReward.this, HomeParentActivity.class);
                         SetUpReward.this.startActivity(addChildLater);
                     }
                 });
                 Alert.create().show();
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        mPrizesRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for (DataSnapshot prize: dataSnapshot.getChildren()) {
+//                    reward.put(prize.getKey(), prize.getValue(Integer.class));
+//                    tokenAmount = Integer.parseInt(prize.getKey());
+//                    rewardsList.add(prize.getKey().concat(" ".concat(String.valueOf(tokenAmount).concat(" Tokens"))));
+//                }
+//                adapter.notifyDataSetChanged();
+
+
+                //not sure how to update list view when view get created, do that here
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    //fb write
+    private void writePrize(String prize, Integer cost) {
+        mPrizesRef.child(prize).setValue(cost);
     }
 
 

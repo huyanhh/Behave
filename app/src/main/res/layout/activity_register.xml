@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="com.behave.behave.Register">
+    tools:context="com.behave.behave.ui.Register">
 
     <!--<TextView-->
         <!--android:layout_width="wrap_content"-->

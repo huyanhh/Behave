@@ -1,4 +1,4 @@
-package com.behave.behave;
+package com.behave.behave.ui;
 
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
@@ -7,26 +7,16 @@ import android.os.Bundle;
 
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.behave.behave.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -41,7 +31,7 @@ public class Register extends AppCompatActivity
 {
     private static final String TAG = "Register";
     private static String firstName;
-    private static String lastName;
+//    private static String lastName;
     private static String email;
 
     private FirebaseAuth mAuth;
@@ -71,7 +61,6 @@ public class Register extends AppCompatActivity
         };
 
         final EditText etFirstName = (EditText) findViewById(R.id.etFirstName);
-        final EditText etUsername = (EditText) findViewById(R.id.etUsername);
         final EditText etPassword = (EditText) findViewById(R.id.etPassword);
         final EditText etVerifyPassword = (EditText) findViewById(R.id.etVerifyPassword);
         final EditText etEmail = (EditText) findViewById(R.id.etEmail);
@@ -84,7 +73,6 @@ public class Register extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 firstName = etFirstName.getText().toString();
-                final String Username = etUsername.getText().toString();
                 email = etEmail.getText().toString();
                 final String password = etPassword.getText().toString();
                 final String verifyPassword = etVerifyPassword.getText().toString();
@@ -103,12 +91,12 @@ public class Register extends AppCompatActivity
                     etFirstName.requestFocus();
                 }
 
-                if (!notEmpty(Username) || Username == null) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
-                    builder.setMessage("Not a valid Username").setNegativeButton("Retry", null).create().show();
-                    valid = false;
-                    etUsername.requestFocus();
-                }
+//                if (!notEmpty(Username) || Username == null) {
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
+//                    builder.setMessage("Not a valid Username").setNegativeButton("Retry", null).create().show();
+//                    valid = false;
+//                    etUsername.requestFocus();
+//                }
                 if (!notEmpty(password) || password.length() < 8) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
                     builder.setMessage("Password has to be at least 8 characters long").setNegativeButton("Retry", null).create().show();
@@ -224,10 +212,10 @@ public class Register extends AppCompatActivity
     {
         return firstName;
     }
-    public static String getLastName()
-    {
-        return lastName;
-    }
+//    public static String getLastName()
+//    {
+//        return lastName;
+//    }
     public static String getEmail()
     {
         return email;

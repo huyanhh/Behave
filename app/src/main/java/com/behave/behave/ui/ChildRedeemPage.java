@@ -1,9 +1,11 @@
-package com.behave.behave;
+package com.behave.behave.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
+import com.behave.behave.R;
 
 public class ChildRedeemPage extends AppCompatActivity {
 
@@ -13,7 +15,7 @@ public class ChildRedeemPage extends AppCompatActivity {
         setContentView(R.layout.activity_child_redeem_page);
     }
     public void returnChild(View view){
-        Intent startNewActivity = new Intent (this,HomeChildrenPage.class);
+        Intent startNewActivity = new Intent (this, HomeChildrenPage.class);
         startActivity(startNewActivity);
 
 

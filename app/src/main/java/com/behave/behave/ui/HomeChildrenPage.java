@@ -1,10 +1,12 @@
-package com.behave.behave;
+package com.behave.behave.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
+
+import com.behave.behave.ui.ChildRedeemPage;
+import com.behave.behave.R;
 
 public class HomeChildrenPage extends AppCompatActivity {
 
