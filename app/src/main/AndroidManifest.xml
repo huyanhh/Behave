@@ -23,22 +23,12 @@
             android:label="@string/title_activity_register"
             android:theme="@style/AppTheme.NoActionBar" />
         />
-<<<<<<< HEAD
         <activity android:name=".ui.ForgotPassword" />
         <activity android:name=".ui.HomeParentActivity" />
         <activity android:name=".ui.LoginActivity" />
         <activity android:name=".ui.AddChild" />
         <activity android:name=".ui.ChildTokenSchedule" />
         <activity android:name=".ui.SetUpReward"></activity>
-=======
-        <activity android:name=".ForgotPassword" />
-        <activity android:name=".HomeParentActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".AddChild" />
-        <activity android:name=".ChildTokenSchedule" />
-        <activity android:name=".SetUpReward" />
-        <activity android:name=".ui.MenuAbout"></activity>
->>>>>>> master
     </application>
 
 </manifest>
