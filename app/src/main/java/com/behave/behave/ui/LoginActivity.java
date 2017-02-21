@@ -135,9 +135,9 @@ public class LoginActivity extends AppCompatActivity
                 {
                     final String username = etUsername.getText().toString(); // should be email
                     final String password = etPassword.getText().toString();
-                    if(!username.isEmpty() || !password.isEmpty())
+                    if(!username.isEmpty() || !password.isEmpty()) {
                         signIn(username, password);
-
+                    }
                     //if username||password is empty display this
                     else
                     {
@@ -153,8 +153,10 @@ public class LoginActivity extends AppCompatActivity
 
     }
 
-    private void signIn(String email, String password) {
+    private void signIn(String email, final String password) {
         Log.d(TAG, "signIn:" + email);
+        final String tempEmail = email;
+        final String tempPassword = password;
 
         // [START sign_in_with_email]
         mAuth.signInWithEmailAndPassword(email, password)
@@ -173,6 +175,10 @@ public class LoginActivity extends AppCompatActivity
                         } else {
 //                            create an intent to store Username information for UserActivity
                             Intent userIntent = new Intent(LoginActivity.this, HomeParentActivity.class);
+                            userIntent.putExtra("Username", tempEmail);
+                            userIntent.putExtra("password", tempPassword);
+                            Username = tempEmail;
+                            Password = tempPassword;
                             LoginActivity.this.startActivity(userIntent);
                         }
                     }

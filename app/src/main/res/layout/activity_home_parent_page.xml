@@ -6,41 +6,50 @@
     android:gravity="center">
 
     <TextView
-        android:text="Welcome back, Username!"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="24dp"
-        android:id="@+id/textView" />
+        android:id="@+id/tvWelcome" />
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="362dp">
+        android:layout_width="296dp"
+        android:layout_height="351dp">
 
-        <Button
-            android:text="Child 1"
+        <!--<Button-->
+            <!--android:text="Child 1"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/button1" />-->
+
+        <!--<Button-->
+            <!--android:text="change name"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/button2" />-->
+
+        <!--<Button-->
+            <!--android:text="change name back"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/button3" />-->
+
+        <ListView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/button1" />
-
-        <Button
-            android:text="change name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/button2" />
-
-        <Button
-            android:text="change name back"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/button3" />
-
+            android:layout_height="match_parent"
+            android:id="@+id/lvParentList" />
     </LinearLayout>
 
     <Button
-        android:text="prize list"
+        android:text="Add Child"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="24dp"
-        android:id="@+id/prizeList" />
+        android:id="@+id/bParentAddChild" />
+
+    <!--<Button-->
+        <!--android:text="prize list"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:padding="24dp"-->
+        <!--android:id="@+id/prizeList" />-->
 </LinearLayout>
