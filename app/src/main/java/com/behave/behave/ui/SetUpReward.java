@@ -26,6 +26,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Created by Calvin on 2/20/2017.
+ */
+
 public class SetUpReward extends AppCompatActivity {
 
 
