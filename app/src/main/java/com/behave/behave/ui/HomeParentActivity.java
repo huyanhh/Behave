@@ -3,6 +3,7 @@ package com.behave.behave.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.behave.behave.R;
+import com.behave.behave.models.Child;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,13 +41,14 @@ public class HomeParentActivity extends AppCompatActivity implements AdapterView
 //    private Button mPrizeList;
     private ArrayAdapter<String> adapter;
     final Map<String, Integer> reward = new HashMap<String, Integer>();
-    final List<String> childList = new ArrayList<>();
+    List<String> childList = new ArrayList<>();
     //final List<ArrayList<HashMap<String, String>>> childList = new ArrayList<ArrayList<HashMap<String,String>>>();
     //final List<HashMap<String, String>> tableGenerator = new ArrayList<HashMap<String, String>>();
     // when we get a reference it gets us a ref to the root of the json ref tree
 
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference mKidRef = mRootRef.child("children").child("child1"); // creates `-/children` in db
+    DatabaseReference mKidRef = mRootRef.child("children"); // creates `-/children` in db
+    DatabaseReference mParRef = mRootRef.child("parents").child("parentid1");
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,19 +56,18 @@ public class HomeParentActivity extends AppCompatActivity implements AdapterView
 
         final TextView tvWelcome = (TextView) findViewById(R.id.tvWelcome);
         final Button bAddChild = (Button) findViewById(R.id.bParentAddChild);
-        final ListView lvParentList = (ListView) findViewById(R.id.lvParentList);
 
         tvWelcome.setText("Welcome back, "+ LoginActivity.getUsername());
 
         //get children from database
-        childList.add("Bob");
-        childList.add("Tom");
-        childList.add("Jane");
-        childList.add("Jody");
+        readChildren();
 
-        adapter = new ArrayAdapter<String>(HomeParentActivity.this, android.R.layout.simple_list_item_1, childList);
-        lvParentList.setAdapter(adapter);      // arrayadapter filled with friends' name
-        lvParentList.setOnItemClickListener(HomeParentActivity.this);
+//        childList.add("Bob");
+//        childList.add("Tom");
+//        childList.add("Jane");
+//        childList.add("Jody");
+
+
 //        mChildButton = (Button) findViewById(R.id.button1);
 //        mPrizeList = (Button) findViewById(R.id.prizeList);
 //        mAddChild = (Button) findViewById(R.id.button2);
@@ -76,7 +78,8 @@ public class HomeParentActivity extends AppCompatActivity implements AdapterView
         bAddChild.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent addChildIntent = new Intent(HomeParentActivity.this, AddChild.class);
+                HomeParentActivity.this.startActivity(addChildIntent);
 
 //                reward.put(newPrize, tokenAmount);
 //                childList.add(newPrize.concat(" poo".concat(String.valueOf(tokenAmount).concat(" Tokens"))));
@@ -93,12 +96,42 @@ public class HomeParentActivity extends AppCompatActivity implements AdapterView
 
     }
 
+    private void readChildren() {
+
+
+        mParRef.child("children").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<String> nameList = new ArrayList<>();
+                for (DataSnapshot kid : dataSnapshot.getChildren()) {
+                    String name = kid.child("name").getValue(String.class);
+                    if (name != null)
+                        nameList.add(name);
+                }
+                childList = nameList;
+                final ListView lvParentList = (ListView) findViewById(R.id.lvParentList);
+                if (childList.size() != 0) {
+                    adapter = new ArrayAdapter<String>(HomeParentActivity.this, android.R.layout.simple_list_item_1, childList);
+                    lvParentList.setAdapter(adapter);      // arrayadapter filled with friends' name
+                    lvParentList.setOnItemClickListener(HomeParentActivity.this);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
     //whenever condition in the database changes we want to also update child
     //so in this case if we add a child we just change the name from child 1 to
     //the kids name just as a small example
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
+    @Override
+    protected void onStart() {
+        super.onStart();
 //        //create value listener here
 //        //if another kid is added to the kid tree, listen and add another button
 //        mKidRef.child("name").addValueEventListener(new ValueEventListener() {
@@ -135,8 +168,8 @@ public class HomeParentActivity extends AppCompatActivity implements AdapterView
 //                HomeParentActivity.this.startActivity(RewardIntent);
 //            }
 //        });
-//
-//    }
+
+    }
 
     //Menu option
     @Override
