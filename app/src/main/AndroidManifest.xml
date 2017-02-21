@@ -28,7 +28,8 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".AddChild" />
         <activity android:name=".ChildTokenSchedule" />
-        <activity android:name=".SetUpReward"></activity>
+        <activity android:name=".SetUpReward" />
+        <activity android:name=".MenuAbout"></activity>
     </application>
 
 </manifest>

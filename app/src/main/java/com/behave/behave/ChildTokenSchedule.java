@@ -13,6 +13,10 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+/**
+ * Created by Calvin on 2/17/2017.
+ */
+
 public class ChildTokenSchedule extends AppCompatActivity {
 
     private static int amountOfToken = 0;

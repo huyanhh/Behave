@@ -33,6 +33,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/**
+ * Created by Calvin on 2/17/2017.
+ */
+
 public class Register extends AppCompatActivity
 {
     private static final String TAG = "Register";

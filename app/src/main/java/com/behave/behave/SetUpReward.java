@@ -21,6 +21,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Created by Calvin on 2/17/2017.
+ */
+
 public class SetUpReward extends AppCompatActivity {
 
     private ListView rewards;

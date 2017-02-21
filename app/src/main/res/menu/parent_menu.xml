@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".HomeParentActivity">
+
+
+    <item
+        android:id="@+id/mHome"
+        android:title="Home" />
+    <item android:title="child"
+        android:id="@+id/mChild"/>
+    <item android:title="Redeem Notification"
+        android:id="@+id/mRedeemNotification"/>
+    <item android:title="Prize List"
+        android:id="@+id/mPrizeList"/>
+    <item android:title="Settings"
+        android:id="@+id/mSetting"/>
+    <item android:title="About"
+        android:id="@+id/mAbout"/>
+    <item android:title="Logout"
+        android:id="@+id/mLogOut"/>
+
+</menu>

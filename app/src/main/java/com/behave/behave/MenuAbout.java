@@ -1,22 +1,22 @@
 package com.behave.behave;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.*;
 
 /**
- * Created by huyanh on 2017. 2. 6..
+ * Created by Calvin on 2/20/2017.
  */
 
-public class HomeParentActivity extends AppCompatActivity {
+public class MenuAbout extends AppCompatActivity {
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_parent_page);
-
+        setContentView(R.layout.activity_menu_about);
     }
-
 
     //Menu option
     @Override
@@ -24,7 +24,7 @@ public class HomeParentActivity extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.parent_menu, menu);
         return super.onCreateOptionsMenu(menu);
-        //  return true;
+      //  return true;
     }
 
     @Override
@@ -43,8 +43,6 @@ public class HomeParentActivity extends AppCompatActivity {
             case R.id.mSetting:
                 break;
             case R.id.mAbout:
-                Intent aboutIntent = new Intent(this, MenuAbout.class);
-                this.startActivity(aboutIntent);
                 break;
             case R.id.mLogOut:
                 LoginActivity.clearUsername();

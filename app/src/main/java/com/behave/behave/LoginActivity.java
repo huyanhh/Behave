@@ -29,6 +29,10 @@ import org.json.JSONObject;
 
 import static java.sql.DriverManager.println;
 
+/**
+ * Created by Calvin on 2/17/2017.
+ */
+
 public class LoginActivity extends AppCompatActivity
 {
     private static final String TAG = "Login";
