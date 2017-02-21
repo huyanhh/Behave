@@ -29,6 +29,7 @@
         <activity android:name=".ui.AddChild" />
         <activity android:name=".ui.ChildTokenSchedule" />
         <activity android:name=".ui.SetUpReward"></activity>
+        <activity android:name=".ui.MenuAbout"></activity>
     </application>
 
 </manifest>
