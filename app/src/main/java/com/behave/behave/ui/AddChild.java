@@ -111,7 +111,7 @@ public class AddChild extends AppCompatActivity {
 //        mParRef.child("children").setValue(childId);
         Child child = new Child(childId, "parent1", name);
         mKidRef.child(childId).setValue(child);
-        mParRef.child("children").child(childId).setValue(true);
+        mParRef.child("children").child(childId).setValue(child);
     }
 
     // [START on_start_add_listener]sdaf
