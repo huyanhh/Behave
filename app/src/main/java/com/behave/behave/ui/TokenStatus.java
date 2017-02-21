@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.ListViewCompat;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -47,8 +49,47 @@ public class TokenStatus extends AppCompatActivity implements AdapterView.OnItem
 
     }
 
+    //pick a token to edit in the list
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
     }
+
+    //Menu option
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.parent_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+        //  return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.mHome:
+                Intent homeIntent = new Intent(this, HomeParentActivity.class);
+                this.startActivity(homeIntent);
+                break;
+            case R.id.mChild:
+                break;
+            case R.id.mRedeemNotification:
+                break;
+            case R.id.mPrizeList:
+                break;
+            case R.id.mSetting:
+                break;
+            case R.id.mAbout:
+                Intent aboutIntent = new Intent(this, MenuAbout.class);
+                this.startActivity(aboutIntent);
+                break;
+            case R.id.mLogOut:
+                LoginActivity.clearUsername();
+                Intent logoutIntent = new Intent(this, MainActivity.class);
+                this.startActivity(logoutIntent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    //Menu option end
 }

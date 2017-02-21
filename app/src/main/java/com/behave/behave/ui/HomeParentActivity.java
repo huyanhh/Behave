@@ -174,7 +174,9 @@ public class HomeParentActivity extends AppCompatActivity implements AdapterView
         }
         return super.onOptionsItemSelected(item);
     }
+    //Menu option end
 
+    //Listen for a child to be selected from the Listview
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent tokenStatus = new Intent(this, TokenStatus.class);
