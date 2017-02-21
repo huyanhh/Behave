@@ -37,7 +37,7 @@
         <activity android:name=".AddChild" />
         <activity android:name=".ChildTokenSchedule" />
         <activity android:name=".SetUpReward" />
-        <activity android:name=".MenuAbout"></activity>
+        <activity android:name=".ui.MenuAbout"></activity>
 >>>>>>> master
     </application>
 
