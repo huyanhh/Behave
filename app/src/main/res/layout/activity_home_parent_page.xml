@@ -15,7 +15,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent">
+        android:layout_height="362dp">
 
         <Button
             android:text="Child 1"
@@ -36,4 +36,11 @@
             android:id="@+id/button3" />
 
     </LinearLayout>
+
+    <Button
+        android:text="prize list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="24dp"
+        android:id="@+id/prizeList" />
 </LinearLayout>

@@ -1,10 +1,9 @@
-package com.behave.behave;
+package com.behave.behave.ui;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.renderscript.ScriptGroup;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -14,19 +13,29 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import com.behave.behave.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/// Sets up rewards in the onboarding, but we should reuse the view later for the prizelist
 public class SetUpReward extends AppCompatActivity {
 
     private ListView rewards;
     private ArrayAdapter<String> adapter;
     private String newPrize;
     private int tokenAmount;
+
+    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference mPrizesRef = mRootRef.child("parents").child("parentid1").child("prizes");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +113,7 @@ public class SetUpReward extends AppCompatActivity {
                                 alert1.setPositiveButton("OK", null);
                                 alert1.create().show();
 
+                                writePrize(newPrize, tokenAmount);
                                 adapter.notifyDataSetChanged();
                             } else {
 
@@ -138,13 +148,18 @@ public class SetUpReward extends AppCompatActivity {
                 Alert.setNeutralButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent addChildLater = new Intent(SetUpReward.this, MainActivity.class);
+                        Intent addChildLater = new Intent(SetUpReward.this, HomeParentActivity.class);
                         SetUpReward.this.startActivity(addChildLater);
                     }
                 });
                 Alert.create().show();
             }
         });
+    }
+
+    //fb write
+    private void writePrize(String prize, Integer cost) {
+        mPrizesRef.child(prize).setValue(cost);
     }
 
 

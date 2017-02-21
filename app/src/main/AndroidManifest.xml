@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,16 +19,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Register"
+            android:name=".ui.Register"
             android:label="@string/title_activity_register"
             android:theme="@style/AppTheme.NoActionBar" />
         />
-        <activity android:name=".ForgotPassword" />
-        <activity android:name=".HomeParentActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".AddChild" />
-        <activity android:name=".ChildTokenSchedule" />
-        <activity android:name=".SetUpReward"></activity>
+        <activity android:name=".ui.ForgotPassword" />
+        <activity android:name=".ui.HomeParentActivity" />
+        <activity android:name=".ui.LoginActivity" />
+        <activity android:name=".ui.AddChild" />
+        <activity android:name=".ui.ChildTokenSchedule" />
+        <activity android:name=".ui.SetUpReward"></activity>
     </application>
 
 </manifest>

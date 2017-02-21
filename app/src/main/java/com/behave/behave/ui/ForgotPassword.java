@@ -1,7 +1,9 @@
-package com.behave.behave;
+package com.behave.behave.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.behave.behave.R;
 
 public class ForgotPassword extends AppCompatActivity {
 

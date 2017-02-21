@@ -1,10 +1,12 @@
-package com.behave.behave;
+package com.behave.behave.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.behave.behave.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,6 +22,7 @@ public class HomeParentActivity extends AppCompatActivity {
     private Button mChildButton;
     private Button mAddChild;
     private Button mAddChild2;
+    private Button mPrizeList;
 
     // when we get a reference it gets us a ref to the root of the json ref tree
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
@@ -31,6 +34,7 @@ public class HomeParentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home_parent_page);
 
         mChildButton = (Button) findViewById(R.id.button1);
+        mPrizeList = (Button) findViewById(R.id.prizeList);
         mAddChild = (Button) findViewById(R.id.button2);
         mAddChild2 = (Button) findViewById(R.id.button3);
     }
@@ -67,6 +71,14 @@ public class HomeParentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mKidRef.child("name").setValue("little huyanh");
+            }
+        });
+
+        mPrizeList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent RewardIntent = new Intent(HomeParentActivity.this, SetUpReward.class);
+                HomeParentActivity.this.startActivity(RewardIntent);
             }
         });
     }

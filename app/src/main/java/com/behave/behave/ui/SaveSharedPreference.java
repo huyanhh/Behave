@@ -1,4 +1,4 @@
-package com.behave.behave;
+package com.behave.behave.ui;
 
 import android.content.Context;
 import android.content.SharedPreferences;
