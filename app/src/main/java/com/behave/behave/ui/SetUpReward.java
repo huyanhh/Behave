@@ -29,10 +29,14 @@ import java.util.Map;
 /// Sets up rewards in the onboarding, but we should reuse the view later for the prizelist
 public class SetUpReward extends AppCompatActivity {
 
+
+
     private ListView rewards;
     private ArrayAdapter<String> adapter;
     private String newPrize;
     private int tokenAmount;
+    final Map<String, Integer> reward = new HashMap<String, Integer>();
+    final List<String> rewardsList = new ArrayList<String>();
 
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference mPrizesRef = mRootRef.child("parents").child("parentid1").child("prizes");
@@ -44,9 +48,8 @@ public class SetUpReward extends AppCompatActivity {
 
         final Button bAddReward = (Button) findViewById(R.id.bSetUpAdd);
         final Button bOk = (Button) findViewById(R.id.bSetUpRewards);
+
         rewards = (ListView) findViewById(R.id.lRewardList);
-        final List<String> rewardsList = new ArrayList<String>();
-        final Map<String, Integer> reward = new HashMap<String, Integer>();
 
         adapter = new ArrayAdapter<String>(SetUpReward.this, android.R.layout.simple_list_item_1, rewardsList);
         rewards.setAdapter(adapter);      // arrayadapter filled with friends' name
@@ -153,6 +156,31 @@ public class SetUpReward extends AppCompatActivity {
                     }
                 });
                 Alert.create().show();
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        mPrizesRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for (DataSnapshot prize: dataSnapshot.getChildren()) {
+//                    reward.put(prize.getKey(), prize.getValue(Integer.class));
+//                    tokenAmount = Integer.parseInt(prize.getKey());
+//                    rewardsList.add(prize.getKey().concat(" ".concat(String.valueOf(tokenAmount).concat(" Tokens"))));
+//                }
+//                adapter.notifyDataSetChanged();
+
+
+                //not sure how to update list view when view get created, do that here
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
     }
