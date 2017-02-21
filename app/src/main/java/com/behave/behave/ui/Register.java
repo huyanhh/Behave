@@ -27,7 +27,7 @@ public class Register extends AppCompatActivity
 {
     private static final String TAG = "Register";
     private static String firstName;
-    private static String lastName;
+//    private static String lastName;
     private static String email;
 
     private FirebaseAuth mAuth;
@@ -57,7 +57,6 @@ public class Register extends AppCompatActivity
         };
 
         final EditText etFirstName = (EditText) findViewById(R.id.etFirstName);
-        final EditText etUsername = (EditText) findViewById(R.id.etUsername);
         final EditText etPassword = (EditText) findViewById(R.id.etPassword);
         final EditText etVerifyPassword = (EditText) findViewById(R.id.etVerifyPassword);
         final EditText etEmail = (EditText) findViewById(R.id.etEmail);
@@ -70,7 +69,6 @@ public class Register extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 firstName = etFirstName.getText().toString();
-                final String Username = etUsername.getText().toString();
                 email = etEmail.getText().toString();
                 final String password = etPassword.getText().toString();
                 final String verifyPassword = etVerifyPassword.getText().toString();
@@ -89,12 +87,12 @@ public class Register extends AppCompatActivity
                     etFirstName.requestFocus();
                 }
 
-                if (!notEmpty(Username) || Username == null) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
-                    builder.setMessage("Not a valid Username").setNegativeButton("Retry", null).create().show();
-                    valid = false;
-                    etUsername.requestFocus();
-                }
+//                if (!notEmpty(Username) || Username == null) {
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
+//                    builder.setMessage("Not a valid Username").setNegativeButton("Retry", null).create().show();
+//                    valid = false;
+//                    etUsername.requestFocus();
+//                }
                 if (!notEmpty(password) || password.length() < 8) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
                     builder.setMessage("Password has to be at least 8 characters long").setNegativeButton("Retry", null).create().show();
