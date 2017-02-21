@@ -13,11 +13,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.behave.behave.R;
 
+import com.behave.behave.models.Child;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.UUID;
 
 /**
  * Created by Calvin on 2/17/2017.
@@ -28,6 +33,10 @@ public class AddChild extends AppCompatActivity {
     private static final String TAG = "Register";
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+
+    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference mKidRef = mRootRef.child("children");
+    DatabaseReference mParRef = mRootRef.child("parents").child("parentid1");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +61,7 @@ public class AddChild extends AppCompatActivity {
         };
 
         final EditText etFirstName = (EditText) findViewById(R.id.etChildFirstName);
-        final EditText etUsername = (EditText) findViewById(R.id.etChildUsername);
-        final EditText etPassword = (EditText) findViewById(R.id.etChildPassword);
-        final EditText etVerifyPassword = (EditText) findViewById(R.id.etChildVerifyPassword);
+
         final Button bOk = (Button) findViewById(R.id.bAddChildOk);
         etFirstName.requestFocus();
 
@@ -66,9 +73,6 @@ public class AddChild extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final String firstName = etFirstName.getText().toString();
-                final String username = etUsername.getText().toString();
-                final String password = etPassword.getText().toString();
-                final String verifyPassword = etVerifyPassword.getText().toString();
 
                 if(firstName.isEmpty())
                 {
@@ -78,39 +82,16 @@ public class AddChild extends AppCompatActivity {
                     valid = false;
 
                 }
-                if(username.isEmpty() )
-                {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(AddChild.this);
-                    builder.setMessage("Not a valid Username").setNegativeButton("Retry", null).create().show();
-                    etUsername.requestFocus();
-                    valid = false;
-                }
-                if(password.isEmpty() || verifyPassword.isEmpty() || password.length() < 8)
-                {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(AddChild.this);
-                    builder.setMessage("Password has to be at least 8 characters long").setNegativeButton("Retry", null).create().show();
-                    etPassword.requestFocus();
-                    valid = false;
-                }
-
-                if(!password.equals(verifyPassword))
-                {
-                    AlertDialog.Builder Alert = new AlertDialog.Builder(AddChild.this);
-                    Alert.setMessage("Password does not match");
-                    Alert.setPositiveButton("OK", null);
-                    etPassword.setText("");
-                    etVerifyPassword.setText("");
-                    Alert.create().show();
-                    etPassword.requestFocus();
-                    valid = false;
-                }
 
                 if(valid)
                 {
                    // createAccount(username, password);
-
+                    String uniqueID = UUID.randomUUID().toString();
+                    uniqueID = uniqueID.substring(uniqueID.length() / 2 + 1); // remove hyphen
+                    createNewChild(uniqueID, firstName);
                     AlertDialog.Builder Alert = new AlertDialog.Builder(AddChild.this);
-                    Alert.setMessage(firstName + " has been added");
+                    Alert.setMessage(firstName + " has been added, please use the code " +
+                            uniqueID + " to log in");
                     Alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -124,30 +105,13 @@ public class AddChild extends AppCompatActivity {
         });
     }
 
-    private void createAccount(String email, String password) {
-        Log.d(TAG, "createAccount:" + email);
-
-        // [START create_user_with_email]
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
-
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
-                            Toast.makeText(AddChild.this, "firebase auth failed",
-                                    Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(AddChild.this, "success",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-                });
-        // [END create_user_with_email]
+    private void createNewChild(String childId, String name) {
+        // since we have a Child class we don't need to manually
+        // set all fields, so we can just call child
+//        mParRef.child("children").setValue(childId);
+        Child child = new Child(childId, "parent1", name);
+        mKidRef.child(childId).setValue(child);
+        mParRef.child("children").child(childId).setValue(true);
     }
 
     // [START on_start_add_listener]sdaf

@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         {
             startActivity(new Intent(this, LoginActivity.class));
         }
-        //need to check what type of account based on the databse
+        //need to check what type of account based on the database
         else
         {
             startActivity(new Intent(this, HomeParentActivity.class));

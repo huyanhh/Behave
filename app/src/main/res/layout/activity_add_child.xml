@@ -28,25 +28,24 @@
         android:layout_marginBottom="47dp"
         android:id="@+id/bAddChildOk" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/etChildUsername"
-        android:layout_below="@+id/textView6"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+    <!--<EditText-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:inputType="textPersonName"-->
+        <!--android:ems="10"-->
+        <!--android:id="@+id/etChildUsername"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignParentEnd="true" />-->
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/etChildVerifyPassword"
-        android:layout_below="@+id/textView9"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+    <!--<EditText-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:inputType="textPassword"-->
+        <!--android:ems="10"-->
+        <!--android:id="@+id/etChildVerifyPassword"-->
+        <!--android:layout_below="@+id/textView9"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignParentEnd="true" />-->
 
     <TextView
         android:text="First name"
@@ -67,38 +66,38 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/etChildPassword"
-        android:layout_below="@+id/textView8"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+    <!--<EditText-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:inputType="textPassword"-->
+        <!--android:ems="10"-->
+        <!--android:id="@+id/etChildPassword"-->
+        <!--android:layout_below="@+id/textView8"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignParentEnd="true" />-->
 
-    <TextView
-        android:text="Username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView6"
-        android:layout_below="@+id/etChildFirstName"
-        android:layout_alignParentStart="true" />
+    <!--<TextView-->
+        <!--android:text="Username"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/textView6"-->
+        <!--android:layout_below="@+id/etChildFirstName"-->
+        <!--android:layout_alignParentStart="true" />-->
 
-    <TextView
-        android:text="Password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView8"
-        android:layout_below="@+id/etChildUsername"
-        android:layout_alignParentStart="true" />
+    <!--<TextView-->
+        <!--android:text="Password"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/textView8"-->
+        <!--android:layout_below="@+id/etChildUsername"-->
+        <!--android:layout_alignParentStart="true" />-->
 
-    <TextView
-        android:text="Re-enter password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView9"
-        android:layout_below="@+id/etChildPassword"
-        android:layout_alignParentStart="true" />
+    <!--<TextView-->
+        <!--android:text="Re-enter password"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/textView9"-->
+        <!--android:layout_below="@+id/etChildPassword"-->
+        <!--android:layout_alignParentStart="true" />-->
 
 </RelativeLayout>
