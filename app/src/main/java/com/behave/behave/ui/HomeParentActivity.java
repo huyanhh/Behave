@@ -29,7 +29,6 @@ public class HomeParentActivity extends AppCompatActivity {
     DatabaseReference mKidRef = mRootRef.child("children").child("child1"); // creates `-/children` in db
 
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_parent_page);
 
@@ -81,5 +80,6 @@ public class HomeParentActivity extends AppCompatActivity {
                 HomeParentActivity.this.startActivity(RewardIntent);
             }
         });
+
     }
 }

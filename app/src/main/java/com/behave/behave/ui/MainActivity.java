@@ -27,5 +27,8 @@ public class MainActivity extends AppCompatActivity {
 //        {
 //            //startActivity(new Intent(this, HomeChildrenPage.class));
 //        }
+        //  startActivity(new Intent(this, SetUpReward.class));
+        //   startActivity(new Intent(this, ChildTokenSchedule.class));
+        // startActivity(new Intent(this, MenuAbout.class));
     }
 }

@@ -13,6 +13,10 @@ import android.widget.Spinner;
 
 import com.behave.behave.R;
 
+/**
+ * Created by Calvin on 2/17/2017.
+ */
+
 public class ChildTokenSchedule extends AppCompatActivity {
 
     private static int amountOfToken = 0;

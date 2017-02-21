@@ -26,7 +26,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/// Sets up rewards in the onboarding, but we should reuse the view later for the prizelist
 public class SetUpReward extends AppCompatActivity {
 
 
