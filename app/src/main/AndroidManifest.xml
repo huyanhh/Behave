@@ -30,7 +30,8 @@
         <activity android:name=".ui.ChildTokenSchedule" />
         <activity android:name=".ui.SetUpReward" />
         <activity android:name=".ui.MenuAbout" />
-        <activity android:name=".ui.TokenStatus"></activity>
+        <activity android:name=".ui.TokenStatus" />
+        <activity android:name=".ui.ParentSettings"></activity>
     </application>
 
 </manifest>

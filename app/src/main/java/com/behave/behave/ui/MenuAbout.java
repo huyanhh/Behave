@@ -36,15 +36,19 @@ public class MenuAbout extends AppCompatActivity {
                 Intent homeIntent = new Intent(this, HomeParentActivity.class);
                 this.startActivity(homeIntent);
                 break;
-            case R.id.mChild:
-                break;
+//            case R.id.mChild:
+//                break;
             case R.id.mRedeemNotification:
                 break;
-            case R.id.mPrizeList:
-                break;
+//            case R.id.mPrizeList:
+//                break;
             case R.id.mSetting:
+                Intent settingIntent = new Intent(this, ParentSettings.class);
+                this.startActivity(settingIntent);
                 break;
             case R.id.mAbout:
+                Intent aboutIntent = new Intent(this, MenuAbout.class);
+                this.startActivity(aboutIntent);
                 break;
             case R.id.mLogOut:
                 LoginActivity.clearUsername();

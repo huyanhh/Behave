@@ -19,6 +19,10 @@ import com.behave.behave.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Calvin on 2/20/2017.
+ */
+
 public class TokenStatus extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
     private List<String> tokenList = new ArrayList<>();
@@ -71,13 +75,15 @@ public class TokenStatus extends AppCompatActivity implements AdapterView.OnItem
                 Intent homeIntent = new Intent(this, HomeParentActivity.class);
                 this.startActivity(homeIntent);
                 break;
-            case R.id.mChild:
-                break;
+//            case R.id.mChild:
+//                break;
             case R.id.mRedeemNotification:
                 break;
-            case R.id.mPrizeList:
-                break;
+//            case R.id.mPrizeList:
+//                break;
             case R.id.mSetting:
+                Intent settingIntent = new Intent(this, ParentSettings.class);
+                this.startActivity(settingIntent);
                 break;
             case R.id.mAbout:
                 Intent aboutIntent = new Intent(this, MenuAbout.class);
