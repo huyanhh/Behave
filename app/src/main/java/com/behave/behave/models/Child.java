@@ -6,17 +6,15 @@ package com.behave.behave.models;
 
 public class Child extends User {
 
-    public String id;
     public String parentId;
-    public String name;
     public int tokens = 0;
 
     public Child() {
 
     }
 
-    public Child(String id, String parentId, String name) {
-        this.id = id;
+    public Child(String uid, String parentId, String name) {
+        this.uid = uid;
         this.parentId = parentId;
         this.name = name;
     }
