@@ -42,7 +42,6 @@ public class Register extends AppCompatActivity
     public static final String PARENTS_CHILD = "parents";
     private DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
 
-
     @Override
     protected void onCreate(Bundle saveInstanceState)
     {
@@ -172,8 +171,6 @@ public class Register extends AppCompatActivity
                         } else {
                             Toast.makeText(Register.this, "success",
                                     Toast.LENGTH_SHORT).show();
-
-
                         }
 
                     }

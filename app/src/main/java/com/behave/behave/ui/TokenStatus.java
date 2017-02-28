@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.ListViewCompat;
+import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +16,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.behave.behave.R;
+import com.behave.behave.models.Parent;
+import com.behave.behave.utils.Constants;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +35,13 @@ public class TokenStatus extends AppCompatActivity implements AdapterView.OnItem
 
     private List<String> tokenList = new ArrayList<>();
     private ArrayAdapter<String> adapter;
+    int tokenCount;
+
+    TextView tvTokenCount;
+
+    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference mKidRef = mRootRef.child(Constants.CHILDREN_CHILD);
+    String kid = "a6a3-60611b13ed9c";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,9 +49,8 @@ public class TokenStatus extends AppCompatActivity implements AdapterView.OnItem
 
         Intent intent = getIntent();
         String childName = intent.getStringExtra("childName");
-        int tokenCount = 5;
         final TextView tvChildName = (TextView) findViewById(R.id.tvChildNameTokenStatus);
-        final TextView tvTokenCount = (TextView) findViewById(R.id.tvTokenCount);
+        tvTokenCount = (TextView) findViewById(R.id.tvTokenCount);
         final Button bTokenMinus = (Button) findViewById(R.id.bTokenStatusMinus);
         final Button bTokenAdd = (Button) findViewById(R.id.bTokenStatusAdd);
         final ListView lvTokenList = (ListView) findViewById(R.id.lvTokenStatusList);
@@ -49,8 +63,32 @@ public class TokenStatus extends AppCompatActivity implements AdapterView.OnItem
         adapter = new ArrayAdapter<String>(TokenStatus.this, android.R.layout.simple_list_item_1, tokenList);
         lvTokenList.setAdapter(adapter);      // arrayadapter filled with friends' name
         lvTokenList.setOnItemClickListener(TokenStatus.this);
-        tvTokenCount.setText("Token Count: " + tokenCount);
 
+        bTokenAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mKidRef.child(kid).child("tokens").setValue(++tokenCount);
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        ValueEventListener kidListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                tokenCount = dataSnapshot.child(kid).child("tokens").getValue(Integer.class);
+                tvTokenCount.setText("Token Count: " + tokenCount);
+                // ...
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // ...
+            }
+        };
+        mKidRef.addValueEventListener(kidListener);
     }
 
     //pick a token to edit in the list

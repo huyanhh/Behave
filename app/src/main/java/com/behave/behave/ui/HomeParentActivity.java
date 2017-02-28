@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.behave.behave.R;
 import com.behave.behave.models.Child;
+import com.behave.behave.models.Parent;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -56,29 +57,34 @@ public class HomeParentActivity extends AppCompatActivity implements AdapterView
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference mKidRef = mRootRef.child(CHILDREN_CHILD); // creates `-/children` in db
     DatabaseReference mParRef = mRootRef.child(PARENTS_CHILD);
+    Parent user;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_parent_page);
 
-        mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        mParRef = mParRef.child(mFirebaseUser.getUid());
-
         final TextView tvWelcome = (TextView) findViewById(R.id.tvWelcome);
         final Button bAddChild = (Button) findViewById(R.id.bParentAddChild);
 
-        tvWelcome.setText("Welcome back, "+ LoginActivity.getUsername());
+        ValueEventListener parListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Get Post object and use the values to update the UI
+                user = dataSnapshot.getValue(Parent.class);
+                tvWelcome.setText("Welcome back, " + user.name);
+                System.out.println(user.name);
+                // ...
+            }
 
-//        childList.add("Bob");
-//        childList.add("Tom");
-//        childList.add("Jane");
-//        childList.add("Jody");
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // ...
+            }
+        };
+        mParRef.addValueEventListener(parListener);
 
-
-//        mChildButton = (Button) findViewById(R.id.button1);
-//        mPrizeList = (Button) findViewById(R.id.prizeList);
-//        mAddChild = (Button) findViewById(R.id.button2);
-//        mAddChild2 = (Button) findViewById(R.id.button3);
+        mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        mParRef = mParRef.child(mFirebaseUser.getUid());
 
 
 
@@ -87,17 +93,6 @@ public class HomeParentActivity extends AppCompatActivity implements AdapterView
             public void onClick(View v) {
                 Intent addChildIntent = new Intent(HomeParentActivity.this, AddChild.class);
                 HomeParentActivity.this.startActivity(addChildIntent);
-
-//                reward.put(newPrize, tokenAmount);
-//                childList.add(newPrize.concat(" poo".concat(String.valueOf(tokenAmount).concat(" Tokens"))));
-//
-//                alert1.setTitle("Reward added");
-//                alert1.setMessage(newPrize + " has been added");
-//                alert1.setPositiveButton("OK", null);
-//                alert1.create().show();
-//
-//                writePrize(newPrize, tokenAmount);
-//                adapter.notifyDataSetChanged();
             }
         });
 
@@ -176,6 +171,7 @@ public class HomeParentActivity extends AppCompatActivity implements AdapterView
                 LoginActivity.clearUsername();
                 Intent logoutIntent = new Intent(this, MainActivity.class);
                 this.startActivity(logoutIntent);
+                FirebaseAuth.getInstance().signOut();
                 break;
         }
         return super.onOptionsItemSelected(item);
