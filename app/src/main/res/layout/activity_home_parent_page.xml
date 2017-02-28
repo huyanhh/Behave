@@ -3,13 +3,14 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:gravity="center"
+    android:weightSum="1">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="227dp"
         android:layout_height="wrap_content"
-        android:padding="24dp"
-        android:id="@+id/tvWelcome" />
+        android:id="@+id/tvWelcome"
+        android:layout_weight="0.75" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -45,6 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/bParentAddChild" />
+
 
     <!--<Button-->
         <!--android:text="prize list"-->

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_parent_redeem_page_list_child"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.behave.behave.ui.ParentRedeemPageListChild">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="134dp">
+
+        <Button
+            android:text="Child1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_child1" />
+         <!--   android:onClick="goToRedeemActivity"/> -->
+
+        <Button
+            android:text="Child2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_child2" />
+
+        <Button
+            android:text="Child3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_child3" />
+
+
+        <!-- USE THIS CODE TO REPLACE THE HARDCODED BUTTONS ABOVE
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="404dp"
+        android:id="@+id/lvParentList"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="14dp" /> -->
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:text="Pick a child:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:id="@+id/tv_pick_a_child"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+
+    <!--   MOVE THESE BUTTONS TO THE NEXT SCREEN
+    <Button
+        android:text="Approve Now"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_approve_now" />
+
+    <Button
+        android:text="Maybe Later"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_maybe_later" /> -->
+
+</RelativeLayout>

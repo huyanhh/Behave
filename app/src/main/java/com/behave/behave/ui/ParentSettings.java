@@ -3,10 +3,9 @@ package com.behave.behave.ui;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.preference.DialogPreference;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.InputType;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -104,7 +103,7 @@ public class ParentSettings extends AppCompatActivity {
                 android.app.AlertDialog.Builder changePW = new android.app.AlertDialog.Builder(ParentSettings.this);
                 changePW.setTitle("Change Password");
 
-                final EditText oldPassword = new EditText(ParentSettings.this);
+                final EditText oldPassword = new EditText(ParentSettings.this); //<-------
                 oldPassword.setHint("Old Password");
                 oldPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 final String oPassword = oldPassword.getText().toString();
@@ -199,6 +198,8 @@ public class ParentSettings extends AppCompatActivity {
 //            case R.id.mChild:
 //                break;
             case R.id.mRedeemNotification:
+                Intent redeemIntent = new Intent(this, ParentRedeemPageListChild.class);
+                this.startActivity(redeemIntent);
                 break;
 //            case R.id.mPrizeList:
 //                break;

@@ -5,30 +5,33 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.behave.behave.R;
 
-/**
- * Created by Calvin on 2/20/2017.
- */
-
-public class MenuAbout extends AppCompatActivity {
+public class ParentRedeemPageListChild extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu_about);
+        setContentView(R.layout.activity_parent_redeem_page_list_child);
     }
 
-    //Menu option
+    public void goToRedeemActivity(View view) {
+       // Intent intent = new Intent(this, ParentRedeemPageAllowRedeem.class);
+       // startActivity(intent);
+    }
+
+    //Creates Overflow Menu
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.parent_menu, menu);
         return super.onCreateOptionsMenu(menu);
-      //  return true;
+        //  return true;
     }
 
+    //Overflow menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -60,4 +63,5 @@ public class MenuAbout extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

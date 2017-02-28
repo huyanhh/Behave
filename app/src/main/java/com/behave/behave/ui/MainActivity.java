@@ -1,10 +1,9 @@
 package com.behave.behave.ui;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
-import com.behave.behave.ui.HomeParentActivity;
 import com.behave.behave.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 //        {
 //            //startActivity(new Intent(this, HomeChildrenPage.class));
 //        }
-        //  startActivity(new Intent(this, SetUpReward.class));
+//          startActivity(new Intent(this, ParentRedeemPageListChild.class));
         //   startActivity(new Intent(this, ChildTokenSchedule.class));
         // startActivity(new Intent(this, MenuAbout.class));
     }

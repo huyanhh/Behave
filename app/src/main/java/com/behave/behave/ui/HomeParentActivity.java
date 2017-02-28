@@ -3,7 +3,6 @@ package com.behave.behave.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,19 +11,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.behave.behave.R;
-import com.behave.behave.models.Child;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
-import java.net.Inet4Address;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -181,6 +175,7 @@ public class HomeParentActivity extends AppCompatActivity implements AdapterView
         //  return true;
     }
 
+    //overflow menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -191,6 +186,8 @@ public class HomeParentActivity extends AppCompatActivity implements AdapterView
 //            case R.id.mChild:
 //                break;
             case R.id.mRedeemNotification:
+                Intent redeemIntent = new Intent(this, ParentRedeemPageListChild.class);
+                this.startActivity(redeemIntent);
                 break;
 //            case R.id.mPrizeList:
 //                break;

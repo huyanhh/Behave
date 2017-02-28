@@ -31,7 +31,8 @@
         <activity android:name=".ui.SetUpReward" />
         <activity android:name=".ui.MenuAbout" />
         <activity android:name=".ui.TokenStatus" />
-        <activity android:name=".ui.ParentSettings"></activity>
+        <activity android:name=".ui.ParentSettings" />
+        <activity android:name=".ui.ParentRedeemPageListChild" />
     </application>
 
 </manifest>
