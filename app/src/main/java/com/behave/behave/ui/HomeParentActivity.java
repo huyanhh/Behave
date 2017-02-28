@@ -57,7 +57,7 @@ public class HomeParentActivity extends AppCompatActivity implements AdapterView
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference mKidRef = mRootRef.child(CHILDREN_CHILD); // creates `-/children` in db
     DatabaseReference mParRef = mRootRef.child(PARENTS_CHILD);
-    Parent user;
+//    Parent user;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,13 +66,15 @@ public class HomeParentActivity extends AppCompatActivity implements AdapterView
         final TextView tvWelcome = (TextView) findViewById(R.id.tvWelcome);
         final Button bAddChild = (Button) findViewById(R.id.bParentAddChild);
 
+        mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        mParRef = mParRef.child(mFirebaseUser.getUid());
+
         ValueEventListener parListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get Post object and use the values to update the UI
-                user = dataSnapshot.getValue(Parent.class);
-                tvWelcome.setText("Welcome back, " + user.name);
-                System.out.println(user.name);
+//                user = dataSnapshot.getValue(Parent.class);
+                tvWelcome.setText("Welcome back, " + dataSnapshot.child("name").getValue());
+//                System.out.println(user.name);
                 // ...
             }
 
@@ -82,11 +84,6 @@ public class HomeParentActivity extends AppCompatActivity implements AdapterView
             }
         };
         mParRef.addValueEventListener(parListener);
-
-        mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        mParRef = mParRef.child(mFirebaseUser.getUid());
-
-
 
         bAddChild.setOnClickListener(new View.OnClickListener() {
             @Override
