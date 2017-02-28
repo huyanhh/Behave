@@ -8,11 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-<<<<<<< HEAD
-=======
-import android.os.Bundle;
 import android.text.InputType;
->>>>>>> origin/master
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +22,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+//<<<<<<< HEAD
+//=======
+//>>>>>>> origin/master
 
 /**
  * Created by Calvin on 2/17/2017.
