@@ -30,13 +30,14 @@ import java.util.UUID;
 
 public class AddChild extends AppCompatActivity {
 
-    private static final String TAG = "Register";
+    private static final String TAG = "AddChild";
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference mKidRef = mRootRef.child("children");
-    DatabaseReference mParRef = mRootRef.child("parents").child("parentid1");
+    DatabaseReference mParRef = mRootRef.child("parents");
+    String parentId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,8 @@ public class AddChild extends AppCompatActivity {
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    mParRef = mParRef.child(user.getUid());
+                    parentId = user.getUid();
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -108,13 +111,12 @@ public class AddChild extends AppCompatActivity {
     private void createNewChild(String childId, String name) {
         // since we have a Child class we don't need to manually
         // set all fields, so we can just call child
-//        mParRef.child("children").setValue(childId);
-        Child child = new Child(childId, "parent1", name);
+        Child child = new Child(childId, parentId, name);
         mKidRef.child(childId).setValue(child);
         mParRef.child("children").child(childId).setValue(child);
     }
 
-    // [START on_start_add_listener]sdaf
+    // [START on_start_add_listener]
     @Override
     public void onStart() {
         super.onStart();

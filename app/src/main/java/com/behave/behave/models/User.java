@@ -6,5 +6,6 @@ package com.behave.behave.models;
 
 public abstract class User {
 
-    public String firstName;
+    public String name;
+    public String uid;
 }

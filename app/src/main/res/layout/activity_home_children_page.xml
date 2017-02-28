@@ -11,7 +11,7 @@
     >
 
     <TextView
-        android:text="Tokens"
+        android:text="Hello Kid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -53,7 +53,7 @@
         android:text="X tokens"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/TokenAmount"
+        android:id="@+id/tokenAmount"
         android:textSize="32dp"
         android:layout_alignBottom="@+id/tvWelcome"
         android:layout_toEndOf="@+id/tvWelcome"

@@ -15,6 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.behave.behave.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,8 +34,7 @@ import java.util.Map;
 
 public class SetUpReward extends AppCompatActivity {
 
-
-
+    private FirebaseUser mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     private ListView rewards;
     private ArrayAdapter<String> adapter;
     private String newPrize;
@@ -42,12 +43,14 @@ public class SetUpReward extends AppCompatActivity {
     final List<String> rewardsList = new ArrayList<String>();
 
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference mPrizesRef = mRootRef.child("parents").child("parentid1").child("prizes");
+    DatabaseReference mPrizesRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_up_reward);
+
+        mPrizesRef = mRootRef.child("parents").child(mFirebaseUser.getUid()).child("prizes");
 
         final Button bAddReward = (Button) findViewById(R.id.bSetUpAdd);
         final Button bOk = (Button) findViewById(R.id.bSetUpRewards);
@@ -192,6 +195,5 @@ public class SetUpReward extends AppCompatActivity {
     private void writePrize(String prize, Integer cost) {
         mPrizesRef.child(prize).setValue(cost);
     }
-
 
 }

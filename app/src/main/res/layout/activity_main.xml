@@ -63,4 +63,9 @@
         android:layout_height="wrap_content"
         android:text="Forgot Password"
         android:id="@+id/tvForgotPassword" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Not a parent?"
+        android:id="@+id/bChild" />
 </LinearLayout>

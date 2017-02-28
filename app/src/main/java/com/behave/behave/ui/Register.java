@@ -17,11 +17,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.behave.behave.R;
+import com.behave.behave.models.Parent;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * Created by Calvin on 2/17/2017.
@@ -30,12 +34,13 @@ import com.google.firebase.auth.FirebaseUser;
 public class Register extends AppCompatActivity
 {
     private static final String TAG = "Register";
-    private static String firstName;
-//    private static String lastName;
+    private static String name;
     private static String email;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    public static final String PARENTS_CHILD = "parents";
+    private DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
 
     @Override
     protected void onCreate(Bundle saveInstanceState)
@@ -52,6 +57,10 @@ public class Register extends AppCompatActivity
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+
+                    Parent parent = new Parent(user.getEmail(), name);
+                    //created account data and stuff
+                    mRootRef.child(PARENTS_CHILD).child(user.getUid()).setValue(parent);
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -72,7 +81,7 @@ public class Register extends AppCompatActivity
             boolean valid = true;
             @Override
             public void onClick(View v) {
-                firstName = etFirstName.getText().toString();
+                name = etFirstName.getText().toString();
                 email = etEmail.getText().toString();
                 final String password = etPassword.getText().toString();
                 final String verifyPassword = etVerifyPassword.getText().toString();
@@ -84,7 +93,7 @@ public class Register extends AppCompatActivity
                     valid = false;
                     etEmail.requestFocus();
                 }
-                if (!notEmpty(firstName)|| firstName == null) {
+                if (!notEmpty(name)|| name == null) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
                     builder.setMessage("Name cannot be blank").setNegativeButton("Retry", null).create().show();
                     valid = false;
@@ -210,7 +219,7 @@ public class Register extends AppCompatActivity
 
     public static String getFirstName()
     {
-        return firstName;
+        return name;
     }
 //    public static String getLastName()
 //    {
