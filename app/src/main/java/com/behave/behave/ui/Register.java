@@ -59,13 +59,7 @@ public class Register extends AppCompatActivity
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
 
-                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                            .setDisplayName(name)
-                            .build();
-
-
-                    user.updateProfile(profileUpdates);
-                    Parent parent = new Parent(user.getEmail(), user.getDisplayName());
+                    Parent parent = new Parent(user.getEmail(), name);
                     //created account data and stuff
                     mRootRef.child(PARENTS_CHILD).child(user.getUid()).setValue(parent);
                 } else {

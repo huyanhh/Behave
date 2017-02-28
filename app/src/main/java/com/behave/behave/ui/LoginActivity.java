@@ -1,5 +1,6 @@
 package com.behave.behave.ui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
@@ -7,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -38,6 +40,7 @@ public class LoginActivity extends AppCompatActivity
     private static SharedPreferences.Editor pe;
     private static String Username;
     private static String Password;
+    String mChildCode;
 
     // [START declare_auth]
     private FirebaseAuth mAuth;
@@ -78,6 +81,7 @@ public class LoginActivity extends AppCompatActivity
         final EditText etPassword = (EditText) findViewById(R.id.etPassword);
 
         final Button bLogin = (Button) findViewById(R.id.bLogin);
+        final Button bChildLogin = (Button) findViewById(R.id.bChild);
         final TextView tvRegisterLink = (TextView) findViewById(R.id.tvRegister);
         final TextView tvForgotPassword = (TextView) findViewById(R.id.tvForgotPassword);
 
@@ -151,6 +155,41 @@ public class LoginActivity extends AppCompatActivity
             });
         }
 
+        bChildLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showInputDialog();
+            }
+        });
+
+    }
+
+    private void showInputDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Input code given by your parent");
+
+        final EditText input = new EditText(this);
+
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mChildCode = input.getText().toString();
+                Intent userIntent = new Intent(LoginActivity.this, HomeChildrenPage.class);
+                userIntent.putExtra("childId", mChildCode);
+                LoginActivity.this.startActivity(userIntent);
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
     }
 
     private void signIn(String email, final String password) {

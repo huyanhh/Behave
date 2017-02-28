@@ -111,14 +111,12 @@ public class AddChild extends AppCompatActivity {
     private void createNewChild(String childId, String name) {
         // since we have a Child class we don't need to manually
         // set all fields, so we can just call child
-//        mParRef.child("children").setValue(childId);
         Child child = new Child(childId, parentId, name);
-        // TODO: - push children onto array instead of adding object
         mKidRef.child(childId).setValue(child);
         mParRef.child("children").child(childId).setValue(child);
     }
 
-    // [START on_start_add_listener]sdaf
+    // [START on_start_add_listener]
     @Override
     public void onStart() {
         super.onStart();

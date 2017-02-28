@@ -6,7 +6,6 @@ package com.behave.behave.models;
 
 public class Parent extends User {
 
-
     public String email;
     public Child[] children;
     public String[] prizeList;
