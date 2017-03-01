@@ -242,6 +242,8 @@ public class LoginActivity extends AppCompatActivity
     {
         pe.clear();
         pe.commit();
+        //FirebaseUser mFirebaseUser;
+        FirebaseAuth.getInstance().signOut();
     }
 
     public static String getUsername()

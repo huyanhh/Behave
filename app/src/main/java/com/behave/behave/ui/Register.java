@@ -128,24 +128,6 @@ public class Register extends AppCompatActivity
 
                 if(valid) {
                     createAccount(email, password);
-
-                    AlertDialog.Builder Alert = new AlertDialog.Builder(Register.this);
-                    Alert.setMessage("Do you want to add child now?");
-                    Alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            Intent addChildNow = new Intent(Register.this, AddChild.class);
-                            Register.this.startActivity(addChildNow);
-                        }
-                    });
-                    Alert.setNeutralButton("No", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            Intent addChildLater = new Intent(Register.this, LoginActivity.class);
-                            Register.this.startActivity(addChildLater);
-                        }
-                    });
-                    Alert.create().show();
                 }
             }
         });
@@ -166,11 +148,32 @@ public class Register extends AppCompatActivity
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Toast.makeText(Register.this, "firebase auth failed",
-                                    Toast.LENGTH_SHORT).show();
+                            AlertDialog.Builder Alert = new AlertDialog.Builder(Register.this);
+                            Alert.setMessage("Error, Email has been registered");
+                            Alert.setPositiveButton("ok", null);
+                            Alert.create().show();
+//                            Toast.makeText(Register.this, "firebase auth failed",
+//                                    Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(Register.this, "success",
-                                    Toast.LENGTH_SHORT).show();
+                            AlertDialog.Builder Alert = new AlertDialog.Builder(Register.this);
+                            Alert.setMessage("Do you want to add child now?");
+                            Alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Intent addChildNow = new Intent(Register.this, AddChild.class);
+                                    Register.this.startActivity(addChildNow);
+                                }
+                            });
+                            Alert.setNeutralButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Intent addChildLater = new Intent(Register.this, LoginActivity.class);
+                                    Register.this.startActivity(addChildLater);
+                                }
+                            });
+                            Alert.create().show();
+//                            Toast.makeText(Register.this, "success",
+//                                    Toast.LENGTH_SHORT).show();
                         }
 
                     }

@@ -8,40 +8,6 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:791144379742:android:4a4e26d8ed570bfd",
-        "android_client_info": {
-          "package_name": "behave.behave"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "791144379742-00a63r45ua81a5crfme8cjm00j5d612t.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBU-EGB8f1L-Z9Z_G_jk0Ei4x1l58lLfH8"
-        },
-        {
-          "current_key": "AIzaSyAo6-Ma2cF9dgywQ1ma8F5LOxK7SBeBFyw"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:791144379742:android:4fc8e82a1ddf624c",
         "android_client_info": {
           "package_name": "com.behave.behave"
@@ -49,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "791144379742-tu5qbe5edf40q37i2ejhq0t5j8kthegp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.behave.behave",
+            "certificate_hash": "96d81d7f6d71e6848335e0128abc53dbe790d71b"
+          }
+        },
+        {
+          "client_id": "791144379742-hclag24d6kqln535iak5rbec9f9qjjdr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.behave.behave",
+            "certificate_hash": "a6c303cb7b004c1854a12a76f67614742b94b549"
+          }
+        },
+        {
           "client_id": "791144379742-00a63r45ua81a5crfme8cjm00j5d612t.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -56,9 +38,6 @@
       "api_key": [
         {
           "current_key": "AIzaSyBU-EGB8f1L-Z9Z_G_jk0Ei4x1l58lLfH8"
-        },
-        {
-          "current_key": "AIzaSyAo6-Ma2cF9dgywQ1ma8F5LOxK7SBeBFyw"
         }
       ],
       "services": {
