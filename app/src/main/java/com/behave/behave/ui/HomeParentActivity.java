@@ -39,7 +39,7 @@ public class HomeParentActivity extends AppCompatActivity implements AdapterView
 //    private Button mAddChild2;
 //    private Button mPrizeList;
     private ArrayAdapter<String> adapter;
-    final Map<String, Integer> reward = new HashMap<String, Integer>();
+    final Map<String, String> childUID = new HashMap<>();
     List<String> childList = new ArrayList<>();
     //final List<ArrayList<HashMap<String, String>>> childList = new ArrayList<ArrayList<HashMap<String,String>>>();
     //final List<HashMap<String, String>> tableGenerator = new ArrayList<HashMap<String, String>>();
@@ -96,8 +96,11 @@ public class HomeParentActivity extends AppCompatActivity implements AdapterView
                 List<String> nameList = new ArrayList<>();
                 for (DataSnapshot kid : dataSnapshot.getChildren()) {
                     String name = kid.child("name").getValue(String.class);
-                    if (name != null)
+                    String uid = kid.child("uid").getValue(String.class);
+                    if (name != null) {
                         nameList.add(name);
+                        childUID.put(name, uid);
+                    }
                 }
                 childList = nameList;
                 final ListView lvParentList = (ListView) findViewById(R.id.lvParentList);
@@ -175,6 +178,7 @@ public class HomeParentActivity extends AppCompatActivity implements AdapterView
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent tokenStatus = new Intent(this, TokenStatus.class);
         tokenStatus.putExtra("childName", childList.get(position));
+        tokenStatus.putExtra("childUID", childUID.get(childList.get(position)));
         this.startActivity(tokenStatus);
         //TokenStatus.putExtra("password", tempPassword);
 //        switch(position)
