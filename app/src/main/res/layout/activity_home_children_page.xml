@@ -29,15 +29,6 @@
         android:layout_below="@+id/textView2"
         android:layout_centerHorizontal="true" />
 
-    <Button
-        android:text="Redeem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button_redeem"
-        android:onClick="redeemPrize"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
     <TextView
         android:text="You have"
         android:layout_width="wrap_content"
@@ -76,6 +67,16 @@
         android:id="@+id/textView2"
         android:layout_below="@+id/tvWelcome"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="Redeem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_redeem"
+        android:onClick="redeemPrize"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="18dp" />
 
 
 </RelativeLayout>

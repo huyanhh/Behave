@@ -1,9 +1,14 @@
 package com.behave.behave.ui;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.behave.behave.ui.ChildRedeemPage;
@@ -15,7 +20,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.behave.behave.utils.Constants;
 import com.google.firebase.database.ValueEventListener;
 
+import com.behave.behave.R;
+
+
+
 public class HomeChildrenPage extends AppCompatActivity {
+
 
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference mKidRef = mRootRef.child(Constants.CHILDREN_CHILD); // creates `-/children` in db
@@ -46,9 +56,37 @@ public class HomeChildrenPage extends AppCompatActivity {
             }
         });
     }
-    public void redeemPrize(View view){
-        Intent startNewActivity = new Intent (this,ChildRedeemPage.class);
-        startActivity(startNewActivity);
+   // @Override
+    public void redeemPrize (View view){
+        Intent intent = new Intent (this, ChildRedeemPage.class);
+        startActivity(intent);
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.child_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()) {
+            case R.id.item_option1:
+                Intent settingsIntent = new Intent(this, ChildSetting.class);
+                this.startActivity(settingsIntent);
+                break;
+            case R.id.item_option2:
+                LoginActivity.clearUsername();
+                Intent logoutIntent = new Intent(this, MainActivity.class);
+                this.startActivity(logoutIntent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+
+    }
+
 
 }

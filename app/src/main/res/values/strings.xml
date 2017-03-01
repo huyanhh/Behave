@@ -4,4 +4,5 @@
     <string name="tv_hello_world">Hello World</string>
     <string name="title_activity_parent_redeem_page_allow_redeem">ParentRedeemPageAllowRedeem
     </string>
+    <string name="title_activity_child_menu_about">ChildMenuAbout</string>
 </resources>
