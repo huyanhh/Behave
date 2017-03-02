@@ -10,6 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.behave.behave.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 /**
  * Created by Calvin on 2/17/2017.
  */
@@ -45,7 +48,8 @@ public class ForgotPassword extends AppCompatActivity {
                     alert.setPositiveButton("OK", null);
                 }
                 else {
-                    alert.setMessage("If password is valid, reset password will be sent to your email at " + email);
+                    alert.setMessage("If Email is valid, reset password will be sent to your email at " + email);
+                    FirebaseAuth.getInstance().sendPasswordResetEmail(email);
                     alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

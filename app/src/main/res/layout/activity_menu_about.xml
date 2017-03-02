@@ -55,12 +55,11 @@
         android:textColor="@android:color/black" />
 
     <TextView
-        android:text="Child Token Application that helps parents' keep tracking of their child behavioral"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView12"
         android:layout_marginTop="24dp"
-        android:id="@+id/textView18"
+        android:id="@+id/tvAboutDescription"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:textColor="@android:color/black" />

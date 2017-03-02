@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
@@ -15,13 +16,22 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.behave.behave.R;
+import com.behave.behave.models.Parent;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 /**
  * Created by Calvin on 2/20/2017.
  */
 
 public class ParentSettings extends AppCompatActivity {
-
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,23 +76,22 @@ public class ParentSettings extends AppCompatActivity {
                 changeEmail.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(ParentSettings.this);
-                        alert.setTitle("Change Password");
+
                         String email = newEmail.getText().toString();
                         String vEmail = verifyEmail.getText().toString();
 
-                        //CHANGE EMAIL IN FIREBASE
                         if(email.equals(vEmail) && isValidEmail(email))
                         {
-                            //change EMAIL here in FIREHERE
-                            alert.setMessage("Email changed");
+                            changeEmail(email);
                         }
                         else
                         {
+                            AlertDialog.Builder alert = new AlertDialog.Builder(ParentSettings.this);
+                            alert.setTitle("Change Password");
                             alert.setMessage("Email do not match or incorrect format");
+                            alert.setPositiveButton("Ok", null);
+                            alert.create().show();
                         }
-                        alert.setPositiveButton("Ok", null);
-                        alert.create().show();
                     }
                 });
                 changeEmail.setNegativeButton("Cancel", null);
@@ -100,7 +109,7 @@ public class ParentSettings extends AppCompatActivity {
                 LinearLayout layout = new LinearLayout(context);
                 layout.setOrientation(LinearLayout.VERTICAL);
 
-                android.app.AlertDialog.Builder changePW = new android.app.AlertDialog.Builder(ParentSettings.this);
+                final android.app.AlertDialog.Builder changePW = new android.app.AlertDialog.Builder(ParentSettings.this);
                 changePW.setTitle("Change Password");
 
                 final EditText oldPassword = new EditText(ParentSettings.this); //<-------
@@ -124,21 +133,23 @@ public class ParentSettings extends AppCompatActivity {
                 changePW.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(ParentSettings.this);
-                        alert.setTitle("Change Password");
+
 
                         //CHECK PASSWORD FROM FIREBASE HERE
                         if(nPassword.equals(vPassword))  //INCLUDE CHECK OLD PASSWORD WITH DB
                         {
                             //change password here in FIREHERE
-                            alert.setMessage("Password changed");
+                            changePassword(nPassword);
                         }
                         else
                         {
+                            AlertDialog.Builder alert = new AlertDialog.Builder(ParentSettings.this);
+                            alert.setTitle("Change Password");
                             alert.setMessage("Wrong Password");
+                            alert.setPositiveButton("Ok", null);
+                            alert.create().show();
                         }
-                        alert.setPositiveButton("Ok", null);
-                        alert.create().show();
+
                     }
                 });
                 changePW.setNegativeButton("Cancel", null);
@@ -164,7 +175,7 @@ public class ParentSettings extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
 
                                 //INSERT DELETE FROM FIREBASE HERE
-
+                                deleteAccount();
                                 Intent addChildNow = new Intent(ParentSettings.this, MainActivity.class);
                                 ParentSettings.this.startActivity(addChildNow);
                             }
@@ -178,7 +189,57 @@ public class ParentSettings extends AppCompatActivity {
         });
     }
 
+    //change email in firebase
+    public void changeEmail(String email)
+    {
+        DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+        HashMap<String, Object> temp = new HashMap<>();
+        temp.put("email", email);
+        DatabaseReference mParRef = mRootRef.child("parents").child(user.getUid());
+        mParRef.updateChildren(temp);
+        user.updateEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()) {
+                    AlertDialog.Builder alert = new AlertDialog.Builder(ParentSettings.this);
+                    alert.setTitle("Change Password");
+                    alert.setMessage("Email changed");
+                    alert.setPositiveButton("Ok", null);
+                    alert.create().show();
+                }
+            }
+        });
+    }
 
+    //change password in firebase
+    public void changePassword(String password)
+    {
+        user.updatePassword(password).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(ParentSettings.this);
+                alert.setTitle("Change Password");
+                alert.setMessage("Password Change successfully");
+                alert.setPositiveButton("Ok", null);
+                alert.create().show();
+            }
+        });
+    }
+
+    //delete account
+    public void deleteAccount()
+    {
+        user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(ParentSettings.this);
+                alert.setTitle("Account deleted");
+                alert.setMessage(user.getDisplayName() + "  has been deleted");
+                alert.setPositiveButton("Ok", null);
+                alert.create().show();
+            }
+        });
+    }
     //Menu option
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {

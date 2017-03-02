@@ -39,7 +39,7 @@ public class HomeParentActivity extends AppCompatActivity implements AdapterView
 //    private Button mAddChild2;
 //    private Button mPrizeList;
     private ArrayAdapter<String> adapter;
-    final Map<String, Integer> reward = new HashMap<String, Integer>();
+    final Map<String, String> childUID = new HashMap<>();
     List<String> childList = new ArrayList<>();
     //final List<ArrayList<HashMap<String, String>>> childList = new ArrayList<ArrayList<HashMap<String,String>>>();
     //final List<HashMap<String, String>> tableGenerator = new ArrayList<HashMap<String, String>>();
@@ -58,6 +58,7 @@ public class HomeParentActivity extends AppCompatActivity implements AdapterView
 
         final TextView tvWelcome = (TextView) findViewById(R.id.tvWelcome);
         final Button bAddChild = (Button) findViewById(R.id.bParentAddChild);
+        final Button bViewRewards = (Button) findViewById(R.id.bViewRewards);
 
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         mParRef = mParRef.child(mFirebaseUser.getUid());
@@ -78,6 +79,16 @@ public class HomeParentActivity extends AppCompatActivity implements AdapterView
         };
         mParRef.addValueEventListener(parListener);
 
+        bViewRewards.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //MAYBE CHANGE THIS???
+                Intent seeRewardIntent = new Intent (HomeParentActivity.this, SetUpReward.class);
+//                seeRewardIntent.putExtra("True", true);
+                HomeParentActivity.this.startActivity(seeRewardIntent);
+            }
+        });
+
         bAddChild.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,8 +107,11 @@ public class HomeParentActivity extends AppCompatActivity implements AdapterView
                 List<String> nameList = new ArrayList<>();
                 for (DataSnapshot kid : dataSnapshot.getChildren()) {
                     String name = kid.child("name").getValue(String.class);
-                    if (name != null)
+                    String uid = kid.child("uid").getValue(String.class);
+                    if (name != null) {
                         nameList.add(name);
+                        childUID.put(name, uid);
+                    }
                 }
                 childList = nameList;
                 final ListView lvParentList = (ListView) findViewById(R.id.lvParentList);
@@ -175,22 +189,7 @@ public class HomeParentActivity extends AppCompatActivity implements AdapterView
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent tokenStatus = new Intent(this, TokenStatus.class);
         tokenStatus.putExtra("childName", childList.get(position));
+        tokenStatus.putExtra("childUID", childUID.get(childList.get(position)));
         this.startActivity(tokenStatus);
-        //TokenStatus.putExtra("password", tempPassword);
-//        switch(position)
-//        {
-//            case 0:
-//                Toast.makeText(this, childList.get(position), Toast.LENGTH_LONG).show();
-//                break;
-//            case 1:
-//                Toast.makeText(this, childList.get(position), Toast.LENGTH_LONG).show();
-//                break;
-//            case 2:
-//                Toast.makeText(this, childList.get(position), Toast.LENGTH_LONG).show();
-//                break;
-//            case 3:
-//                Toast.makeText(this, childList.get(position), Toast.LENGTH_LONG).show();
-//                break;
-//        }
     }
 }
