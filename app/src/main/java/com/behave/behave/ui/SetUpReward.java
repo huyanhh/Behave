@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,12 +28,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Calvin on 2/20/2017.
  */
 
-public class SetUpReward extends AppCompatActivity {
+public class SetUpReward extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
     private FirebaseUser mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     private ListView rewards;
@@ -40,7 +42,8 @@ public class SetUpReward extends AppCompatActivity {
     private String newPrize;
     private int tokenAmount;
     final Map<String, Integer> reward = new HashMap<String, Integer>();
-    final List<String> rewardsList = new ArrayList<String>();
+    private List<String> rewardsList = new ArrayList<String>();
+    private Map<String, Integer> rewardKeyList = new HashMap<>();
 
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference mPrizesRef;
@@ -57,8 +60,35 @@ public class SetUpReward extends AppCompatActivity {
 
         rewards = (ListView) findViewById(R.id.lRewardList);
 
-        adapter = new ArrayAdapter<String>(SetUpReward.this, android.R.layout.simple_list_item_1, rewardsList);
-        rewards.setAdapter(adapter);      // arrayadapter filled with friends' name
+        mPrizesRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List <String> tempList = new ArrayList<String>();
+                for(DataSnapshot reward : dataSnapshot.getChildren()){
+                    Integer rewardDes = reward.getValue(Integer.class);
+                    String rewardKey = reward.getKey();
+                    if(rewardDes != null)
+                        tempList.add(rewardKey + "\t" + rewardDes);
+                    if(!rewardKeyList.containsKey(rewardKey))
+                        rewardKeyList.put(rewardKey, rewardDes);
+                }
+                rewardsList = tempList;
+
+                if(rewardsList.size() != 0)
+                {
+                    adapter = new ArrayAdapter<String>(SetUpReward.this, android.R.layout.simple_list_item_1, rewardsList);
+                    rewards.setAdapter(adapter);      // arrayadapter filled with friends' name
+                    rewards.setOnItemClickListener(SetUpReward.this);
+                }
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
         bAddReward.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,7 +153,7 @@ public class SetUpReward extends AppCompatActivity {
                                 alert1.create().show();
 
                                 writePrize(newPrize, tokenAmount);
-                                adapter.notifyDataSetChanged();
+                                //adapter.notifyDataSetChanged();
                             } else {
 
                                 alert1.setTitle("Duplicate Reward");
@@ -143,7 +173,12 @@ public class SetUpReward extends AppCompatActivity {
         bOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+//                String goBack;
+//                if(getIntent().getStringExtra("True")!=null)
+//                {
+//                    Intent HomeIntent = new Intent(SetUpReward.this, HomeParentActivity.class);
+//                    SetUpReward.this.startActivity(HomeIntent);
+//                }
                 //do something
                 AlertDialog.Builder Alert = new AlertDialog.Builder(SetUpReward.this);
                 Alert.setMessage("Do you want to add child now?");
@@ -196,4 +231,86 @@ public class SetUpReward extends AppCompatActivity {
         mPrizesRef.child(prize).setValue(cost);
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        final String key = rewardsList.get(position).substring(0, rewardsList.get(position).indexOf("\t"));
+
+        Context context = SetUpReward.this;
+        LinearLayout layout = new LinearLayout(context);
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(SetUpReward.this);
+        alert.setTitle("Edit Rewards");
+
+        final EditText prize = new EditText(SetUpReward.this);
+        prize.setHint("Enter Prize");
+        prize.setInputType(InputType.TYPE_CLASS_TEXT);
+        //alert.setView(prize);
+        layout.addView(prize);
+
+        final EditText tokens = new EditText(SetUpReward.this);
+        tokens.setInputType(InputType.TYPE_CLASS_NUMBER);
+        tokens.setHint("Enter amount");
+        //alert.setView(tokens);
+        layout.addView(tokens);
+
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                AlertDialog.Builder alert1 = new AlertDialog.Builder(SetUpReward.this);
+
+                if(prize.getText().toString().isEmpty())
+                {
+                    alert1.setTitle("Warning");
+                    alert1.setMessage("Prize entry can't be empty");
+                    alert1.setPositiveButton("OK", null);
+                    prize.requestFocus();
+                    alert1.create().show();
+                }
+                else if(tokens.getText().toString().isEmpty())
+                {
+                    alert1.setTitle("Warning");
+                    alert1.setMessage("Amount of tokens entry can't be empty");
+                    alert1.setPositiveButton("OK", null);
+                    //dfstokens.requestFocus();
+                    alert1.create().show();
+                }
+                else {
+                    newPrize = prize.getText().toString();
+                    tokenAmount = Integer.parseInt(tokens.getText().toString());
+                    int x = (newPrize.length()) - 1;
+                    while (newPrize.charAt(x--) == ' ') {
+                    }
+                    //                        newPrize.ind
+                    // if(newPrize.charAt(x) == ' ')
+                    newPrize = newPrize.substring(0, x + 2);
+
+                    if (!reward.containsKey(newPrize.toLowerCase())) {
+                        reward.put(newPrize, tokenAmount);
+                        rewardsList.add(newPrize.concat(" ".concat(String.valueOf(tokenAmount).concat(" Tokens"))));
+
+                        reward.remove(key);
+                        rewardKeyList.remove(key);
+                        mPrizesRef.child(key).removeValue();
+
+                        alert1.setTitle("Reward added");
+                        alert1.setMessage(newPrize + " has been added");
+                        alert1.setPositiveButton("OK", null);
+                        alert1.create().show();
+
+                        writePrize(newPrize, tokenAmount);
+                    } else {
+
+                        alert1.setTitle("Duplicate Reward");
+                        alert1.setMessage("Duplicate Reward");
+                        alert1.setPositiveButton("OK", null);
+                        alert1.create().show();
+                    }
+                }
+            }
+        });
+        alert.setNegativeButton("Cancel", null);
+        alert.setView(layout);
+        alert.show();
+    }
 }

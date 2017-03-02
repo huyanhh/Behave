@@ -58,6 +58,7 @@ public class HomeParentActivity extends AppCompatActivity implements AdapterView
 
         final TextView tvWelcome = (TextView) findViewById(R.id.tvWelcome);
         final Button bAddChild = (Button) findViewById(R.id.bParentAddChild);
+        final Button bViewRewards = (Button) findViewById(R.id.bViewRewards);
 
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         mParRef = mParRef.child(mFirebaseUser.getUid());
@@ -77,6 +78,16 @@ public class HomeParentActivity extends AppCompatActivity implements AdapterView
             }
         };
         mParRef.addValueEventListener(parListener);
+
+        bViewRewards.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //MAYBE CHANGE THIS???
+                Intent seeRewardIntent = new Intent (HomeParentActivity.this, SetUpReward.class);
+//                seeRewardIntent.putExtra("True", true);
+                HomeParentActivity.this.startActivity(seeRewardIntent);
+            }
+        });
 
         bAddChild.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,21 +191,5 @@ public class HomeParentActivity extends AppCompatActivity implements AdapterView
         tokenStatus.putExtra("childName", childList.get(position));
         tokenStatus.putExtra("childUID", childUID.get(childList.get(position)));
         this.startActivity(tokenStatus);
-        //TokenStatus.putExtra("password", tempPassword);
-//        switch(position)
-//        {
-//            case 0:
-//                Toast.makeText(this, childList.get(position), Toast.LENGTH_LONG).show();
-//                break;
-//            case 1:
-//                Toast.makeText(this, childList.get(position), Toast.LENGTH_LONG).show();
-//                break;
-//            case 2:
-//                Toast.makeText(this, childList.get(position), Toast.LENGTH_LONG).show();
-//                break;
-//            case 3:
-//                Toast.makeText(this, childList.get(position), Toast.LENGTH_LONG).show();
-//                break;
-//        }
     }
 }
