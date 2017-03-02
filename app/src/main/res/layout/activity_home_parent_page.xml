@@ -10,7 +10,8 @@
         android:layout_width="227dp"
         android:layout_height="wrap_content"
         android:id="@+id/tvWelcome"
-        android:layout_weight="0.75" />
+        android:layout_weight="0.75"
+        android:gravity="center"/>
 
     <LinearLayout
         android:orientation="vertical"

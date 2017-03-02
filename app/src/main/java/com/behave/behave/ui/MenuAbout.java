@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.behave.behave.R;
 
@@ -18,6 +19,9 @@ public class MenuAbout extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_about);
+        final TextView tvAbout = (TextView) findViewById(R.id.tvAboutDescription);
+        tvAbout.setText("Behave Application is an application that will help parents' keep" +
+                " track of their children behavior and will reward them when appropriate.");
     }
 
     //Menu option
