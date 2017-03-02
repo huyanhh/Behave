@@ -6,21 +6,133 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.behave.behave.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-public class ParentRedeemPageListChild extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-    @Override
+public class ParentRedeemPageListChild extends AppCompatActivity implements AdapterView.OnItemClickListener {
+
+    private FirebaseUser mFirebaseUser;
+    private ArrayAdapter<String> adapter;
+    final Map<String, String> childUID = new HashMap<>();
+    List<String> childList = new ArrayList<>();
+
+    // when we get a reference it gets us a ref to the root of the json ref tree
+    public static final String PARENTS_CHILD = "parents";
+    public static final String CHILDREN_CHILD = "children";
+
+    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference mKidRef = mRootRef.child(CHILDREN_CHILD); // creates `-/children` in db
+    DatabaseReference mParRef = mRootRef.child(PARENTS_CHILD);
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parent_redeem_page_list_child);
+
+        //final TextView tvWelcome = (TextView) findViewById(R.id.tvWelcome);   //do i need this???
+        //final Button bAddChild = (Button) findViewById(R.id.bParentAddChild);   // don't need addChild button
+
+        mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();    //used to get the parent from firebase
+        mParRef = mParRef.child(mFirebaseUser.getUid());
+
+
+        //Used to show "Welcome back, parentName" on the screen
+       ValueEventListener parListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                /*tvWelcome.setText("Welcome back, " + dataSnapshot.child("name").getValue());*/
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                //need this so ValueEventListener() doesn't cause error
+            }
+        };
+
+
+       // mParRef.addValueEventListener(parListener);   //not sure if i need this
+
+      /* bAddChild.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent addChildIntent = new Intent(ParentRedeemPageListChild.this, AddChild.class);
+                ParentRedeemPageListChild.this.startActivity(addChildIntent);
+            }
+        });*/
+
     }
 
-    public void goToRedeemActivity(View view) {
-       // Intent intent = new Intent(this, ParentRedeemPageAllowRedeem.class);
-       // startActivity(intent);
+
+    private void readChildren()
+    {
+
+        mParRef.child("children").addValueEventListener(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+                List<String> nameList = new ArrayList<>();
+                for (DataSnapshot kid : dataSnapshot.getChildren()) {
+                    String name = kid.child("name").getValue(String.class);
+                    String uid = kid.child("uid").getValue(String.class);
+                    if (name != null) {
+                        nameList.add(name);
+                        childUID.put(name, uid);
+                    }
+                }
+                childList = nameList;
+                final ListView lvParentList = (ListView) findViewById(R.id.lv_childList);   //gets reference to Listview
+                if (childList.size() != 0)
+                {   //attaches this list to the .xml file using adapter
+                    adapter = new ArrayAdapter<String>(ParentRedeemPageListChild.this, android.R.layout.simple_list_item_1, childList);
+                    lvParentList.setAdapter(adapter);      // arrayadapter filled with friends' name
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                //need this so ValueEventListener() doesn't cause error
+            }
+        });
     }
+
+
+    //Listens for a child to be selected from the Listview
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent allowRedeemIntent = new Intent(this, ParentRedeemPageAllowRedemption.class);
+        //  allowRedeemIntent.putExtra("childName", childList.get(position));
+        //  allowRedeemIntent.putExtra("childUID", childUID.get(childList.get(position)));
+        this.startActivity(allowRedeemIntent);
+    }
+
+
+    //whenever condition in the database changes we want to also update child
+    //so in this case if we add a child we just change the name from child 1 to
+    //the kids name just as a small example
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        //gets children from database
+        readChildren();
+
+    }
+
 
     //Creates Overflow Menu
     @Override
@@ -39,14 +151,10 @@ public class ParentRedeemPageListChild extends AppCompatActivity {
                 Intent homeIntent = new Intent(this, HomeParentActivity.class);
                 this.startActivity(homeIntent);
                 break;
-//            case R.id.mChild:
-//                break;
             case R.id.mRedeemNotification:
                 Intent redeemIntent = new Intent(this, ParentRedeemPageListChild.class);
                 this.startActivity(redeemIntent);
                 break;
-//            case R.id.mPrizeList:
-//                break;
             case R.id.mSetting:
                 Intent settingIntent = new Intent(this, ParentSettings.class);
                 this.startActivity(settingIntent);
@@ -63,5 +171,6 @@ public class ParentRedeemPageListChild extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 
 }

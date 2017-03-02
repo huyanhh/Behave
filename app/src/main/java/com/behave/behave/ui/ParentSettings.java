@@ -50,7 +50,7 @@ public class ParentSettings extends AppCompatActivity {
             }
         });
 
-        //change email clicked
+        //change email clicked, show a pop up dialog box
         bChangeEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

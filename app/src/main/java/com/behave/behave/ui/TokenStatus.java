@@ -4,8 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,11 +17,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.behave.behave.R;
 import com.behave.behave.utils.Constants;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -55,8 +53,8 @@ public class TokenStatus extends AppCompatActivity implements AdapterView.OnItem
         setContentView(R.layout.activity_token_status);
 
         Intent intent = getIntent();
-        String childName = intent.getStringExtra("childName");
-        childUID = intent.getStringExtra("childUID");
+        String childName = intent.getStringExtra("childName");  //gets the child's name
+        childUID = intent.getStringExtra("childUID");   // gets the child's uid
         final TextView tvChildName = (TextView) findViewById(R.id.tvChildNameTokenStatus);
         tvTokenCount = (TextView) findViewById(R.id.tvTokenCount);
         final Button bTokenMinus = (Button) findViewById(R.id.bTokenStatusMinus);
@@ -202,7 +200,7 @@ public class TokenStatus extends AppCompatActivity implements AdapterView.OnItem
         mKidRef.addValueEventListener(kidListener);
     }
 
-    //pick a token to edit in the list
+    //pick a token to edit in the list. can click on token and edit the description
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         final String key;
