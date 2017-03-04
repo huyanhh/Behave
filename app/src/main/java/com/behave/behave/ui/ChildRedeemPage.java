@@ -13,15 +13,22 @@ import com.behave.behave.R;
 
 public class ChildRedeemPage extends AppCompatActivity {
 
+    String prize;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_child_redeem_page);
+
     }
     //@Override
     public void returnChild(View view) {
         Intent startNewActivity = new Intent(this, HomeChildrenPage.class);
         startActivity(startNewActivity);
+
+        // TODO: implement this
+//        Intent childNameIntent = getIntent();
+//        prize = childNameIntent.getStringExtra("prizeName");
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
