@@ -12,7 +12,7 @@
 
 
     <TextView
-        android:text="wants to redeem"
+        android:text="wants to redeem. "
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -21,10 +21,9 @@
         android:id="@+id/tv_wants_to_redeem" />
 
     <TextView
-        android:text="Child1"
+        android:id="@+id/tv_child_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_child1"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="45dp" />
@@ -39,16 +38,16 @@
         android:id="@+id/lay_redeem_options">
 
         <Button
+            android:id="@+id/btn_approve_now"
             android:text="Approve Now"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_approve_now" />
+            android:layout_height="wrap_content" />
 
         <Button
+            android:id="@+id/btn_maybe_later"
             android:text="Maybe Later"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_maybe_later"
             android:onClick="goToHomePage"/>
     </LinearLayout>
 

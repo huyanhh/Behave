@@ -3,6 +3,7 @@ package com.behave.behave.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,7 +25,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+/* Created by Irish Marquez */
+
+
 public class ParentRedeemPageListChild extends AppCompatActivity implements AdapterView.OnItemClickListener {
+
+    private static final String TAG = "myMessage";
+
 
     private FirebaseUser mFirebaseUser;
     private ArrayAdapter<String> adapter;
@@ -41,50 +49,38 @@ public class ParentRedeemPageListChild extends AppCompatActivity implements Adap
 
 
     protected void onCreate(Bundle savedInstanceState) {
+        Log.i(TAG, "PRListChild.onCreate_begin");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parent_redeem_page_list_child);
-
-        //final TextView tvWelcome = (TextView) findViewById(R.id.tvWelcome);   //do i need this???
-        //final Button bAddChild = (Button) findViewById(R.id.bParentAddChild);   // don't need addChild button
 
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();    //used to get the parent from firebase
         mParRef = mParRef.child(mFirebaseUser.getUid());
 
 
-        //Used to show "Welcome back, parentName" on the screen
+        //Used to display "Welcome back, parentName" on the screen
        ValueEventListener parListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                /*tvWelcome.setText("Welcome back, " + dataSnapshot.child("name").getValue());*/
+                //need this so ValueEventListener() doesn't cause error
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 //need this so ValueEventListener() doesn't cause error
             }
         };
-
-
-       // mParRef.addValueEventListener(parListener);   //not sure if i need this
-
-      /* bAddChild.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent addChildIntent = new Intent(ParentRedeemPageListChild.this, AddChild.class);
-                ParentRedeemPageListChild.this.startActivity(addChildIntent);
-            }
-        });*/
-
+        Log.i(TAG, "PRListChild.onCreate_end");
     }
 
 
     private void readChildren()
     {
-
+        Log.i(TAG, "PRListChild.readChildren_start");
         mParRef.child("children").addValueEventListener(new ValueEventListener()
         {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
+                Log.i(TAG, "PRListChild.onDataChange_begin");
                 List<String> nameList = new ArrayList<>();
                 for (DataSnapshot kid : dataSnapshot.getChildren()) {
                     String name = kid.child("name").getValue(String.class);
@@ -100,7 +96,9 @@ public class ParentRedeemPageListChild extends AppCompatActivity implements Adap
                 {   //attaches this list to the .xml file using adapter
                     adapter = new ArrayAdapter<String>(ParentRedeemPageListChild.this, android.R.layout.simple_list_item_1, childList);
                     lvParentList.setAdapter(adapter);      // arrayadapter filled with friends' name
+                    lvParentList.setOnItemClickListener(ParentRedeemPageListChild.this); //"listens" to the click
                 }
+                Log.i(TAG, "PRListChild.onDataChange_end");
             }
 
             @Override
@@ -108,16 +106,18 @@ public class ParentRedeemPageListChild extends AppCompatActivity implements Adap
                 //need this so ValueEventListener() doesn't cause error
             }
         });
+        Log.i(TAG, "PRListChild.readChildren_end");
     }
 
 
     //Listens for a child to be selected from the Listview
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Log.i(TAG, "PRListChild.onItemClick_begin");
         Intent allowRedeemIntent = new Intent(this, ParentRedeemPageAllowRedemption.class);
-        //  allowRedeemIntent.putExtra("childName", childList.get(position));
-        //  allowRedeemIntent.putExtra("childUID", childUID.get(childList.get(position)));
-        this.startActivity(allowRedeemIntent);
+          allowRedeemIntent.putExtra("childName", childList.get(position));
+        this.startActivity(allowRedeemIntent);          //<--------------- why does this skip to redeempagesuccess?
+        Log.i(TAG, "PRListChild.onItemClick_end");
     }
 
 
@@ -126,11 +126,10 @@ public class ParentRedeemPageListChild extends AppCompatActivity implements Adap
     //the kids name just as a small example
     @Override
     protected void onStart() {
+        Log.i(TAG, "PRListChild.onStart_begin");
         super.onStart();
-
-        //gets children from database
-        readChildren();
-
+        readChildren();         //gets children from database
+        Log.i(TAG, "PRListChild.onStart_end");
     }
 
 
@@ -140,7 +139,6 @@ public class ParentRedeemPageListChild extends AppCompatActivity implements Adap
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.parent_menu, menu);
         return super.onCreateOptionsMenu(menu);
-        //  return true;
     }
 
     //Overflow menu
