@@ -28,7 +28,6 @@
         <activity android:name=".ui.HomeChildrenPage" />
         <activity android:name=".ui.LoginActivity" />
         <activity android:name=".ui.AddChild" />
-        <activity android:name=".ui.ChildTokenSchedule" />
         <activity android:name=".ui.SetUpReward" />
         <activity android:name=".ui.MenuAbout" />
         <activity android:name=".ui.TokenStatus" />

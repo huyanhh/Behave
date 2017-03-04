@@ -85,7 +85,7 @@ public class SetUpReward extends AppCompatActivity implements AdapterView.OnItem
                     Integer rewardDes = reward.getValue(Integer.class);
                     String rewardKey = reward.getKey();
                     if(rewardDes != null)
-                        tempList.add(rewardKey + "\t" + rewardDes);
+                        tempList.add(rewardKey + "\t" + " for " +  rewardDes.toString().concat(" Tokens"));
                     if(!rewardKeyList.containsKey(rewardKey))
                         rewardKeyList.put(rewardKey, rewardDes);
                 }
@@ -280,12 +280,12 @@ public class SetUpReward extends AppCompatActivity implements AdapterView.OnItem
                     newPrize = newPrize.substring(0, x + 2);
 
                     if (!reward.containsKey(newPrize.toLowerCase())) {
-                        reward.put(newPrize, tokenAmount);
-                        rewardsList.add(newPrize.concat(" ".concat(String.valueOf(tokenAmount).concat(" Tokens"))));
-
                         reward.remove(key);
                         rewardKeyList.remove(key);
                         mPrizesRef.child(key).removeValue();
+
+                        reward.put(newPrize, tokenAmount);
+                        rewardsList.add(newPrize.concat(" ".concat(String.valueOf(tokenAmount).concat(" Tokens"))));
 
                         alert1.setTitle("Reward added");
                         alert1.setMessage(newPrize + " has been added");

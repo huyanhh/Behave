@@ -17,7 +17,9 @@
         android:layout_marginTop="19dp"
         android:id="@+id/tvInstruction"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textSize="24sp"
+        android:textColor="#000000" />
 
     <Button
         android:text="Ok"
@@ -26,7 +28,9 @@
         android:layout_alignParentBottom="true"
         android:layout_toEndOf="@+id/tvInstruction"
         android:layout_marginBottom="47dp"
-        android:id="@+id/bAddChildOk" />
+        android:id="@+id/bAddChildOk"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:backgroundTint="#0000ff" />
 
     <!--<EditText-->
         <!--android:layout_width="wrap_content"-->
@@ -54,7 +58,8 @@
         android:id="@+id/textView5"
         android:layout_marginTop="19dp"
         android:layout_below="@+id/tvInstruction"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="#000" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -64,7 +69,8 @@
         android:id="@+id/etChildFirstName"
         android:layout_below="@+id/textView5"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:hint="Enter child name" />
 
     <!--<EditText-->
         <!--android:layout_width="wrap_content"-->
