@@ -260,12 +260,10 @@ public class TokenStatus extends AppCompatActivity implements AdapterView.OnItem
                 Intent homeIntent = new Intent(this, HomeParentActivity.class);
                 this.startActivity(homeIntent);
                 break;
-//            case R.id.mChild:
-//                break;
             case R.id.mRedeemNotification:
+                Intent redeemIntent = new Intent(this, ParentRedeemPageListChild.class);
+                this.startActivity(redeemIntent);
                 break;
-//            case R.id.mPrizeList:
-//                break;
             case R.id.mSetting:
                 Intent settingIntent = new Intent(this, ParentSettings.class);
                 this.startActivity(settingIntent);
