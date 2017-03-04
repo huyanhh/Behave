@@ -41,7 +41,7 @@ public class ParentRedeemPageAllowRedemption extends AppCompatActivity implement
 
         //Creates a button listener for APPROVE NOW button
         Button btn_approve = (Button) findViewById(R.id.btn_approve_now);
-
+        Button btn_maybe_later = (Button) findViewById(R.id.btn_maybe_later);
         /* setOnClickListener cannot be applied to btn_approve so
              add "implements to View.OnClickListener" first to class declaration.
              onClick() method is also required to be implemented. After that,
@@ -57,9 +57,20 @@ public class ParentRedeemPageAllowRedemption extends AppCompatActivity implement
 
     @Override
     public void onClick(View view) {
+        switch(view.getId())
+        {
+            case R.id.btn_approve_now:
+                Intent passChildNameIntent = new Intent (ParentRedeemPageAllowRedemption.this, ParentRedeemPageSuccess.class);  //<--- may need to pass to onclick
+                passChildNameIntent.putExtra("childName", childName);
+                startActivity(passChildNameIntent);
+                break;
+            case R.id.btn_maybe_later:
+                Intent goToHomeIntent = new Intent(this, HomeParentActivity.class);
+                startActivity(goToHomeIntent);
+                break;
+
+        }
         Log.i(TAG, "PRAllowRedemption.onClick_begin");
-        Intent gotoSuccessIntent = new Intent(this, ParentRedeemPageSuccess.class);
-        startActivity(gotoSuccessIntent);
         Log.i(TAG, "PRAllowRedemption.onClick_end");                                                                            //<------------
     }
 
@@ -68,7 +79,7 @@ public class ParentRedeemPageAllowRedemption extends AppCompatActivity implement
     protected void onStart() {
         Log.i(TAG, "PRAllowRedemption.onStart_begin");
         super.onStart();
-                                                                                             //<------------
+        //<------------
         //readChildren();         //gets children from database
         Log.i(TAG, "PRAllowRedemption.onStart_end");
     }
@@ -85,7 +96,6 @@ public class ParentRedeemPageAllowRedemption extends AppCompatActivity implement
     // Takes the user back to HomeParentActivity
     public void goToHomePage(View view) {
         Log.i(TAG, "PRAllowRedemption.goToHomePage_begin");
-        switch()
         Intent goToHomeIntent = new Intent(this, HomeParentActivity.class);
         startActivity(goToHomeIntent);
         Log.i(TAG, "PRAllowRedemption.goToHomePage_end");
