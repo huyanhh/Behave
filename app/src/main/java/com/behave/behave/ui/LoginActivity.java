@@ -203,9 +203,10 @@ public class LoginActivity extends AppCompatActivity
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Log.w(TAG, "signInWithEmail:failed", task.getException());
-                            Toast.makeText(LoginActivity.this, "couldn't sign in whoops lol",
-                                    Toast.LENGTH_SHORT).show();
+                            AlertDialog.Builder Alert = new AlertDialog.Builder(LoginActivity.this);
+                            Alert.setMessage("Incorrect Username or Password");
+                            Alert.setPositiveButton("OK", null);
+                            Alert.create().show();
                         } else {
 //                            create an intent to store Username information for UserActivity
                             Intent userIntent = new Intent(LoginActivity.this, HomeParentActivity.class);
