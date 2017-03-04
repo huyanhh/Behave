@@ -7,11 +7,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.behave.behave.R;
 
 public class ChildRedeemPage extends AppCompatActivity {
+    String prize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,10 +19,13 @@ public class ChildRedeemPage extends AppCompatActivity {
         setContentView(R.layout.activity_child_redeem_page);
     }
     //@Override
-    public void returnChild(View view) {
-        Intent startNewActivity = new Intent(this, HomeChildrenPage.class);
-        startActivity(startNewActivity);
+       public void returnChild(View v) {
+        Intent intent = new Intent(ChildRedeemPage.this, HomeChildrenPage.class);
+        startActivity(intent);
     }
+    // TODO: implement this
+//        Intent childNameIntent = getIntent();
+//        prize = childNameIntent.getStringExtra("prizeName");
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater menuInflater= getMenuInflater();
@@ -46,8 +49,5 @@ public class ChildRedeemPage extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
 
     }
-
-
-        // need token counter and prize name, as well as prize picture from database
 
 }
