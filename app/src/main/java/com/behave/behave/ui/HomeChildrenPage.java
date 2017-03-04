@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.behave.behave.R;
@@ -30,14 +31,16 @@ public class HomeChildrenPage extends AppCompatActivity {
     TextView tvTokenAmount;
     TextView tvGreetings;
 
+    Button bRedeem = (Button) findViewById(R.id.button_redeem);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_children_page);
 
         childId = "a6a3-60611b13ed9c";
-        Intent childNameIntent = getIntent();
-        childId = childNameIntent.getStringExtra("childId");
+//        Intent childNameIntent = getIntent();
+//        childId = childNameIntent.getStringExtra("childId");
         // Example of a call to a native method
         //  TextView tv = (TextView) findViewById(R.id.sample_text);
         //tv.setText(stringFromJNI());
@@ -60,7 +63,7 @@ public class HomeChildrenPage extends AppCompatActivity {
 
     }
    // @Override
-    public void redeemPrize (View view){
+    public void redeemPrize(View view) {
         // TODO: this stuff
 //        mRootRef.child(Constants.REDEEMING_CHILD).child(childId).
         // pick whichever prize is in the prize list then pass it to the parent
