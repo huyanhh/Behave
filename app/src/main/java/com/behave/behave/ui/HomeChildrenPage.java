@@ -64,7 +64,7 @@ public class HomeChildrenPage extends AppCompatActivity  {
 
         childId = "a6a3-60611b13ed9c";
         Intent childNameIntent = getIntent();
-        //childId = childNameIntent.getStringExtra("childId");
+        childId = childNameIntent.getStringExtra("childId");
         // Example of a call to a native method
         //  TextView tv = (TextView) findViewById(R.id.sample_text);
         //tv.setText(stringFromJNI());

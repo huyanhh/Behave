@@ -44,16 +44,19 @@ public class SetUpReward extends AppCompatActivity implements AdapterView.OnItem
     final Map<String, Integer> reward = new HashMap<String, Integer>();
     private List<String> rewardsList = new ArrayList<String>();
     private Map<String, Integer> rewardKeyList = new HashMap<>();
+    private List<String> kids = new ArrayList<>();
 
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference mPrizesRef;
+    DatabaseReference mParentRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_up_reward);
 
-        mPrizesRef = mRootRef.child("parents").child(mFirebaseUser.getUid()).child("prizes");
+        mParentRef = mRootRef.child("parents").child(mFirebaseUser.getUid());
+        mPrizesRef = mParentRef.child("prizes");
 
         final Button bAddReward = (Button) findViewById(R.id.bSetUpAdd);
         final Button bOk = (Button) findViewById(R.id.bSetUpRewards);
@@ -205,18 +208,11 @@ public class SetUpReward extends AppCompatActivity implements AdapterView.OnItem
     protected void onStart() {
         super.onStart();
 
-        mPrizesRef.addValueEventListener(new ValueEventListener() {
+        mParentRef.child("children").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-//                for (DataSnapshot prize: dataSnapshot.getChildren()) {
-//                    reward.put(prize.getKey(), prize.getValue(Integer.class));
-//                    tokenAmount = Integer.parseInt(prize.getKey());
-//                    rewardsList.add(prize.getKey().concat(" ".concat(String.valueOf(tokenAmount).concat(" Tokens"))));
-//                }
-//                adapter.notifyDataSetChanged();
-
-
-                //not sure how to update list view when view get created, do that here
+                for (DataSnapshot prize: dataSnapshot.getChildren())
+                    kids.add(prize.getKey());
             }
 
             @Override
@@ -229,6 +225,8 @@ public class SetUpReward extends AppCompatActivity implements AdapterView.OnItem
     //fb write
     private void writePrize(String prize, Integer cost) {
         mPrizesRef.child(prize).setValue(cost);
+        for (String kid: kids)
+            mRootRef.child("children").child(kid).child("prizes").child(prize).setValue(cost);
     }
 
     @Override
