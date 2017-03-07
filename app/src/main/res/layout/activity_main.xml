@@ -57,6 +57,7 @@
         android:id="@+id/tvRegister"
         android:textColor="#0004ff" />
 
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="6dp"
@@ -66,7 +67,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Forgot Password"
-        android:id="@+id/tvForgotPassword" />
+        android:id="@+id/tvForgotPassword"
+        android:textColor="#FF0004FF" />
 
     <Button
         android:layout_width="match_parent"

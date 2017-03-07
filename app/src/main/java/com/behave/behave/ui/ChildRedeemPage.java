@@ -55,7 +55,14 @@ public class ChildRedeemPage extends AppCompatActivity {
 //        });
 //    }
     }
-
+    //@Override
+       public void returnChild(View v) {
+        Intent intent = new Intent(ChildRedeemPage.this, HomeChildrenPage.class);
+        startActivity(intent);
+    }
+    // TODO: implement this
+//        Intent childNameIntent = getIntent();
+//        prize = childNameIntent.getStringExtra("prizeName");
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
