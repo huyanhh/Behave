@@ -68,7 +68,7 @@ public class HomeParentActivity extends AppCompatActivity implements AdapterView
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 //                user = dataSnapshot.getValue(Parent.class);
-                tvWelcome.setText("Welcome back, " + dataSnapshot.child("name").getValue());
+                tvWelcome.setText("Welcome, " + dataSnapshot.child("name").getValue());
 //                System.out.println(user.name);
                 // ...
             }

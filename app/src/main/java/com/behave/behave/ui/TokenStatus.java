@@ -60,7 +60,7 @@ public class TokenStatus extends AppCompatActivity implements AdapterView.OnItem
         final Button bTokenMinus = (Button) findViewById(R.id.bTokenStatusMinus);
         final Button bTokenAdd = (Button) findViewById(R.id.bTokenStatusAdd);
         lvTokenList = (ListView) findViewById(R.id.lvTokenStatusList);
-        tvChildName.setText(childName + " Token Status:");
+        tvChildName.setText(childName + "'s Token Status:");
         mAddToken = mKidRef.child(childUID).child("tokenDescription");
 
        //put lists onto ListView, lvTokenList

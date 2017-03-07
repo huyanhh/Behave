@@ -4,9 +4,11 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -29,7 +31,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by Calvin on 2/20/2017.
@@ -325,4 +326,48 @@ public class SetUpReward extends AppCompatActivity implements AdapterView.OnItem
         alert.setView(layout);
         alert.show();
     }
+
+
+    //Creates Overflow Menu
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.parent_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    //What happens when user clicks on an item in overflow menu
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.mHome:
+                Intent homeIntent = new Intent(this, HomeParentActivity.class);
+                this.startActivity(homeIntent);
+                break;
+            case R.id.mRedeemNotification:
+                Intent redeemIntent = new Intent(this, ParentRedeemPageListChild.class);
+                this.startActivity(redeemIntent);
+                break;
+            case R.id.mSetting:
+                Intent settingIntent = new Intent(this, ParentSettings.class);
+                this.startActivity(settingIntent);
+                break;
+            case R.id.mAbout:
+                Intent aboutIntent = new Intent(this, MenuAbout.class);
+                this.startActivity(aboutIntent);
+                break;
+            case R.id.mLogOut:
+                LoginActivity.clearUsername();
+                Intent logoutIntent = new Intent(this, MainActivity.class);
+                this.startActivity(logoutIntent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
+
+
+
 }

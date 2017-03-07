@@ -3,7 +3,6 @@ package com.behave.behave.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,24 +30,21 @@ import java.util.Map;
 
 public class ParentRedeemPageListChild extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    private static final String TAG = "myMessage";
-
     private FirebaseUser mFirebaseUser;
     private ArrayAdapter<String> adapter;
-    final Map<String, String> childUID = new HashMap<>();
+    final Map<String, String> childUID = new HashMap<>();      // KV-pair of child's UID and its value
     List<String> childList = new ArrayList<>();
 
     // when we get a reference it gets us a ref to the root of the json ref tree
-    public static final String PARENTS_CHILD = "parents";
-    public static final String CHILDREN_CHILD = "children";
+    public static final String PARENTS_CHILD = "parents";       // "parents" is a db child
+    public static final String CHILDREN_CHILD = "children";     // "children" is a db child
 
-    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference mKidRef = mRootRef.child(CHILDREN_CHILD); // creates `-/children` in db
-    DatabaseReference mParRef = mRootRef.child(PARENTS_CHILD);
+    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference(); // points to root directory
+    DatabaseReference mKidRef = mRootRef.child(CHILDREN_CHILD); // points to "children" directory
+    DatabaseReference mParRef = mRootRef.child(PARENTS_CHILD);  // points to "parents" directory
 
 
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i(TAG, "PRListChild.onCreate_begin");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parent_redeem_page_list_child);
 
@@ -67,24 +63,27 @@ public class ParentRedeemPageListChild extends AppCompatActivity implements Adap
                 //need this so ValueEventListener() doesn't cause error
             }
         };
-        Log.i(TAG, "PRListChild.onCreate_end");
     }
 
 
-    private void readChildren()
+    private void displayChildrenWhoWantToRedeem()
     {
-        Log.i(TAG, "PRListChild.readChildren_start");
         mParRef.child("children").addValueEventListener(new ValueEventListener()
         {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
-                Log.i(TAG, "PRListChild.onDataChange_begin");
                 List<String> nameList = new ArrayList<>();
                 for (DataSnapshot kid : dataSnapshot.getChildren()) {
                     String name = kid.child("name").getValue(String.class);
                     String uid = kid.child("uid").getValue(String.class);
-                    if (name != null) {
+                  /*  if (name != null) {
+                        nameList.add(name);
+                        childUID.put(name, uid);
+                    }*/
+                    String isRedeeming = kid.child("isRedeeming").getValue().toString();
+                    if (isRedeeming.equalsIgnoreCase("true"))           // <---------- GO BACK TO THIS LATER AFTER EDIT CHILD HAS BEEN UPDATED
+                    {
                         nameList.add(name);
                         childUID.put(name, uid);
                     }
@@ -97,7 +96,6 @@ public class ParentRedeemPageListChild extends AppCompatActivity implements Adap
                     lvParentList.setAdapter(adapter);      // arrayadapter filled with friends' name
                     lvParentList.setOnItemClickListener(ParentRedeemPageListChild.this); //"listens" to the click
                 }
-                Log.i(TAG, "PRListChild.onDataChange_end");
             }
 
             @Override
@@ -105,20 +103,17 @@ public class ParentRedeemPageListChild extends AppCompatActivity implements Adap
                 //need this so ValueEventListener() doesn't cause error
             }
         });
-        Log.i(TAG, "PRListChild.readChildren_end");
     }
 
 
     //Listens for a child to be selected from the Listview
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.i(TAG, "PRListChild.onItemClick_begin");
         Intent allowRedeemIntent = new Intent(this, ParentRedeemPageAllowRedemption.class);
         String childName = childList.get(position);
         allowRedeemIntent.putExtra("childName", childName);
         allowRedeemIntent.putExtra("childId", childUID.get(childName));
-        this.startActivity(allowRedeemIntent);          //<--------------- why does this skip to redeempagesuccess?
-        Log.i(TAG, "PRListChild.onItemClick_end");
+        this.startActivity(allowRedeemIntent);
     }
 
 
@@ -127,10 +122,8 @@ public class ParentRedeemPageListChild extends AppCompatActivity implements Adap
     //the kids name just as a small example
     @Override
     protected void onStart() {
-        Log.i(TAG, "PRListChild.onStart_begin");
         super.onStart();
-        readChildren();         //gets children from database
-        Log.i(TAG, "PRListChild.onStart_end");
+        displayChildrenWhoWantToRedeem();         //gets children from database
     }
 
 
