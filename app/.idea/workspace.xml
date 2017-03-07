@@ -12,31 +12,7 @@
     <bookmark url="file://$PROJECT_DIR$/src/main/java/com/behave/behave/ui/ChildRedeemPage.java" line="39" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ed53ba9-b7c9-4252-a76c-a62f861837d8" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/behave/behave/ui/ChildSetting.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/behave/behave/ui/ChildTokenSchedule.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/res/layout/activity_child_setting.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/res/layout/activity_child_token_schedule.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/behave/behave/ui/AddChild.java" afterPath="$PROJECT_DIR$/src/main/java/com/behave/behave/ui/AddChild.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/behave/behave/ui/ChildRedeemPage.java" afterPath="$PROJECT_DIR$/src/main/java/com/behave/behave/ui/ChildRedeemPage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/behave/behave/ui/HomeChildrenPage.java" afterPath="$PROJECT_DIR$/src/main/java/com/behave/behave/ui/HomeChildrenPage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/behave/behave/ui/HomeParentActivity.java" afterPath="$PROJECT_DIR$/src/main/java/com/behave/behave/ui/HomeParentActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/behave/behave/ui/LoginActivity.java" afterPath="$PROJECT_DIR$/src/main/java/com/behave/behave/ui/LoginActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/behave/behave/utils/Constants.java" afterPath="$PROJECT_DIR$/src/main/java/com/behave/behave/utils/Constants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/activity_add_child.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_add_child.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/activity_child_redeem_page.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_child_redeem_page.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/activity_forgot_password.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_forgot_password.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/activity_home_children_page.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_home_children_page.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/activity_home_parent_page.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_home_parent_page.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/activity_parent_settings.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_parent_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/activity_register.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_register.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/activity_set_up_reward.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_set_up_reward.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/activity_token_status.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_token_status.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/menu/child_menu.xml" afterPath="$PROJECT_DIR$/src/main/res/menu/child_menu.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/values/colors.xml" afterPath="$PROJECT_DIR$/src/main/res/values/colors.xml" />
-    </list>
+    <list default="true" id="1ed53ba9-b7c9-4252-a76c-a62f861837d8" name="Default" comment="" />
     <ignored path="app.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -2639,7 +2615,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
