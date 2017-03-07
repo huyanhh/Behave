@@ -32,19 +32,25 @@
             android:text="Edit Child"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/bEditChild" />
+            android:id="@+id/bEditChild"
+            android:backgroundTint="@android:color/holo_blue_dark"
+            style="@style/Widget.AppCompat.Button.Colored" />
 
         <Button
             android:text="Change Email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/bChangeEmail" />
+            android:id="@+id/bChangeEmail"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:backgroundTint="@android:color/holo_blue_dark" />
 
         <Button
             android:text="Change Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/bChangePassword" />
+            android:id="@+id/bChangePassword"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:backgroundTint="@android:color/holo_blue_dark" />
 
         <Button
             android:text="Delete Account"
@@ -52,7 +58,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/bDeleteAccount"
             android:textColor="@android:color/white"
-            android:background="@android:color/holo_red_dark" />
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:backgroundTint="@android:color/holo_red_dark" />
 
     </LinearLayout>
 </RelativeLayout>

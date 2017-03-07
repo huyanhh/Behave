@@ -10,13 +10,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.behave.behave.ui.MainActivity"
     android:orientation="vertical"
-    android:weightSum="1"
-    android:background="#A9A9A9">
+    android:weightSum="1">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Email"
-        android:id="@+id/tvUsername" />
+        android:id="@+id/tvUsername"
+        android:textColor="@color/colorAccent" />
 
     <EditText
         android:layout_width="match_parent"
@@ -27,7 +27,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Password"
-        android:id="@+id/tvPassword" />
+        android:id="@+id/tvPassword"
+        android:textColor="@android:color/black" />
 
     <EditText
         android:layout_width="match_parent"
@@ -40,7 +41,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Login"
-        android:id="@+id/bLogin" />
+        android:id="@+id/bLogin"
+        android:backgroundTint="#444444"
+        android:textColor="@android:color/white" />
 
     <TextView
         android:layout_width="match_parent"
@@ -51,7 +54,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Register"
-        android:id="@+id/tvRegister" />
+        android:id="@+id/tvRegister"
+        android:textColor="#0004ff" />
 
     <TextView
         android:layout_width="match_parent"
@@ -63,9 +67,12 @@
         android:layout_height="wrap_content"
         android:text="Forgot Password"
         android:id="@+id/tvForgotPassword" />
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Not a parent?"
-        android:id="@+id/bChild" />
+        android:text="Click here for login as a Child"
+        android:id="@+id/bChild"
+        android:textColor="#2900d1"
+        android:backgroundTint="#41ddfc" />
 </LinearLayout>

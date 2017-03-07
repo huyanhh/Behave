@@ -98,8 +98,8 @@ public class AddChild extends AppCompatActivity {
                     Alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            Intent tokenClass = new Intent(AddChild.this, ChildTokenSchedule.class);
-                            AddChild.this.startActivity(tokenClass);
+                            Intent rewardIntent = new Intent(AddChild.this, SetUpReward.class);
+                            AddChild.this.startActivity(rewardIntent);
                         }
                     });
                     Alert.create().show();

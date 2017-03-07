@@ -50,6 +50,7 @@ public class HomeParentActivity extends AppCompatActivity implements AdapterView
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference mKidRef = mRootRef.child(CHILDREN_CHILD); // creates `-/children` in db
     DatabaseReference mParRef = mRootRef.child(PARENTS_CHILD);
+
 //    Parent user;
 
     protected void onCreate(Bundle savedInstanceState) {
