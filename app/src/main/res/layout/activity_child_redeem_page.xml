@@ -10,34 +10,32 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.behave.behave.ui.ChildRedeemPage">
 
-    <Button
-        android:text="Return"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/returnChild"
-        android:onClick="returnChild"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="51dp" />
 
     <TextView
-        android:text="Congrudulations you have earned!"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:id="@+id/Prize"
+        android:text="Prize"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:layout_below="@+id/congrats"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:textSize="40sp"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:text="Your parents have received your request for your Prize!
+  Be Excited for your"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:id="@+id/congrats"
         android:textAppearance="@android:style/TextAppearance.Large"
         android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:textAlignment="center"
+        android:textStyle="normal|bold"
         android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/congrats"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:id="@+id/Prize"
-        android:text="Prize"
-        android:textAppearance="@android:style/TextAppearance.Material.Large" />
 
 </RelativeLayout>

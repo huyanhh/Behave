@@ -16,57 +16,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textSize="40dp"
+        android:textSize="30sp"
         android:id="@+id/textView3" />
-
-    <TextView
-        android:text="Good Job!"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"
-        android:textSize="40dp"
-        android:id="@+id/textView4"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:text="You have"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
-        android:textSize="32dp"
-        android:id="@+id/tvWelcome"
-        android:layout_marginStart="22dp"
-        android:layout_below="@+id/textView3"
-        android:layout_alignStart="@+id/textView2" />
-
-    <TextView
-        android:text="X tokens"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tokenAmount"
-        android:textSize="32dp"
-        android:layout_alignBottom="@+id/tvWelcome"
-        android:layout_toEndOf="@+id/tvWelcome"
-        android:layout_marginStart="22dp"
-        android:layout_alignTop="@+id/tvWelcome" />
-
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        app:srcCompat="@drawable/ww"
-        android:id="@+id/imageView2"
-        android:layout_below="@+id/textView4"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:text="X more token to get PRIZE"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="28dp"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/tvWelcome"
-        android:layout_centerHorizontal="true" />
 
     <Button
         android:text="Redeem"
@@ -77,6 +28,66 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="18dp" />
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="296dp"
+        android:layout_height="260dp"
+        android:weightSum="1"
+        android:id="@+id/linearLayout5"
+        android:layout_above="@+id/button_redeem"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="14dp">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/lvPrizeList"
+            android:textAlignment="center"
+            android:headerDividersEnabled="false"
+            android:layout_alignEnd="@+id/linearLayout2" />
+    </LinearLayout>
+
+    <TextView
+        android:text="Good Job!"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4"
+        android:textSize="20sp"
+        android:layout_below="@+id/tvWelcome"
+        android:layout_alignStart="@+id/button_redeem"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:text="You have"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvWelcome"
+        android:textSize="20sp"
+        android:layout_marginTop="32dp"
+        android:layout_below="@+id/textView3"
+        android:layout_alignStart="@+id/linearLayout5"
+        android:layout_marginStart="34dp" />
+
+    <TextView
+        android:text="X"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tokenAmount"
+        android:textSize="20sp"
+        android:layout_above="@+id/textView4"
+        android:layout_alignEnd="@+id/button_redeem"
+        android:layout_marginEnd="25dp" />
+
+    <TextView
+        android:text="Tokens"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView8"
+        android:textSize="20sp"
+        android:layout_above="@+id/textView4"
+        android:layout_toEndOf="@+id/textView3" />
 
 
 </RelativeLayout>

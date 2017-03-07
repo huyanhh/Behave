@@ -55,7 +55,8 @@
         android:layout_height="wrap_content"
         android:text="Register"
         android:id="@+id/tvRegister"
-        android:textColor="#FF0004FF" />
+        android:textColor="#0004ff" />
+
 
     <TextView
         android:layout_width="match_parent"
