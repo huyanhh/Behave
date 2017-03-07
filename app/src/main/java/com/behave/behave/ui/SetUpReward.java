@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.behave.behave.R;
+import com.behave.behave.utils.Constants;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -62,6 +63,19 @@ public class SetUpReward extends AppCompatActivity implements AdapterView.OnItem
         final Button bOk = (Button) findViewById(R.id.bSetUpRewards);
 
         rewards = (ListView) findViewById(R.id.lRewardList);
+
+        mRootRef.child("parents").child(mFirebaseUser.getUid()).child(Constants.CHILDREN_CHILD).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot kid : dataSnapshot.getChildren())
+                    kids.add(kid.getKey());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         mPrizesRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -226,7 +240,7 @@ public class SetUpReward extends AppCompatActivity implements AdapterView.OnItem
     private void writePrize(String prize, Integer cost) {
         mPrizesRef.child(prize).setValue(cost);
         for (String kid: kids)
-            mRootRef.child("children").child(kid).child("prizes").child(prize).setValue(cost);
+            mRootRef.child(Constants.CHILDREN_CHILD).child(kid).child(Constants.PRIZES_CHILD).child(prize).setValue(cost);
     }
 
     @Override

@@ -33,7 +33,6 @@ public class ParentRedeemPageListChild extends AppCompatActivity implements Adap
 
     private static final String TAG = "myMessage";
 
-
     private FirebaseUser mFirebaseUser;
     private ArrayAdapter<String> adapter;
     final Map<String, String> childUID = new HashMap<>();
@@ -57,7 +56,7 @@ public class ParentRedeemPageListChild extends AppCompatActivity implements Adap
         mParRef = mParRef.child(mFirebaseUser.getUid());
 
 
-        //Used to display "Welcome back, parentName" on the screen
+        // Used to display "Welcome back, parentName" on the screen
        ValueEventListener parListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -115,7 +114,9 @@ public class ParentRedeemPageListChild extends AppCompatActivity implements Adap
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Log.i(TAG, "PRListChild.onItemClick_begin");
         Intent allowRedeemIntent = new Intent(this, ParentRedeemPageAllowRedemption.class);
-          allowRedeemIntent.putExtra("childName", childList.get(position));
+        String childName = childList.get(position);
+        allowRedeemIntent.putExtra("childName", childName);
+        allowRedeemIntent.putExtra("childId", childUID.get(childName));
         this.startActivity(allowRedeemIntent);          //<--------------- why does this skip to redeempagesuccess?
         Log.i(TAG, "PRListChild.onItemClick_end");
     }

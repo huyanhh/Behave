@@ -12,6 +12,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.behave.behave.R;
+import com.behave.behave.utils.Constants;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 /* Created by Irish Marquez */
@@ -22,7 +28,11 @@ public class ParentRedeemPageAllowRedemption extends AppCompatActivity implement
     private static final String TAG = "myMessage";
 
     private String childName;   // stores child's name from ParentRedeemPageListChild
+    public String childId;
+    private String prize;
     private ArrayAdapter<String> adapter;
+
+    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
 
 
     @Override
@@ -36,8 +46,22 @@ public class ParentRedeemPageAllowRedemption extends AppCompatActivity implement
             on ParentRedeemPageAllowRedemption in textview. */
         Intent childNameIntent = getIntent();
         childName = childNameIntent.getStringExtra("childName");
+        childId = childNameIntent.getStringExtra("childId");
         TextView tv_childName = (TextView) findViewById(R.id.tv_child_name);
         tv_childName.setText(childName);
+
+        // retrieve prize names here
+        mRootRef.child(Constants.REDEEMING_CHILD).child(childId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                prize = dataSnapshot.getKey();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         //Creates a button listener for APPROVE NOW button
         Button btn_approve = (Button) findViewById(R.id.btn_approve_now);
