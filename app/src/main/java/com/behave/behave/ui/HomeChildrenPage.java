@@ -58,7 +58,7 @@ public class HomeChildrenPage extends AppCompatActivity  {
     TextView tvGreetings;
     private ArrayAdapter<String> adapter;
 
-    Button bRedeem = (Button) findViewById(R.id.button_redeem);
+//    Button bRedeem = (Button) findViewById(R.id.button_redeem);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,10 +69,8 @@ public class HomeChildrenPage extends AppCompatActivity  {
 
         childId = "a6a3-60611b13ed9c";
         Intent childNameIntent = getIntent();
-        //childId = childNameIntent.getStringExtra("childId");
-        // Example of a call to a native method
-        //  TextView tv = (TextView) findViewById(R.id.sample_text);
-        //tv.setText(stringFromJNI());
+        childId = childNameIntent.getStringExtra("childId");
+
         tvTokenAmount = (TextView) findViewById(R.id.tokenAmount);
         tvGreetings = (TextView) findViewById(R.id.textView3);
         final ListView lvPrizeList = (ListView) findViewById(R.id.lvPrizeList);
@@ -103,38 +101,44 @@ public class HomeChildrenPage extends AppCompatActivity  {
                         //lvPrizeList.setOnClickListener(HomeChildrenPage.this);
                     }
                 }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
+            }
+
+        });
     }
    // @Override
-    public void redeemPrize(View view) {
-        // TODO: this stuff
-//        mRootRef.child(Constants.REDEEMING_CHILD).child(childId).
-        // pick whichever prize is in the prize list then pass it to the parent
-        // first check if prize and token count are valid
-        String prize = "coolio prize here ok jimmy you take care of this";
-        Intent intent = new Intent (this, ChildRedeemPage.class);
-        // intent.putExtra("prize", prize);
-        startActivity(intent);
-        mRootRef.child(Constants.REDEEMING_CHILD).child(childId).child(prize).setValue(true);
-        //final ListView lvPrizeList = (ListView) findViewById(R.id.lvPrizeList);
-        //   if (prizes.size()!=0){
-        //  adapter = new ArrayAdapter<String>(HomeChildrenPage.this,android.R.layout.simple_list_item_1, prizes);
-        //   }
-
-//        rp.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View view){
-//                Context context = HomeChildrenPage.this;
-//                LinearLayout layout = new LinearLayout(context);
-//                layout.setOrientation(LinearLayout.VERTICAL);
+//    public void redeemPrize(View view) {
+//        // TODO: this stuff
+////        mRootRef.child(Constants.REDEEMING_CHILD).child(childId).
+//        // pick whichever prize is in the prize list then pass it to the parent
+//        // first check if prize and token count are valid
+//        String prize = "coolio prize here ok jimmy you take care of this";
+//        Intent intent = new Intent(this, ChildRedeemPage.class);
+//        // intent.putExtra("prize", prize);
+//        startActivity(intent);
+//        mRootRef.child(Constants.REDEEMING_CHILD).child(childId).child(prize).setValue(true);
+//        //final ListView lvPrizeList = (ListView) findViewById(R.id.lvPrizeList);
+//        //   if (prizes.size()!=0){
+//        //  adapter = new ArrayAdapter<String>(HomeChildrenPage.this,android.R.layout.simple_list_item_1, prizes);
+//        //   }
 //
-//                AlertDialog.Builder alert = new AlertDialog.Builder(HomeChildrenPage.this);
-//                alert.setTitle("Redeem this Prize?");
-
-
-//            }
-//        });
-    }
+////        rp.setOnClickListener(new View.OnClickListener(){
+////            @Override
+////            public void onClick(View view){
+////                Context context = HomeChildrenPage.this;
+////                LinearLayout layout = new LinearLayout(context);
+////                layout.setOrientation(LinearLayout.VERTICAL);
+////
+////                AlertDialog.Builder alert = new AlertDialog.Builder(HomeChildrenPage.this);
+////                alert.setTitle("Redeem this Prize?");
+//
+//
+////            }
+////        });
+//    }
     //@Override
 //    @Override
 //    protected void onStart() {
@@ -155,10 +159,6 @@ public class HomeChildrenPage extends AppCompatActivity  {
 //    }
 
     public void redeemPrize(View v) {
-//        mRootRef.child(Constants.REDEEMING_CHILD).child(childId).
-        // pick whichever prize is in the prize list then pass it to the parent
-        // first check if prize and token count are valid
-        // prizes
 
         Context context = HomeChildrenPage.this;
         LinearLayout layout = new LinearLayout(context);
@@ -241,10 +241,6 @@ public class HomeChildrenPage extends AppCompatActivity  {
         alert.show();
     }
 
-
-
-
-
 //
 //    @Override
 //    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -297,6 +293,5 @@ public class HomeChildrenPage extends AppCompatActivity  {
         return super.onOptionsItemSelected(item);
 
     }
-
 
 }
