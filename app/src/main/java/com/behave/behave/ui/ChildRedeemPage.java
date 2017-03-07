@@ -55,7 +55,7 @@ public class ChildRedeemPage extends AppCompatActivity {
 //        });
 //    }
     }
-    //@Override
+
        public void returnChild(View v) {
         Intent intent = new Intent(ChildRedeemPage.this, HomeChildrenPage.class);
         startActivity(intent);
