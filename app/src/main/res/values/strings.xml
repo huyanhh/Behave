@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Behave</string>
+    <string name="app_name">Trakemon</string>
     <string name="title_activity_register">Register</string>
     <string name="tv_hello_world">Hello World</string>
     <string name="title_activity_parent_redeem_page_allow_redeem">ParentRedeemPageAllowRedeem
