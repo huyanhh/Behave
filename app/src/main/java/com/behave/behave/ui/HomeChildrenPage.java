@@ -3,6 +3,9 @@ package com.behave.behave.ui;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.util.Pair;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.net.Uri;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AlertDialog;
@@ -22,8 +25,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.behave.behave.models.Child;
-import com.behave.behave.ui.ChildRedeemPage;
 import com.behave.behave.R;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -33,6 +34,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.behave.behave.utils.Constants;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import com.behave.behave.R;
 
 import java.util.ArrayList;
@@ -49,11 +51,14 @@ public class HomeChildrenPage extends AppCompatActivity  {
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference mKidRef = mRootRef.child(Constants.CHILDREN_CHILD); // creates `-/children` in db
     String childId;
+
     ArrayList<Pair<String, Integer>> prizes = new ArrayList<Pair<String, Integer>>();
     private List<String> prizesList;
     TextView tvTokenAmount;
     TextView tvGreetings;
     private ArrayAdapter<String> adapter;
+
+//    Button bRedeem = (Button) findViewById(R.id.button_redeem);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +70,7 @@ public class HomeChildrenPage extends AppCompatActivity  {
         childId = "a6a3-60611b13ed9c";
         Intent childNameIntent = getIntent();
         childId = childNameIntent.getStringExtra("childId");
-        // Example of a call to a native method
-        //  TextView tv = (TextView) findViewById(R.id.sample_text);
-        //tv.setText(stringFromJNI());
+
         tvTokenAmount = (TextView) findViewById(R.id.tokenAmount);
         tvGreetings = (TextView) findViewById(R.id.textView3);
         final ListView lvPrizeList = (ListView) findViewById(R.id.lvPrizeList);
@@ -78,6 +81,7 @@ public class HomeChildrenPage extends AppCompatActivity  {
                 List<String> tempList = new ArrayList<String>();
                 tvTokenAmount.setText(dataSnapshot.child("tokens").getValue().toString());
                 tvGreetings.setText("Hi " + dataSnapshot.child("name").getValue(String.class));
+
                 for (DataSnapshot prize : dataSnapshot.child(Constants.PRIZES_CHILD).getChildren()) {
 //                    Integer prizeDes = prize.getValue(Integer.class);
 //                    String prizeKey = prize.getKey();
@@ -97,33 +101,44 @@ public class HomeChildrenPage extends AppCompatActivity  {
                         //lvPrizeList.setOnClickListener(HomeChildrenPage.this);
                     }
                 }
-
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
+
         });
-        //final ListView lvPrizeList = (ListView) findViewById(R.id.lvPrizeList);
-        //   if (prizes.size()!=0){
-        //  adapter = new ArrayAdapter<String>(HomeChildrenPage.this,android.R.layout.simple_list_item_1, prizes);
-        //   }
-
-//        rp.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View view){
-//                Context context = HomeChildrenPage.this;
-//                LinearLayout layout = new LinearLayout(context);
-//                layout.setOrientation(LinearLayout.VERTICAL);
-//
-//                AlertDialog.Builder alert = new AlertDialog.Builder(HomeChildrenPage.this);
-//                alert.setTitle("Redeem this Prize?");
-
-
-//            }
-//        });
     }
+   // @Override
+//    public void redeemPrize(View view) {
+//        // TODO: this stuff
+////        mRootRef.child(Constants.REDEEMING_CHILD).child(childId).
+//        // pick whichever prize is in the prize list then pass it to the parent
+//        // first check if prize and token count are valid
+//        String prize = "coolio prize here ok jimmy you take care of this";
+//        Intent intent = new Intent(this, ChildRedeemPage.class);
+//        // intent.putExtra("prize", prize);
+//        startActivity(intent);
+//        mRootRef.child(Constants.REDEEMING_CHILD).child(childId).child(prize).setValue(true);
+//        //final ListView lvPrizeList = (ListView) findViewById(R.id.lvPrizeList);
+//        //   if (prizes.size()!=0){
+//        //  adapter = new ArrayAdapter<String>(HomeChildrenPage.this,android.R.layout.simple_list_item_1, prizes);
+//        //   }
+//
+////        rp.setOnClickListener(new View.OnClickListener(){
+////            @Override
+////            public void onClick(View view){
+////                Context context = HomeChildrenPage.this;
+////                LinearLayout layout = new LinearLayout(context);
+////                layout.setOrientation(LinearLayout.VERTICAL);
+////
+////                AlertDialog.Builder alert = new AlertDialog.Builder(HomeChildrenPage.this);
+////                alert.setTitle("Redeem this Prize?");
+//
+//
+////            }
+////        });
+//    }
     //@Override
 //    @Override
 //    protected void onStart() {
@@ -144,10 +159,6 @@ public class HomeChildrenPage extends AppCompatActivity  {
 //    }
 
     public void redeemPrize(View v) {
-//        mRootRef.child(Constants.REDEEMING_CHILD).child(childId).
-        // pick whichever prize is in the prize list then pass it to the parent
-        // first check if prize and token count are valid
-        // prizes
 
         Context context = HomeChildrenPage.this;
         LinearLayout layout = new LinearLayout(context);
@@ -201,7 +212,14 @@ public class HomeChildrenPage extends AppCompatActivity  {
                                     String redeemable = newPrize;
                                     Intent intent = new Intent(HomeChildrenPage.this, ChildRedeemPage.class);
                                     startActivity(intent);
-                                    mRootRef.child(Constants.REDEEMING_CHILD).child(childId).child(redeemable).setValue(true);
+                                    if (mRootRef.child(Constants.REDEEMING_CHILD).child(childId).equals(false)) {
+                                        mRootRef.child(Constants.REDEEMING_CHILD).child(childId).child(redeemable).setValue(true);
+                                    }else{
+                                        alert1.setTitle("Already redeeming");
+                                        alert1.setMessage("Already attempting redeem");
+                                        alert1.setPositiveButton("OK",null);
+                                        alert1.create().show();
+                                    }
                                 } else {
                                     alert1.setTitle("Not enough tokens");
                                     alert1.setMessage("Not enough tokens");
@@ -229,10 +247,6 @@ public class HomeChildrenPage extends AppCompatActivity  {
         alert.setView(layout);
         alert.show();
     }
-
-
-
-
 
 //
 //    @Override
@@ -286,6 +300,5 @@ public class HomeChildrenPage extends AppCompatActivity  {
         return super.onOptionsItemSelected(item);
 
     }
-
 
 }

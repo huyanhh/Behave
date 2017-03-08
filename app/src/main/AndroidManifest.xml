@@ -36,7 +36,9 @@
         <activity android:name=".ui.ParentRedeemPageAllowRedemption" />
         <activity android:name=".ui.ParentRedeemPageSuccess" />
         <activity android:name=".ui.ChildRedeemPage" />
-        <activity android:name=".ui.ChildAbout"></activity>
+        <activity android:name=".ui.ChildAbout"/>
+        <activity android:name=".ui.ChildSetting" />
+
     </application>
 
 </manifest>

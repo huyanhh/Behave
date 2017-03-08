@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -38,6 +39,7 @@ public class AddChild extends AppCompatActivity {
     DatabaseReference mKidRef = mRootRef.child("children");
     DatabaseReference mParRef = mRootRef.child("parents");
     String parentId;
+    String childId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,26 +85,11 @@ public class AddChild extends AppCompatActivity {
                     builder.setMessage("Name cannot be blank").setNegativeButton("Retry", null).create().show();
                     etFirstName.requestFocus();
                     valid = false;
-
                 }
 
                 if(valid)
                 {
-                   // createAccount(username, password);
-                    String uniqueID = UUID.randomUUID().toString();
-                    uniqueID = uniqueID.substring(uniqueID.length() / 2 + 1); // remove hyphen
-                    createNewChild(uniqueID, firstName);
-                    AlertDialog.Builder Alert = new AlertDialog.Builder(AddChild.this);
-                    Alert.setMessage(firstName + " has been added, please use the code " +
-                            uniqueID + " to log in");
-                    Alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            Intent rewardIntent = new Intent(AddChild.this, SetUpReward.class);
-                            AddChild.this.startActivity(rewardIntent);
-                        }
-                    });
-                    Alert.create().show();
+                    showInputDialog(firstName);
                 }
             }
         });
@@ -114,6 +101,45 @@ public class AddChild extends AppCompatActivity {
         Child child = new Child(childId, parentId, name);
         mKidRef.child(childId).setValue(child);
         mParRef.child("children").child(childId).setValue(child);
+    }
+
+    private void showInputDialog(String firstName) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("child username");
+
+        final EditText input = new EditText(this);
+        final String name = firstName;
+
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                childId = input.getText().toString();
+                createNewChild(childId, name);
+
+                AlertDialog.Builder Alert = new AlertDialog.Builder(AddChild.this);
+                Alert.setMessage(name + " has been added, please use the code " +
+                        childId + " to log in");
+                Alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent rewardIntent = new Intent(AddChild.this, SetUpReward.class);
+                        AddChild.this.startActivity(rewardIntent);
+                    }
+                });
+                Alert.create().show();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
     }
 
     // [START on_start_add_listener]
