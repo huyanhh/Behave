@@ -3,7 +3,6 @@ package com.behave.behave.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ParentRedeemPageAllowRedemption extends AppCompatActivity implements View.OnClickListener {
 
-    private static final String TAG = "myMessage";
+
 
     private String childName;   // stores child's name from ParentRedeemPageListChild
     public String childId;
@@ -37,7 +36,6 @@ public class ParentRedeemPageAllowRedemption extends AppCompatActivity implement
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i(TAG, "PRAllowRedemption.onCreate_begin");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parent_redeem_page_allow_redemption);
 
@@ -75,8 +73,6 @@ public class ParentRedeemPageAllowRedemption extends AppCompatActivity implement
 
         /* The following code allows the passing of childName from
            ParentRedeemPageAllowRedemption to ParentRedeemPageSuccess. */
-
-        Log.i(TAG, "PRAllowRedemption.onCreate_end");
     }
 
     @Override
@@ -84,9 +80,10 @@ public class ParentRedeemPageAllowRedemption extends AppCompatActivity implement
         switch(view.getId())
         {
             case R.id.btn_approve_now:
-                Intent passChildNameIntent = new Intent (ParentRedeemPageAllowRedemption.this, ParentRedeemPageSuccess.class);  //<--- may need to pass to onclick
-                passChildNameIntent.putExtra("childName", childName);
-                startActivity(passChildNameIntent);
+                Intent passChildInfoIntent = new Intent (ParentRedeemPageAllowRedemption.this, ParentRedeemPageSuccess.class);
+                passChildInfoIntent.putExtra("childName", childName);
+                passChildInfoIntent.putExtra("childId", childId);
+                startActivity(passChildInfoIntent);
                 break;
             case R.id.btn_maybe_later:
                 Intent goToHomeIntent = new Intent(this, HomeParentActivity.class);
@@ -94,35 +91,25 @@ public class ParentRedeemPageAllowRedemption extends AppCompatActivity implement
                 break;
 
         }
-        Log.i(TAG, "PRAllowRedemption.onClick_begin");
-        Log.i(TAG, "PRAllowRedemption.onClick_end");                                                                            //<------------
     }
 
 
     @Override
     protected void onStart() {
-        Log.i(TAG, "PRAllowRedemption.onStart_begin");
         super.onStart();
-        //<------------
-        //readChildren();         //gets children from database
-        Log.i(TAG, "PRAllowRedemption.onStart_end");
     }
 
 
-    // Takes the user to ParentRedeemPageSuccess activity                                   //<------------ may need to delete later
-    public void goToSuccessActivity(View view) {
-        Log.i(TAG, "PRAllowRedemption.goToSuccessActivity_begin");
+    // Takes the user to ParentRedeemPageSuccess activity
+    public void goToSuccessActivity(View view) {           //<------------ may need to delete later
         Intent gotoSuccessIntent = new Intent(this, ParentRedeemPageSuccess.class);
         startActivity(gotoSuccessIntent);
-        Log.i(TAG, "PRAllowRedemption.goToSuccessActivity_end");
     }
 
     // Takes the user back to HomeParentActivity
     public void goToHomePage(View view) {
-        Log.i(TAG, "PRAllowRedemption.goToHomePage_begin");
         Intent goToHomeIntent = new Intent(this, HomeParentActivity.class);
         startActivity(goToHomeIntent);
-        Log.i(TAG, "PRAllowRedemption.goToHomePage_end");
     }
 
     //Creates Overflow Menu

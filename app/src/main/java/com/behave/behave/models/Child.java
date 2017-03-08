@@ -9,6 +9,7 @@ public class Child extends User {
     public String parentId;
     public int tokens = 0;
     public String tokenDescription = "";
+    public boolean isRedeeming = false;
 
     public Child() {
 
