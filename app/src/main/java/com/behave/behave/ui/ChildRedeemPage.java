@@ -33,15 +33,33 @@ public class ChildRedeemPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_child_redeem_page);
+        prize = "Candy";
 
+        childId = "a6a3-60611b13ed9c";
         Intent childNameIntent = getIntent();
-        prize = childNameIntent.getStringExtra("prizeName");
+        childId = childNameIntent.getStringExtra("childId");
+        Intent HomeChildPage = getIntent();
+        prize= HomeChildPage.getStringExtra("prize");
 
-       // prize= mRootRef.child(Constants.REDEEMING_CHILD).child(childId).getKey();
-        Log.d(prize,"prize");
+      // mRootRef.child(Constants.REDEEMING_CHILD).get
+        //Log.d(prize,"prize");
         childprize = (TextView) findViewById(R.id.Prize);
-        childprize.setText(prize);
+        //childprize.setText(prize);
 
+        mRootRef.child(Constants.REDEEMING_CHILD).child("mei_the_real_hero").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //childprize.setText(dataSnapshot.getValue().toString());
+                for(DataSnapshot k : dataSnapshot.child(Constants.REDEEMING_CHILD).getChildren()){
+                    childprize.setText(k.getValue().toString());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 //        mKidRef.child(childId).addValueEventListener(new ValueEventListener() {
 //            @Override
 //            public void onDataChange(DataSnapshot dataSnapshot) {

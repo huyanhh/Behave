@@ -160,7 +160,7 @@ public class HomeChildrenPage extends AppCompatActivity  {
 
     public void redeemPrize(View v) {
 
-        Context context = HomeChildrenPage.this;
+        final Context context = HomeChildrenPage.this;
         LinearLayout layout = new LinearLayout(context);
         layout.setOrientation(LinearLayout.VERTICAL);
 
@@ -210,17 +210,17 @@ public class HomeChildrenPage extends AppCompatActivity  {
                                 if (temp.equals(newPrize)){
                                 if (Tks <= numToken) {
                                     String redeemable = newPrize;
-                                    Intent intent = new Intent(HomeChildrenPage.this, ChildRedeemPage.class);
-                                    startActivity(intent);
-                                    if (mRootRef.child(Constants.REDEEMING_CHILD).child(childId).equals(false)) {
-                                        mRootRef.child(Constants.REDEEMING_CHILD).child(childId).child(redeemable).setValue(true);
-                                    }else{
-                                        alert1.setTitle("Already redeeming");
-                                        alert1.setMessage("Already attempting redeem");
-                                        alert1.setPositiveButton("OK",null);
-                                        alert1.create().show();
+                                        Intent intent = new Intent(HomeChildrenPage.this, ChildRedeemPage.class);
+                                        startActivity(intent);
+                                        mKidRef.child()
+                                        //mRootRef.child(Constants.REDEEMING_CHILD).child(childId).removeValue();
+                                        //mRootRef.child(Constants.REDEEMING_CHILD).child(childId).child(redeemable).setValue(true);
+                                        Intent s = new Intent(context,ChildRedeemPage.class);
+                                        s.putExtra("prize",redeemable);
+                                        startActivity(s);
                                     }
-                                } else {
+
+                                 else {
                                     alert1.setTitle("Not enough tokens");
                                     alert1.setMessage("Not enough tokens");
                                     alert1.setPositiveButton("OK", null);
