@@ -55,6 +55,7 @@ public class SetUpReward extends AppCompatActivity implements AdapterView.OnItem
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setTitle("Reward Setup");
         setContentView(R.layout.activity_set_up_reward);
 
         mParentRef = mRootRef.child("parents").child(mFirebaseUser.getUid());

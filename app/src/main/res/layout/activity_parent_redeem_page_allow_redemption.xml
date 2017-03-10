@@ -12,13 +12,13 @@
 
 
     <TextView
-        android:text="wants to redeem. "
+        android:text="Redeem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="93dp"
-        android:id="@+id/tv_wants_to_redeem" />
+        android:id="@+id/tv_redeem" />
 
     <TextView
         android:id="@+id/tv_child_name"
@@ -32,7 +32,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tv_wants_to_redeem"
+        android:layout_below="@+id/tv_child_name"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="130dp"
         android:id="@+id/lay_redeem_options">

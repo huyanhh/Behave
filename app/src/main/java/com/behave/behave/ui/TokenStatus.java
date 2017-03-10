@@ -50,6 +50,7 @@ public class TokenStatus extends AppCompatActivity implements AdapterView.OnItem
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setTitle("Token Status");
         setContentView(R.layout.activity_token_status);
 
         Intent intent = getIntent();

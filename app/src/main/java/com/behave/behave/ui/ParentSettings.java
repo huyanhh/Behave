@@ -16,7 +16,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.behave.behave.R;
-import com.behave.behave.models.Parent;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,6 +34,7 @@ public class ParentSettings extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setTitle("Settings");
         setContentView(R.layout.activity_parent_settings);
 
         final Button bEditChild = (Button) findViewById(R.id.bEditChild);
@@ -46,7 +46,7 @@ public class ParentSettings extends AppCompatActivity {
         bEditChild.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //bEditChild
             }
         });
 

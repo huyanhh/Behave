@@ -37,6 +37,7 @@ public class ParentRedeemPageAllowRedemption extends AppCompatActivity implement
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setTitle("Allow Redeem");
         setContentView(R.layout.activity_parent_redeem_page_allow_redemption);
 
         /* The following code creates an intent to receive child's name
@@ -45,14 +46,16 @@ public class ParentRedeemPageAllowRedemption extends AppCompatActivity implement
         Intent childNameIntent = getIntent();
         childName = childNameIntent.getStringExtra("childName");
         childId = childNameIntent.getStringExtra("childId");
-        TextView tv_childName = (TextView) findViewById(R.id.tv_child_name);
-        tv_childName.setText(childName);
+        final TextView tv_childName = (TextView) findViewById(R.id.tv_child_name);
+   //     tv_childName.setText(childName + " wants to redeem ");
 
         // retrieve prize names here
         mRootRef.child(Constants.REDEEMING_CHILD).child(childId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                prize = dataSnapshot.getKey();
+                prize = dataSnapshot.child("children").child("prize").getValue().toString();  //dataSnapshot.getKey();
+
+                tv_childName.setText(childName + " wants to redeem for " + prize + ".");
             }
 
             @Override
@@ -67,12 +70,9 @@ public class ParentRedeemPageAllowRedemption extends AppCompatActivity implement
         /* setOnClickListener cannot be applied to btn_approve so
              add "implements to View.OnClickListener" first to class declaration.
              onClick() method is also required to be implemented. After that,
-             then this should work */
+             then setOnClickListener should work */
         btn_approve.setOnClickListener(ParentRedeemPageAllowRedemption.this);
 
-
-        /* The following code allows the passing of childName from
-           ParentRedeemPageAllowRedemption to ParentRedeemPageSuccess. */
     }
 
     @Override

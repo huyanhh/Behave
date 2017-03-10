@@ -1,20 +1,15 @@
 package com.behave.behave.ui;
 
 import android.content.DialogInterface;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import com.behave.behave.R;
 import com.behave.behave.models.Parent;
@@ -23,9 +18,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Calvin on 2/17/2017.
@@ -46,6 +43,7 @@ public class Register extends AppCompatActivity
     protected void onCreate(Bundle saveInstanceState)
     {
         super.onCreate(saveInstanceState);
+        this.setTitle("Register");
         setContentView(R.layout.activity_register);
 
         mAuth = FirebaseAuth.getInstance();

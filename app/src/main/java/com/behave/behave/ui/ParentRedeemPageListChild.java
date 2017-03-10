@@ -46,6 +46,7 @@ public class ParentRedeemPageListChild extends AppCompatActivity implements Adap
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setTitle("Redeeming");
         setContentView(R.layout.activity_parent_redeem_page_list_child);
 
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();    //used to get the parent from firebase
@@ -70,24 +71,59 @@ public class ParentRedeemPageListChild extends AppCompatActivity implements Adap
     {
         mParRef.child("children").addValueEventListener(new ValueEventListener()
         {
+            String name;
+            String uid;
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
                 List<String> nameList = new ArrayList<>();
                 for (DataSnapshot kid : dataSnapshot.getChildren()) {
-                    String name = kid.child("name").getValue(String.class);
-                    String uid = kid.child("uid").getValue(String.class);
-                  /*  if (name != null) {
-                        nameList.add(name);
-                        childUID.put(name, uid);
+                    /*String*/ name = kid.child("name").getValue(String.class);
+                    /*String*/ uid = kid.child("uid").getValue(String.class);
+                    if (name != null) {
+                        //nameList.add(name);
+                        childUID.put(name, uid);       //add children to map
+                    }
+
+                //    Iterator it =  childUID.entrySet().iterator();
+                 //   while(it.hasNext()) {
+                  //      String c_uid = childUID.get(name);
+                    /*    mKidRef.child(name).addValueEventListener(new ValueEventListener(){
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                for (DataSnapshot kid : dataSnapshot.getChildren()) {
+                                    if (name)
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        }
                     }*/
-                    String isRedeeming = kid.child("isRedeeming").getValue().toString();
+
+
+
+
+                        /*String isRedeeming = mKidRef.child(c_uid).child("isRedeeming").getKey();  //.getValue().toString();
+                        if (isRedeeming.equalsIgnoreCase("true"))           // <---------- GO BACK TO THIS LATER AFTER EDIT CHILD HAS BEEN UPDATED
+                        {
+                            nameList.add(name);
+                         //   childUID.put(name, uid);
+                        }*/
+                    }
+
+
+
+      /*              String isRedeeming = kid.child("isRedeeming").getValue().toString();
                     if (isRedeeming.equalsIgnoreCase("true"))           // <---------- GO BACK TO THIS LATER AFTER EDIT CHILD HAS BEEN UPDATED
                     {
                         nameList.add(name);
                         childUID.put(name, uid);
                     }
-                }
+                }*/
                 childList = nameList;
                 final ListView lvParentList = (ListView) findViewById(R.id.lv_childList);   //gets reference to Listview
                 if (childList.size() != 0)
@@ -103,6 +139,7 @@ public class ParentRedeemPageListChild extends AppCompatActivity implements Adap
                 //need this so ValueEventListener() doesn't cause error
             }
         });
+
     }
 
 

@@ -31,6 +31,7 @@ public class ParentRedeemPageSuccess extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setTitle("Success");
         setContentView(R.layout.activity_parent_redeem_page_success);
 
         /* The following code creates an intent to receive child's name and childUID
@@ -107,4 +108,12 @@ public class ParentRedeemPageSuccess extends AppCompatActivity {
     }
 
 
+    public static class ParentEditChildListChild extends AppCompatActivity {
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_parent_edit_child_list_child);
+        }
+    }
 }

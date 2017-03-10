@@ -11,6 +11,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //changes title bar and centers it
+        this.setTitle("Register");
+       // getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+       // getSupportActionBar().setCustomView(R.layout.abs_layout);
         setContentView(R.layout.activity_main);
 
         if(SaveSharedPreference.getUserName(MainActivity.this).length() == 0)

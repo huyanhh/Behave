@@ -10,6 +10,8 @@ public class Child extends User {
     public int tokens = 0;
     public String tokenDescription = "";
     public boolean isRedeeming = false;
+    public String prize = "";
+    public int amount = 0;
 
     public Child() {
 

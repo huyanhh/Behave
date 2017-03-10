@@ -55,6 +55,7 @@ public class HomeParentActivity extends AppCompatActivity implements AdapterView
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setTitle("Home");
         setContentView(R.layout.activity_home_parent_page);
 
         final TextView tvWelcome = (TextView) findViewById(R.id.tvWelcome);

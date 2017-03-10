@@ -18,6 +18,7 @@ public class MenuAbout extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setTitle("About");
         setContentView(R.layout.activity_menu_about);
         final TextView tvAbout = (TextView) findViewById(R.id.tvAboutDescription);
         tvAbout.setText("Behave Application is an application that will help parents' keep" +
