@@ -11,6 +11,7 @@
     tools:context="com.behave.behave.ui.MainActivity"
     android:orientation="vertical"
     android:weightSum="1">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,44 +38,55 @@
         android:ems="10"
         android:id="@+id/etPassword" />
 
-    <Button
+    <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:id="@+id/bLogin"
-        android:backgroundTint="#444444"
-        android:textColor="@android:color/white" />
+        android:layout_height="85dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="6dp"
-        android:id="@+id/textView2" />
+        <TextView
+            android:id="@+id/tvRegister"
+            android:layout_width="174dp"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_row="1"
+            android:text="Register"
+            android:textAlignment="center"
+            android:textColor="#0004ff" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Register"
-        android:id="@+id/tvRegister"
-        android:textColor="#0004ff" />
+        <Button
+            android:id="@+id/bChild"
+            android:layout_width="172dp"
+            android:layout_height="61dp"
+            android:layout_alignBottom="@+id/bLogin"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_column="0"
+            android:layout_row="0"
+            android:backgroundTint="#41ddfc"
+            android:text="Login as a Child"
+            android:textColor="#2900d1" />
+
+        <TextView
+            android:id="@+id/tvForgotPassword"
+            android:layout_width="167dp"
+            android:layout_height="wrap_content"
+            android:layout_column="2"
+            android:layout_row="1"
+            android:text="Forgot Password"
+            android:textAlignment="center"
+            android:textColor="#FF0004FF" />
+
+        <Button
+            android:id="@+id/bLogin"
+            android:layout_width="167dp"
+            android:layout_height="60dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_column="2"
+            android:layout_row="0"
+            android:backgroundTint="#00a02d"
+            android:text="Login"
+            android:textColor="@android:color/white" />
+    </GridLayout>
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="6dp"
-        android:id="@+id/textView3" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Forgot Password"
-        android:id="@+id/tvForgotPassword"
-        android:textColor="#FF0004FF" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Click here for login as a Child"
-        android:id="@+id/bChild"
-        android:textColor="#2900d1"
-        android:backgroundTint="#41ddfc" />
 </LinearLayout>
