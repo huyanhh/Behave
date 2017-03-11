@@ -20,7 +20,7 @@
         <activity
             android:name=".ui.Register"
             android:label="@string/title_activity_register"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         />
         <activity android:name=".ui.MainActivity" />
         <activity android:name=".ui.ForgotPassword" />
