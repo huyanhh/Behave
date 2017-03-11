@@ -14,7 +14,6 @@
         <activity android:name=".ui.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -23,6 +22,7 @@
             android:label="@string/title_activity_register"
             android:theme="@style/AppTheme.NoActionBar" />
         />
+        <activity android:name=".ui.MainActivity" />
         <activity android:name=".ui.ForgotPassword" />
         <activity android:name=".ui.HomeParentActivity" />
         <activity android:name=".ui.HomeChildrenPage" />
@@ -39,7 +39,6 @@
         <activity android:name=".ui.ChildAbout" />
         <activity android:name=".ui.ChildSetting" />
         <activity android:name=".ui.ParentRedeemPageSuccess$ParentEditChildListChild" />
-
     </application>
 
 </manifest>

@@ -16,7 +16,6 @@ import com.behave.behave.R;
 public class SplashScreen extends Activity {
 
     ImageView iv_teamLogo;
-
     private static int SPLASH_TIME_OUT = 2000;  // length of time splash screen is displayed
     ProgressBar progressBar;
     CountDownTimer countDownTimer;
@@ -33,6 +32,7 @@ public class SplashScreen extends Activity {
         createProgressBar();
     }   // end onCreate
 
+
     /* ADDS THE TEAM LOGO TO THE SCREEN */
     public void addTeamLogo() {
         iv_teamLogo = (ImageView) findViewById(R.id.tv_teamlogo);
@@ -44,7 +44,7 @@ public class SplashScreen extends Activity {
         LAUNCHES THE WELCOME SCREEN FOR 2 SECS BEFORE GOING TO SECOND SCREEN */
     public void createProgressBar() {
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        countDownTimer = new CountDownTimer(SPLASH_TIME_OUT, 1000) {
+        countDownTimer = new CountDownTimer(/*SPLASH_TIME_OUT*/2000, 1000) {
             @Override
             /* WHAT HAPPENS EVERY SECOND */
             public void onTick(long l) {
@@ -54,7 +54,7 @@ public class SplashScreen extends Activity {
 
             @Override
             public void onFinish() {
-                Intent homeIntent = new Intent(SplashScreen.this, Register.class);
+                Intent homeIntent = new Intent(SplashScreen.this, MainActivity.class);
                 startActivity(homeIntent);
             }
         };

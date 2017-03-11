@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 
-/* Created by Irish Marquez */
+/* Created by Calvin Poon and Irish Marquez */
 
 
 public class ParentRedeemPageListChild extends AppCompatActivity implements AdapterView.OnItemClickListener {
@@ -81,28 +81,12 @@ public class ParentRedeemPageListChild extends AppCompatActivity implements Adap
                 for (DataSnapshot kid : dataSnapshot.getChildren()) {
                     /*String*/ name = kid.child("name").getValue(String.class);
                     /*String*/ uid = kid.child("uid").getValue(String.class);
-                    if (name != null) {
-                        //nameList.add(name);
+                    /*if (name != null) {
+                        nameList.add(name);
                         childUID.put(name, uid);       //add children to map
-                    }
-
-                //    Iterator it =  childUID.entrySet().iterator();
-                 //   while(it.hasNext()) {
-                  //      String c_uid = childUID.get(name);
-                    /*    mKidRef.child(name).addValueEventListener(new ValueEventListener(){
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                for (DataSnapshot kid : dataSnapshot.getChildren()) {
-                                    if (name)
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        }
                     }*/
+
+
 
 
 
@@ -113,17 +97,17 @@ public class ParentRedeemPageListChild extends AppCompatActivity implements Adap
                             nameList.add(name);
                          //   childUID.put(name, uid);
                         }*/
-                    }
+                    //}
 
 
 
-      /*              String isRedeeming = kid.child("isRedeeming").getValue().toString();
+                    String isRedeeming = kid.child("isRedeeming").getValue().toString();
                     if (isRedeeming.equalsIgnoreCase("true"))           // <---------- GO BACK TO THIS LATER AFTER EDIT CHILD HAS BEEN UPDATED
                     {
                         nameList.add(name);
                         childUID.put(name, uid);
                     }
-                }*/
+                }
                 childList = nameList;
                 final ListView lvParentList = (ListView) findViewById(R.id.lv_childList);   //gets reference to Listview
                 if (childList.size() != 0)
