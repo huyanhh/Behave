@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -29,6 +30,8 @@ import java.util.Map;
 /**
  * Created by huyanh on 2017. 2. 6..
  */
+
+/* monster image borrowed from http://iconbug.com/detail/icon/2048/yellow-cyclops-monster/ */
 
 public class HomeParentActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
@@ -104,7 +107,7 @@ public class HomeParentActivity extends AppCompatActivity implements AdapterView
     private void readChildren() {
 
         mParRef.child("children").addValueEventListener(new ValueEventListener() {
-            @Override
+            /*@Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 List<String> nameList = new ArrayList<>();
                 for (DataSnapshot kid : dataSnapshot.getChildren()) {
@@ -122,12 +125,42 @@ public class HomeParentActivity extends AppCompatActivity implements AdapterView
                     lvParentList.setAdapter(adapter);      // arrayadapter filled with friends' name
                     lvParentList.setOnItemClickListener(HomeParentActivity.this);
                 }
+            }*/
+
+            /*@Override
+            public void onCancelled(DatabaseError databaseError) {} */
+
+
+
+            // MODIFIED LISTVIEW, ADDED AVATAR
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // 1. Gets children from database
+                // 2. Stores their names into nameList array
+                // 3. Stores their names and uid into childUID hashmap
+                List<String> nameList = new ArrayList<>();
+                for (DataSnapshot kid : dataSnapshot.getChildren()) {
+                    String name = kid.child("name").getValue(String.class);
+                    String uid = kid.child("uid").getValue(String.class);
+                    if (name != null) {
+                        nameList.add(name);
+                        childUID.put(name, uid);
+                    }
+                }
+                childList = nameList;   // copies String names from one arrayList to another (Why?)
+
+                // Use a custom adapter to display avatar with child name
+                ListAdapter adapter_allChildren = new CustomListViewAdapter(HomeParentActivity.this, childList);
+                final ListView lvParentList = (ListView) findViewById(R.id.lvParentList);
+                if (childList.size() != 0) {
+                    lvParentList.setAdapter(adapter_allChildren);
+                    lvParentList.setOnItemClickListener(HomeParentActivity.this);
+                }
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(DatabaseError databaseError) {}
 
-            }
         });
     }
 

@@ -46,7 +46,7 @@ public class ParentRedeemPageListChild extends AppCompatActivity implements Adap
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.setTitle("Redeeming");
+        this.setTitle("Redeem Notification");
         setContentView(R.layout.activity_parent_redeem_page_list_child);
 
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();    //used to get the parent from firebase
