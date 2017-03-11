@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#6cf6d2"
+    android:background="#2cdbad"
     tools:context="com.behave.behave.ui.SplashScreen">
 
     <RelativeLayout
