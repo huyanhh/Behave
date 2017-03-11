@@ -25,68 +25,70 @@
         android:id="@+id/etUsername" />
 
     <TextView
+        android:id="@+id/tvPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Password"
-        android:id="@+id/tvPassword"
         android:textColor="@android:color/black" />
 
     <EditText
+        android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/etPassword" />
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/bLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_column="2"
+        android:layout_row="0"
+        android:backgroundTint="#00a02d"
+        android:text="Login"
+        android:textColor="@android:color/white" />
 
     <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="85dp">
+        android:layout_height="29dp"
+        android:layout_weight="0.90">
 
         <TextView
             android:id="@+id/tvRegister"
             android:layout_width="174dp"
             android:layout_height="wrap_content"
             android:layout_column="0"
-            android:layout_row="1"
+            android:layout_row="0"
             android:text="Register"
             android:textAlignment="center"
             android:textColor="#0004ff" />
-
-        <Button
-            android:id="@+id/bChild"
-            android:layout_width="172dp"
-            android:layout_height="61dp"
-            android:layout_alignBottom="@+id/bLogin"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_column="0"
-            android:layout_row="0"
-            android:backgroundTint="#41ddfc"
-            android:text="Login as a Child"
-            android:textColor="#2900d1" />
 
         <TextView
             android:id="@+id/tvForgotPassword"
             android:layout_width="167dp"
             android:layout_height="wrap_content"
             android:layout_column="2"
-            android:layout_row="1"
+            android:layout_row="0"
             android:text="Forgot Password"
             android:textAlignment="center"
             android:textColor="#FF0004FF" />
 
-        <Button
-            android:id="@+id/bLogin"
-            android:layout_width="167dp"
-            android:layout_height="60dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_column="2"
-            android:layout_row="0"
-            android:backgroundTint="#00a02d"
-            android:text="Login"
-            android:textColor="@android:color/white" />
     </GridLayout>
+
+    <Button
+        android:id="@+id/bChild"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/bLogin"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_column="0"
+        android:layout_row="17"
+        android:backgroundTint="#41ddfc"
+        android:text="Login as a Child"
+        android:textColor="#2900d1" />
 
 
 </LinearLayout>
