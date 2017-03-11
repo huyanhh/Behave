@@ -175,6 +175,7 @@ public class LoginActivity extends AppCompatActivity
                 Intent userIntent = new Intent(LoginActivity.this, HomeChildrenPage.class);
                 userIntent.putExtra("childId", mChildCode);
                 LoginActivity.this.startActivity(userIntent);
+
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

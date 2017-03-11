@@ -38,6 +38,7 @@
         <activity android:name=".ui.ChildRedeemPage" />
         <activity android:name=".ui.ChildAbout" />
         <activity android:name=".ui.ChildSetting" />
+        <activity android:name=".ui.ChildPrizeList"></activity>
     </application>
 
 </manifest>

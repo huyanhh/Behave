@@ -35,24 +35,23 @@ public class ChildRedeemPage extends AppCompatActivity {
         setContentView(R.layout.activity_child_redeem_page);
         prize = "Candy";
 
-        childId = "a6a3-60611b13ed9c";
-        Intent childNameIntent = getIntent();
+        final Intent childNameIntent = getIntent();
         childId = childNameIntent.getStringExtra("childId");
-        Intent HomeChildPage = getIntent();
-        prize= HomeChildPage.getStringExtra("prize");
+//        Intent childPrizeName = getIntent();
+//        prize = childPrizeName.getStringExtra("prizeName");
 
       // mRootRef.child(Constants.REDEEMING_CHILD).get
         //Log.d(prize,"prize");
         childprize = (TextView) findViewById(R.id.Prize);
         //childprize.setText(prize);
 
-        mRootRef.child(Constants.REDEEMING_CHILD).child("mei_the_real_hero").addValueEventListener(new ValueEventListener() {
+        mKidRef.child("childId").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //childprize.setText(dataSnapshot.getValue().toString());
-                for(DataSnapshot k : dataSnapshot.child(Constants.REDEEMING_CHILD).getChildren()){
-                    childprize.setText(k.getValue().toString());
-                }
+             //   prize= dataSnapshot.child("prize").getValue().toString();
+                childprize.setText(prize);
+                //Log.d(dataSnapshot.child("prize").getValue().toString(),"Value of Prize in redeem");
+                //.setText(dataSnapshot.child("prize").getValue(String.class));
             }
 
             @Override
@@ -60,18 +59,7 @@ public class ChildRedeemPage extends AppCompatActivity {
 
             }
         });
-//        mKidRef.child(childId).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                childprize.setText(dataSnapshot.child("prizes").getValue().toString());
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
+
     }
 
        public void returnChild(View v) {
@@ -94,12 +82,18 @@ public class ChildRedeemPage extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.item_option1:
                 Intent settingsIntent = new Intent(this, ChildAbout.class);
+                settingsIntent.putExtra("childId", childId);
                 this.startActivity(settingsIntent);
                 break;
             case R.id.item_option2:
                 LoginActivity.clearUsername();
                 Intent logoutIntent = new Intent(this, MainActivity.class);
                 this.startActivity(logoutIntent);
+                break;
+            case R.id.item_option3:
+                Intent goHome = new Intent(this, HomeChildrenPage.class);
+                goHome.putExtra("childId", childId);
+                this.startActivity(goHome);
                 break;
         }
         return super.onOptionsItemSelected(item);
