@@ -30,25 +30,6 @@
         android:layout_marginBottom="18dp" />
 
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="296dp"
-        android:layout_height="260dp"
-        android:weightSum="1"
-        android:id="@+id/linearLayout5"
-        android:layout_above="@+id/button_redeem"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="14dp">
-
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/lvPrizeList"
-            android:textAlignment="center"
-            android:headerDividersEnabled="false"
-            android:layout_alignEnd="@+id/linearLayout2" />
-    </LinearLayout>
-
     <TextView
         android:text="Good Job!"
         android:layout_width="wrap_content"
@@ -67,7 +48,6 @@
         android:textSize="20sp"
         android:layout_marginTop="32dp"
         android:layout_below="@+id/textView3"
-        android:layout_alignStart="@+id/linearLayout5"
         android:layout_marginStart="34dp" />
 
     <TextView
@@ -88,6 +68,24 @@
         android:textSize="20sp"
         android:layout_above="@+id/textView4"
         android:layout_toEndOf="@+id/textView3" />
+
+    <Button
+        android:id="@+id/listRewardButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="list reward"
+        android:layout_marginBottom="27dp"
+        android:layout_above="@+id/button2"
+        android:layout_alignStart="@+id/textView3" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="59dp"
+        android:text="Currently Redeeming"
+        android:layout_above="@+id/button_redeem"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
