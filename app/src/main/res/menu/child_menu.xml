@@ -3,6 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/item_option3"
+        android:title="Home"
+        />
+    <item
     android:id="@+id/item_option1"
         android:title="About"
        />

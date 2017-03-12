@@ -1,6 +1,7 @@
 package com.behave.behave.ui;
 
 import android.content.Intent;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.behave.behave.R;
@@ -25,7 +27,7 @@ public class ChildRedeemPage extends AppCompatActivity {
     String prize;
     TextView childprize;
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference mKidRef = mRootRef.child(Constants.CHILDREN_CHILD); // creates `-/children` in db
+    DatabaseReference mKidRef = mRootRef.child(Constants.CHILDREN_CHILD);
 
     String childId;
 
@@ -33,36 +35,37 @@ public class ChildRedeemPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_child_redeem_page);
+        prize = "Candy";
 
         Intent childNameIntent = getIntent();
-        prize = childNameIntent.getStringExtra("prizeName");
+        childId = childNameIntent.getStringExtra("childId");
 
-       // prize= mRootRef.child(Constants.REDEEMING_CHILD).child(childId).getKey();
-        Log.d(prize,"prize");
+
         childprize = (TextView) findViewById(R.id.Prize);
-        childprize.setText(prize);
 
-//        mKidRef.child(childId).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                childprize.setText(dataSnapshot.child("prizes").getValue().toString());
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
+        mKidRef.child(childId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                prize = (dataSnapshot.child("prize").getValue().toString());
+                childprize.setText(prize);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+    public void backHome(View view) {
+        Intent backhome = new Intent(ChildRedeemPage.this, HomeChildrenPage.class);
+        backhome.putExtra("childId", childId);
+        this.startActivity(backhome);
     }
 
-       public void returnChild(View v) {
-        Intent intent = new Intent(ChildRedeemPage.this, HomeChildrenPage.class);
-        startActivity(intent);
-    }
-    // TODO: implement this
-//        Intent childNameIntent = getIntent();
-//        prize = childNameIntent.getStringExtra("prizeName");
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -76,6 +79,7 @@ public class ChildRedeemPage extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.item_option1:
                 Intent settingsIntent = new Intent(this, ChildAbout.class);
+                settingsIntent.putExtra("childId", childId);
                 this.startActivity(settingsIntent);
                 break;
             case R.id.item_option2:
@@ -83,9 +87,16 @@ public class ChildRedeemPage extends AppCompatActivity {
                 Intent logoutIntent = new Intent(this, MainActivity.class);
                 this.startActivity(logoutIntent);
                 break;
+            case R.id.item_option3:
+                Intent goHome = new Intent(this, HomeChildrenPage.class);
+                goHome.putExtra("childId", childId);
+                this.startActivity(goHome);
+                break;
         }
         return super.onOptionsItemSelected(item);
 
     }
 }
+
+
 

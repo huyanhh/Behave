@@ -11,64 +11,38 @@
     >
 
     <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Hello Kid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="36sp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="30sp"
-        android:id="@+id/textView3" />
+        android:layout_centerHorizontal="true" />
 
-    <Button
-        android:text="Redeem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button_redeem"
-        android:onClick="redeemPrize"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="18dp" />
-
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="296dp"
-        android:layout_height="260dp"
-        android:weightSum="1"
-        android:id="@+id/linearLayout5"
-        android:layout_above="@+id/button_redeem"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="14dp">
-
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/lvPrizeList"
-            android:textAlignment="center"
-            android:headerDividersEnabled="false"
-            android:layout_alignEnd="@+id/linearLayout2" />
-    </LinearLayout>
 
     <TextView
-        android:text="Good Job!"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/textView4"
-        android:textSize="20sp"
-        android:layout_below="@+id/tvWelcome"
-        android:layout_alignStart="@+id/button_redeem"
-        android:layout_marginTop="15dp" />
-
-    <TextView
-        android:text="You have"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/tvWelcome"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:text="Good Job!"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <TextView
         android:id="@+id/tvWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="26dp"
+        android:layout_marginTop="47dp"
+        android:text="You have"
+        android:textAlignment="center"
         android:textSize="20sp"
-        android:layout_marginTop="32dp"
         android:layout_below="@+id/textView3"
-        android:layout_alignStart="@+id/linearLayout5"
-        android:layout_marginStart="34dp" />
+        android:layout_toStartOf="@+id/tokenAmount" />
 
     <TextView
         android:text="X"
@@ -76,18 +50,49 @@
         android:layout_height="wrap_content"
         android:id="@+id/tokenAmount"
         android:textSize="20sp"
-        android:layout_above="@+id/textView4"
-        android:layout_alignEnd="@+id/button_redeem"
-        android:layout_marginEnd="25dp" />
+        android:layout_alignBaseline="@+id/tvWelcome"
+        android:layout_alignBottom="@+id/tvWelcome"
+        android:layout_centerHorizontal="true" />
 
     <TextView
-        android:text="Tokens"
+        android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView8"
+        android:text="Tokens"
+        android:textAlignment="center"
         android:textSize="20sp"
-        android:layout_above="@+id/textView4"
-        android:layout_toEndOf="@+id/textView3" />
+        android:layout_alignBaseline="@+id/tokenAmount"
+        android:layout_alignBottom="@+id/tokenAmount"
+        android:layout_toEndOf="@+id/tokenAmount"
+        android:layout_marginStart="31dp" />
+
+    <Button
+        android:id="@+id/listRewardButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="list reward"
+        android:layout_marginBottom="20dp"
+        android:layout_above="@+id/credeeming"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/credeeming"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="47dp"
+        android:text="Currently Redeeming"
+        android:textAlignment="center"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+
+        app:srcCompat="@drawable/coin"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

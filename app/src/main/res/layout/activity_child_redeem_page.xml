@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_child_redeem_page"
     android:layout_width="match_parent"
@@ -14,15 +15,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:id="@+id/Prize"
         android:text="Prize"
         android:textAppearance="@android:style/TextAppearance.Material.Large"
-        android:layout_below="@+id/congrats"
-        android:layout_centerHorizontal="true"
         android:textAlignment="center"
         android:textSize="40sp"
-        android:textStyle="normal|bold" />
+        android:textStyle="normal|bold"
+        android:layout_below="@+id/congrats"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:text="Your parents have received your request for your Prize!
@@ -37,5 +37,25 @@
         android:textAlignment="center"
         android:textStyle="normal|bold"
         android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/gift"
+        android:layout_below="@+id/Prize"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp" />
+
+    <Button
+        android:text="Back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/backHomeRedeem"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:onClick="backHome"
+        android:layout_below="@+id/imageView2"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

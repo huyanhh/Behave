@@ -12,6 +12,7 @@
     tools:context="com.behave.behave.ui.ChildAbout">
 
 
+
     <TextView
         android:text="About"
         android:layout_width="wrap_content"
@@ -24,7 +25,7 @@
         android:textColor="@android:color/black" />
 
     <TextView
-        android:text="Trakemon"
+        android:text="Behave!"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView10"
