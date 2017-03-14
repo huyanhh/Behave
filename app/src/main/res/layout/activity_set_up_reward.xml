@@ -63,7 +63,7 @@
             android:textAlignment="center"
             android:headerDividersEnabled="false"
             android:layout_below="@+id/bSetUpAdd"
-            android:layout_alignEnd="@+id/linearLayout2" />
+            android:layout_alignEnd="@+id/linearLay_childname" />
     </LinearLayout>
 
 </RelativeLayout>

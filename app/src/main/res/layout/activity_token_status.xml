@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_token_status"
     android:layout_width="match_parent"
@@ -10,32 +11,74 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.behave.behave.ui.TokenStatus">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="21dp"
-        android:id="@+id/tvChildNameTokenStatus"
-        android:textSize="24sp"
-        android:textColor="@android:color/black" />
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/green_monster"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_toStartOf="@+id/relativeLayout2"
+        android:layout_marginTop="13dp" />
+
+    <RelativeLayout
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:id="@+id/relativeLayout2"
+        android:layout_alignTop="@+id/imageView"
+        android:layout_alignEnd="@+id/lvTokenStatusList">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="21dp"
+            android:gravity="center"
+            android:id="@+id/tvChildNameTokenStatus"
+            android:layout_centerHorizontal="true"
+            android:textSize="24sp"
+            android:textColor="@android:color/black"
+            android:layout_toEndOf="@+id/tvTokenCount" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:id="@+id/relativeLayout"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_toEndOf="@+id/imageView">
+
+        <TextView
+            android:id="@+id/tvTokenCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="25dp"
+            android:textColor="@color/colorAccent" />
+
+    </RelativeLayout>
+
+
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_below="@+id/tvChildNameTokenStatus"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout2">
 
 
     </LinearLayout>
 
     <ListView
-        android:layout_width="match_parent"
-        android:layout_height="233dp"
         android:id="@+id/lvTokenStatusList"
-        android:layout_marginBottom="36dp"
-        android:layout_above="@+id/bTokenStatusAdd"
-        android:layout_alignParentStart="true" />
+        android:layout_width="300dp"
+        android:layout_height="233dp"
+        android:layout_above="@+id/bTokenStatusMinus"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -51,25 +94,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/bTokenStatusMinus"
-        android:layout_below="@+id/lvTokenStatusList"
-        android:layout_toEndOf="@+id/linearLayout"
-        android:layout_marginStart="41dp"
+        android:layout_marginStart="20dp"
         style="@style/Widget.AppCompat.Button"
-        android:backgroundTint="@android:color/holo_red_dark"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:textColor="@android:color/white"
         android:textSize="18sp"
-        android:textStyle="normal|bold" />
+        android:textStyle="normal|bold"
+        android:layout_alignBottom="@+id/tvTokenCount"
+        android:layout_alignStart="@+id/lvTokenStatusList" />
 
     <Button
         android:text="+"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="27dp"
         android:id="@+id/bTokenStatusAdd"
-        android:layout_above="@+id/tvTokenCount"
-        android:layout_toEndOf="@+id/tvTokenCount"
         style="@style/Widget.AppCompat.Button"
         android:backgroundTint="@color/colorPrimaryDark"
         android:textColor="@android:color/white"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:layout_alignBottom="@+id/tvTokenCount"
+        android:layout_alignEnd="@+id/relativeLayout" />
+
+
 </RelativeLayout>

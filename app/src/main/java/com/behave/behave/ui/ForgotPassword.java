@@ -2,16 +2,15 @@ package com.behave.behave.ui;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.behave.behave.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 /**
  * Created by Calvin on 2/17/2017.
@@ -23,6 +22,7 @@ public class ForgotPassword extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setTitle("Forgot Password");
         setContentView(R.layout.activity_forgot_password);
 
         final EditText etForgotPasswordEmail = (EditText) findViewById(R.id.etForgotPasswordEmail);

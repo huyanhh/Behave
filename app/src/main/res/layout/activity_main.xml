@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -11,6 +12,13 @@
     tools:context="com.behave.behave.ui.MainActivity"
     android:orientation="vertical"
     android:weightSum="1">
+
+    <ImageView
+        android:id="@+id/iv_teamlogo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        app:srcCompat="@drawable/teamlogo" />
 
     <TextView
         android:id="@+id/tv_all_fields_required"
@@ -59,14 +67,14 @@
         android:layout_alignParentTop="true"
         android:layout_column="2"
         android:layout_row="0"
-        android:backgroundTint="#00a02d"
+        android:backgroundTint="#24BFB8"
         android:text="Login"
-        android:textColor="@android:color/white" />
+        android:textColor="#ffffff" />
 
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="29dp"
-        android:layout_weight="0.90">
+        android:layout_weight=".90">
 
         <TextView
             android:id="@+id/tvRegister"
@@ -99,9 +107,9 @@
         android:layout_alignParentTop="true"
         android:layout_column="0"
         android:layout_row="17"
-        android:backgroundTint="#41ddfc"
+        android:backgroundTint="#f3e000"
         android:text="Login as a Child"
-        android:textColor="#2900d1" />
+        android:textColor="#24BFB8" />
 
 
 </LinearLayout>

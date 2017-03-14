@@ -20,7 +20,7 @@ import java.util.List;
 class CustomListViewAdapter extends ArrayAdapter<String> {
 
 
-    public CustomListViewAdapter(@NonNull Context context, /*@LayoutRes*/ /*String[]*/ List<String> children) {
+    public CustomListViewAdapter(@NonNull Context context, /*@LayoutRes*/ /*String[]*/  List<String> children) {
         super(context, R.layout.custom_row, children);
 
     }

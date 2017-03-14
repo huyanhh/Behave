@@ -10,21 +10,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.behave.behave.ui.ParentSettings">
 
-    <TextView
-        android:text="Account Settings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView"
-        android:textColor="@android:color/black"
-        android:textSize="30sp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="296dp"
         android:layout_height="351dp"
-        android:layout_marginBottom="43dp"
+        android:layout_marginBottom="40dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true">
 
@@ -33,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/bEditChild"
-            android:backgroundTint="@android:color/holo_blue_dark"
+            android:backgroundTint="@color/colorPrimaryDark"
             style="@style/Widget.AppCompat.Button.Colored" />
 
         <Button
@@ -42,7 +33,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/bChangeEmail"
             style="@style/Widget.AppCompat.Button.Colored"
-            android:backgroundTint="@android:color/holo_blue_dark" />
+            android:backgroundTint="@color/colorPrimaryDark" />
 
         <Button
             android:text="Change Password"
@@ -50,7 +41,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/bChangePassword"
             style="@style/Widget.AppCompat.Button.Colored"
-            android:backgroundTint="@android:color/holo_blue_dark" />
+            android:backgroundTint="@color/colorPrimaryDark" />
 
         <Button
             android:text="Delete Account"
@@ -59,7 +50,7 @@
             android:id="@+id/bDeleteAccount"
             android:textColor="@android:color/white"
             style="@style/Widget.AppCompat.Button.Colored"
-            android:backgroundTint="@android:color/holo_red_dark" />
+            android:backgroundTint="#072928" />
 
     </LinearLayout>
 </RelativeLayout>

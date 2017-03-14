@@ -21,8 +21,8 @@ public class MenuAbout extends AppCompatActivity {
         this.setTitle("About");
         setContentView(R.layout.activity_menu_about);
         final TextView tvAbout = (TextView) findViewById(R.id.tvAboutDescription);
-        tvAbout.setText("Behave Application is an application that will help parents' keep" +
-                " track of their children behavior and will reward them when appropriate.");
+        tvAbout.setText("Trakemon is an application that will help parents keep" +
+                " track of their children's behavior and reward them when appropriate.");
     }
 
     //Menu option

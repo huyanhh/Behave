@@ -1,34 +1,34 @@
 package com.behave.behave.ui;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.text.InputType;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
+        import android.app.AlertDialog;
+        import android.content.Context;
+        import android.content.DialogInterface;
+        import android.content.Intent;
+        import android.os.Bundle;
+        import android.support.v7.app.AppCompatActivity;
+        import android.text.InputType;
+        import android.view.MenuInflater;
+        import android.view.MenuItem;
+        import android.view.View;
+        import android.widget.AdapterView;
+        import android.widget.ArrayAdapter;
+        import android.widget.Button;
+        import android.widget.EditText;
+        import android.widget.LinearLayout;
+        import android.widget.ListView;
+        import android.widget.TextView;
 
-import com.behave.behave.R;
-import com.behave.behave.utils.Constants;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+        import com.behave.behave.R;
+        import com.behave.behave.utils.Constants;
+        import com.google.firebase.database.DataSnapshot;
+        import com.google.firebase.database.DatabaseError;
+        import com.google.firebase.database.DatabaseReference;
+        import com.google.firebase.database.FirebaseDatabase;
+        import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+        import java.util.ArrayList;
+        import java.util.HashMap;
+        import java.util.List;
 
 /**
  * Created by Calvin on 2/20/2017.
@@ -61,10 +61,10 @@ public class TokenStatus extends AppCompatActivity implements AdapterView.OnItem
         final Button bTokenMinus = (Button) findViewById(R.id.bTokenStatusMinus);
         final Button bTokenAdd = (Button) findViewById(R.id.bTokenStatusAdd);
         lvTokenList = (ListView) findViewById(R.id.lvTokenStatusList);
-        tvChildName.setText(childName + "'s Token Status:");
+        tvChildName.setText(childName);
         mAddToken = mKidRef.child(childUID).child("tokenDescription");
 
-       //put lists onto ListView, lvTokenList
+        //put lists onto ListView, lvTokenList
         mAddToken.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -206,7 +206,7 @@ public class TokenStatus extends AppCompatActivity implements AdapterView.OnItem
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         final String key;
         if(tokenKeyList.containsKey(tokenList.get(position)));
-            key = tokenKeyList.get(tokenList.get(position));
+        key = tokenKeyList.get(tokenList.get(position));
 
         Context context = TokenStatus.this;
         LinearLayout layout = new LinearLayout(context);
