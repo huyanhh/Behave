@@ -132,7 +132,7 @@ public class ChildPrizeList extends Activity implements AdapterView.OnItemClickL
 
                             if ((ptoke.first).equals(p) ){
                                 if(ptoke.second < childAmountToken) {
-                                    mKidRef.child(childId).child("prizeToken").setValue(ptoke.second);
+                                    mKidRef.child(childId).child("amount").setValue(ptoke.second);
                                     mKidRef.child(childId).child("prize").setValue(p);
                                     mKidRef.child(childId).child("isRedeeming").setValue(true);
                                 }
