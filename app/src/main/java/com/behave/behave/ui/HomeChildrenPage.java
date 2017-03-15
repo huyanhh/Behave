@@ -129,8 +129,10 @@ public class HomeChildrenPage extends AppCompatActivity {
                     HomeChildrenPage.this.startActivity(redeemIntent);
                 } else {
                     android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(HomeChildrenPage.this);
-                    alert.setTitle("Sorry you have no prizes redeeming right now?");
+                    alert.setTitle("Sorry you have no prizes redeeming right now");
                     alert.setPositiveButton("Ok", null);
+                    alert.create().show();
+
                 }
 
 
