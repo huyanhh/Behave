@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.behave.behave.R;
-import com.behave.behave.utils.Constants;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,9 +28,12 @@ public class ParentRedeemPageAllowRedemption extends AppCompatActivity implement
     private String childName;   // stores child's name from ParentRedeemPageListChild
     public String childId;
     private String prize;
+    private String amount;
+    private String tokens;
     private ArrayAdapter<String> adapter;
 
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference mKidRef;
 
 
     @Override
@@ -40,76 +42,71 @@ public class ParentRedeemPageAllowRedemption extends AppCompatActivity implement
         this.setTitle("Allow Redeem");
         setContentView(R.layout.activity_parent_redeem_page_allow_redemption);
 
-        /* The following code creates an intent to receive child's name
+        /* The following code creates an intent to receive child's name and uid
             from ParentRedeemPageListChild and display it
             on ParentRedeemPageAllowRedemption in textview. */
         Intent childNameIntent = getIntent();
         childName = childNameIntent.getStringExtra("childName");
-        childId = childNameIntent.getStringExtra("childId");
+        childId   = childNameIntent.getStringExtra("childId");
+        prize     = childNameIntent.getStringExtra("prize");
+        amount    = childNameIntent.getStringExtra("amount");
+        tokens     = childNameIntent.getStringExtra("tokens");
+
         final TextView tv_childName = (TextView) findViewById(R.id.tv_child_name);
-   //     tv_childName.setText(childName + " wants to redeem ");
+        tv_childName.setText("Allow " + childName + " to redeem " + prize +
+                            " for " + amount + " token(s)?");
 
-        // retrieve prize names here
-        mRootRef.child(Constants.REDEEMING_CHILD).child(childId).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                prize = dataSnapshot.child("children").child("prize").getValue().toString();  //dataSnapshot.getKey();
-
-                tv_childName.setText(childName + " wants to redeem for " + prize + ".");
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
         //Creates a button listener for APPROVE NOW button
         Button btn_approve = (Button) findViewById(R.id.btn_approve_now);
-        Button btn_maybe_later = (Button) findViewById(R.id.btn_maybe_later);
         /* setOnClickListener cannot be applied to btn_approve so
              add "implements to View.OnClickListener" first to class declaration.
              onClick() method is also required to be implemented. After that,
              then setOnClickListener should work */
-        btn_approve.setOnClickListener(ParentRedeemPageAllowRedemption.this);
+        //btn_approve.setOnClickListener(ParentRedeemPageAllowRedemption.this);
+        btn_approve.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final int newTokens = Integer.parseInt(tokens) - Integer.parseInt(amount);  // token -= amount
+                mKidRef =  mRootRef.child("children").child(childId);
+                mKidRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        mKidRef.child("tokens").setValue(newTokens);    // update token count
+                        mKidRef.child("isRedeeming").setValue(false);   // set isRedeeming to false
+                    }
 
-    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
-    @Override
-    public void onClick(View view) {
-        switch(view.getId())
-        {
-            case R.id.btn_approve_now:
-                Intent passChildInfoIntent = new Intent (ParentRedeemPageAllowRedemption.this, ParentRedeemPageSuccess.class);
-                passChildInfoIntent.putExtra("childName", childName);
-                passChildInfoIntent.putExtra("childId", childId);
-                startActivity(passChildInfoIntent);
-                break;
-            case R.id.btn_maybe_later:
-                Intent goToHomeIntent = new Intent(this, HomeParentActivity.class);
+                    }
+                });
+
+                Intent goToSuccessScreen = new Intent
+                        (ParentRedeemPageAllowRedemption.this, ParentRedeemPageSuccess.class);
+                goToSuccessScreen.putExtra("childName", childName);
+                String newTokenStr = String.valueOf(newTokens);
+                goToSuccessScreen.putExtra("newTokenStr", newTokenStr);
+                startActivity(goToSuccessScreen);
+            }
+        });
+
+
+        Button btn_maybe_later = (Button) findViewById(R.id.btn_maybe_later);
+        btn_maybe_later.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goToHomeIntent = new Intent(ParentRedeemPageAllowRedemption.this, ParentRedeemPageListChild.class);
                 startActivity(goToHomeIntent);
-                break;
+            }
+        });
 
-        }
     }
 
 
     @Override
     protected void onStart() {
         super.onStart();
-    }
-
-
-    // Takes the user to ParentRedeemPageSuccess activity
-    public void goToSuccessActivity(View view) {           //<------------ may need to delete later
-        Intent gotoSuccessIntent = new Intent(this, ParentRedeemPageSuccess.class);
-        startActivity(gotoSuccessIntent);
-    }
-
-    // Takes the user back to HomeParentActivity
-    public void goToHomePage(View view) {
-        Intent goToHomeIntent = new Intent(this, HomeParentActivity.class);
-        startActivity(goToHomeIntent);
     }
 
     //Creates Overflow Menu
@@ -149,4 +146,8 @@ public class ParentRedeemPageAllowRedemption extends AppCompatActivity implement
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onClick(View view) {
+
+    }
 }

@@ -31,7 +31,6 @@ import java.util.Map;
  * Created by huyanh on 2017. 2. 6..
  */
 
-/* monster image borrowed from http://iconbug.com/detail/icon/2048/yellow-cyclops-monster/ */
 
 public class HomeParentActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 

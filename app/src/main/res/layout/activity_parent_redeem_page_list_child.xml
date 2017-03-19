@@ -8,15 +8,16 @@
 
 
     <TextView
-        android:text="Pick a child:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="21dp"
-        android:id="@+id/tv_pick_a_child"
+        android:id="@+id/tv_prompt"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_weight="0.75"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textSize="24sp"
+        android:textColor="@android:color/background_dark" />
 
 
     <LinearLayout

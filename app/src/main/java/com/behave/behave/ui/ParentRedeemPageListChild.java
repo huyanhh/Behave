@@ -8,7 +8,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.behave.behave.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,8 +34,13 @@ public class ParentRedeemPageListChild extends AppCompatActivity implements Adap
 
     private FirebaseUser mFirebaseUser;
     private ArrayAdapter<String> adapter;
+
     final Map<String, String> childUID = new HashMap<>();      // KV-pair of child's UID and its value
+    final Map<String, String> childPrize = new HashMap<>();
+    final Map<String, String> childAmount = new HashMap<>();
+    final Map<String, String> childToken = new HashMap<>();
     List<String> childList = new ArrayList<>();
+
 
     // when we get a reference it gets us a ref to the root of the json ref tree
     public static final String PARENTS_CHILD = "parents";       // "parents" is a db child
@@ -42,7 +49,7 @@ public class ParentRedeemPageListChild extends AppCompatActivity implements Adap
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference(); // points to root directory
     DatabaseReference mKidRef = mRootRef.child(CHILDREN_CHILD); // points to "children" directory
     DatabaseReference mParRef = mRootRef.child(PARENTS_CHILD);  // points to "parents" directory
-
+    //String parentuid = mFirebaseUser.getUid();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,53 +76,48 @@ public class ParentRedeemPageListChild extends AppCompatActivity implements Adap
 
     private void displayChildrenWhoWantToRedeem()
     {
-        mParRef.child("children").addValueEventListener(new ValueEventListener()
+        mKidRef.addValueEventListener(new ValueEventListener()
         {
-            String name;
-            String uid;
-
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
                 List<String> nameList = new ArrayList<>();
+
                 for (DataSnapshot kid : dataSnapshot.getChildren()) {
-                    /*String*/ name = kid.child("name").getValue(String.class);
-                    /*String*/ uid = kid.child("uid").getValue(String.class);
-                    /*if (name != null) {
-                        nameList.add(name);
-                        childUID.put(name, uid);       //add children to map
-                    }*/
+                    String userUID = mFirebaseUser.getUid();
+                    String parentUID = kid.child("parentId").getValue(String.class);
 
-
-
-
-
-
-                        /*String isRedeeming = mKidRef.child(c_uid).child("isRedeeming").getKey();  //.getValue().toString();
-                        if (isRedeeming.equalsIgnoreCase("true"))           // <---------- GO BACK TO THIS LATER AFTER EDIT CHILD HAS BEEN UPDATED
-                        {
-                            nameList.add(name);
-                         //   childUID.put(name, uid);
-                        }*/
-                    //}
-
-
-
+                    String name = kid.child("name").getValue().toString();
+                    String uid = kid.child("uid").getValue().toString();
                     String isRedeeming = kid.child("isRedeeming").getValue().toString();
-                    if (isRedeeming.equalsIgnoreCase("true"))           // <---------- GO BACK TO THIS LATER AFTER EDIT CHILD HAS BEEN UPDATED
-                    {
+                    String amount = kid.child("amount").getValue().toString();
+                    String prize = kid.child("prize").getValue().toString();
+                    String token = kid.child("tokens").getValue().toString();
+
+                    //if the user is this child's parent and the child wants to redeem
+                    if (userUID.equalsIgnoreCase(parentUID) && isRedeeming.equalsIgnoreCase("true")) {
                         nameList.add(name);
-                        childUID.put(name, uid);
+                        childUID.put(name, uid); //add all of this parent's children to map
+                        childAmount.put(name, amount);
+                        childPrize.put(name, prize);
+                        childToken.put(name, token);
                     }
                 }
-                childList = nameList;
+                childList = nameList;  // all the kids' names, whether redeeming or not
+
                 final ListView lvParentList = (ListView) findViewById(R.id.lv_childList);   //gets reference to Listview
+                final TextView tv_promptUser = (TextView) findViewById(R.id.tv_prompt);
                 if (childList.size() != 0)
-                {   //attaches this list to the .xml file using adapter
-                    adapter = new ArrayAdapter<String>(ParentRedeemPageListChild.this, android.R.layout.simple_list_item_1, childList);
-                    lvParentList.setAdapter(adapter);      // arrayadapter filled with friends' name
+                {
+                    tv_promptUser.setText("Child Redeemers List");
+                    //attaches this list to the .xml file using adapter
+                    // Use a custom adapter to display avatar with child name
+                    ListAdapter adapter_allChildren = new CustomListViewAdapter(ParentRedeemPageListChild.this, childList);
+                    lvParentList.setAdapter(adapter_allChildren);      // arrayadapter filled with friends' name
                     lvParentList.setOnItemClickListener(ParentRedeemPageListChild.this); //"listens" to the click
                 }
+                else
+                    tv_promptUser.setText("Redeemers List is Empty");
             }
 
             @Override
@@ -123,17 +125,25 @@ public class ParentRedeemPageListChild extends AppCompatActivity implements Adap
                 //need this so ValueEventListener() doesn't cause error
             }
         });
-
     }
 
 
     //Listens for a child to be selected from the Listview
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        String childName = childList.get(position); // retrieves child's name
+        String uid       = childUID.get(childName);       // retrieves child's uid
+        String amount    = childAmount.get(childName);  // retrieves prize amount
+        String tokens    = childToken.get(childName);    // retrieves child's token count
+        String prize     = childPrize.get(childName);   // retrieves child's prize
+
         Intent allowRedeemIntent = new Intent(this, ParentRedeemPageAllowRedemption.class);
-        String childName = childList.get(position);
         allowRedeemIntent.putExtra("childName", childName);
         allowRedeemIntent.putExtra("childId", childUID.get(childName));
+        allowRedeemIntent.putExtra("prize", prize);
+        allowRedeemIntent.putExtra("amount", amount);
+        allowRedeemIntent.putExtra("tokens", tokens);
         this.startActivity(allowRedeemIntent);
     }
 

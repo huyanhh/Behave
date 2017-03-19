@@ -2,28 +2,22 @@ package com.behave.behave.ui;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-import com.behave.behave.R;
 
+import com.behave.behave.R;
 import com.behave.behave.models.Child;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.UUID;
 
 /**
  * Created by Calvin on 2/17/2017.
@@ -105,7 +99,7 @@ public class AddChild extends AppCompatActivity {
 
     private void showInputDialog(String firstName) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("child username");
+        builder.setTitle("Enter Child's Username");
 
         final EditText input = new EditText(this);
         final String name = firstName;
@@ -120,8 +114,8 @@ public class AddChild extends AppCompatActivity {
                 createNewChild(childId, name);
 
                 AlertDialog.Builder Alert = new AlertDialog.Builder(AddChild.this);
-                Alert.setMessage(name + " has been added, please use the code " +
-                        childId + " to log in");
+                Alert.setMessage(name + " has been added. Please have your child use " +
+                        childId + " to log in.");
                 Alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

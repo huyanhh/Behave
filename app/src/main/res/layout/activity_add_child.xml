@@ -11,15 +11,15 @@
     tools:context="com.behave.behave.ui.AddChild">
 
     <TextView
-        android:text="Set up child account"
+        android:text="Set Up Child Account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="78dp"
         android:id="@+id/tvInstruction"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:textSize="24sp"
-        android:textColor="#000000" />
+        android:textColor="#000000"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:text="Ok"
@@ -30,7 +30,7 @@
         android:layout_marginBottom="47dp"
         android:id="@+id/bAddChildOk"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:backgroundTint="#0000ff" />
+        android:backgroundTint="#2cdbad" />
 
     <!--<EditText-->
         <!--android:layout_width="wrap_content"-->
@@ -56,10 +56,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView5"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="92dp"
+        android:textColor="#000"
         android:layout_below="@+id/tvInstruction"
-        android:layout_alignParentStart="true"
-        android:textColor="#000" />
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"

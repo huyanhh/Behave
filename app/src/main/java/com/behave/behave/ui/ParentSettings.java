@@ -37,18 +37,18 @@ public class ParentSettings extends AppCompatActivity {
         this.setTitle("Settings");
         setContentView(R.layout.activity_parent_settings);
 
-        final Button bEditChild = (Button) findViewById(R.id.bEditChild);
+        //final Button bEditChild = (Button) findViewById(R.id.bEditChild);
         final Button bChangeEmail = (Button) findViewById(R.id.bChangeEmail);
         final Button bChangePassword = (Button) findViewById(R.id.bChangePassword);
         final Button bDeleteAccount = (Button) findViewById(R.id.bDeleteAccount);
 
         //edit child is clicked
-        bEditChild.setOnClickListener(new View.OnClickListener() {
+       /* bEditChild.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //bEditChild
             }
-        });
+        }); */
 
         //change email clicked, show a pop up dialog box
         bChangeEmail.setOnClickListener(new View.OnClickListener() {

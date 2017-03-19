@@ -11,29 +11,25 @@
     tools:context="com.behave.behave.ui.ParentRedeemPageSuccess">
 
     <TextView
-        android:id="@+id/tv_success"
-        android:text="Success!"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_child_name"
+        android:textSize="24sp"
+        android:textColor="@android:color/background_dark"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="87dp" />
+        android:layout_marginTop="75dp" />
 
-    <TextView
-        android:id="@+id/tv_child_name"
+    <Button
+        android:text="Ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_success"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="39dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_child_name"
-        android:layout_alignStart="@+id/tv_success"
-        android:layout_marginTop="91dp"
-        android:id="@+id/tv_token_count" />
-
+        android:layout_marginBottom="36dp"
+        android:id="@+id/btn_OK"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

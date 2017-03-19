@@ -11,22 +11,35 @@
     tools:context="com.behave.behave.ui.ParentRedeemPageAllowRedemption">
 
 
-    <TextView
+   <!-- <TextView
         android:text="Redeem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="93dp"
-        android:id="@+id/tv_redeem" />
+        android:id="@+id/tv_redeem" /> -->
 
-    <TextView
+   <!-- <TextView
         android:id="@+id/tv_child_name"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="45dp" />
+        android:layout_marginTop="45dp"
+        android:textSize="24sp"
+        android:textColor="@android:color/background_dark" /> -->
+
+    <TextView
+        android:id="@+id/tv_child_name"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:textColor="@android:color/background_dark"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="57dp" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -41,14 +54,18 @@
             android:id="@+id/btn_approve_now"
             android:text="Approve Now"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/btn_maybe_later"
             android:text="Maybe Later"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="goToHomePage"/>
+            android:onClick="goToHomePage"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
 </RelativeLayout>

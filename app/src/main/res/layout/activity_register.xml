@@ -11,6 +11,7 @@
     tools:context="com.behave.behave.ui.Register">
 
 
+
     <TextView
         android:id="@+id/tv_all_fields_required"
         android:layout_width="wrap_content"

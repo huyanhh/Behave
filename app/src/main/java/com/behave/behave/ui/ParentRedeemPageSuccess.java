@@ -5,14 +5,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.behave.behave.R;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 
 /* Created by Irish Marquez */
@@ -26,7 +24,9 @@ public class ParentRedeemPageSuccess extends AppCompatActivity {
     /* Stores child's name and uid from ParentRedeemPageAllowRedemption.
         childId will be needed for updating child's tokens */
     private String childName;
-    private String childId;     // random key assigned by Firebase to child
+    //private String childId;     // random key assigned by Firebase to child
+    private String newTokenStr;
+    Button okButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,35 +38,20 @@ public class ParentRedeemPageSuccess extends AppCompatActivity {
            from ParentRedeemPageAllowRedemption */
         Intent childInfoIntent = getIntent();
         childName = childInfoIntent.getStringExtra("childName");
-        childId = childInfoIntent.getStringExtra("childId");
-
+        newTokenStr = childInfoIntent.getStringExtra("newTokenStr");
 
         // Displays child's name
         final TextView TV_CHILDNAME = (TextView) findViewById(R.id.tv_child_name);
-        TV_CHILDNAME.setText(childName + " now has ");
+        TV_CHILDNAME.setText("Success! " + childName + " now has " + newTokenStr + " token(s) left.");
 
-        //Retrieves child's tokens
-        final TextView TV_TOKENCOUNT = (TextView) findViewById(R.id.tv_token_count);
-        mChildTokenCtRef = FirebaseDatabase.getInstance().getReference().child("children").child(childId).child("tokens");
-        mChildTokenCtRef.addValueEventListener(new ValueEventListener() {
+        okButton = (Button) findViewById(R.id.btn_OK);
+        okButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String tokenCt = dataSnapshot.getValue().toString();
-//                TV_TOKENCOUNT.setText(tokenCt + " token(s) left.");
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
+            public void onClick(View view) {
+                Intent intent = new Intent(ParentRedeemPageSuccess.this, ParentRedeemPageListChild.class);
+                startActivity(intent);
             }
         });
-
-
-        // Retrieves child's prize amount
-        mChildPrizeAmountRef = FirebaseDatabase.getInstance().getReference().child("children").child(childId).child("prizes");
-
-
-
 
     }
 
