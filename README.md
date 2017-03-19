@@ -1,5 +1,4 @@
 # Behave
-Project for Informatics 134, behavior token tracker
 Trakemon is a mobile application that uses positive reinforcement to teach children about responsibility and social conduct. 
 We chose to do this project because we know how stressful it can be for parents to constantly have to remind their children to 
 help out at home and teach them how to behave and treat others with respect. We chose a mobile platform because our target audience
